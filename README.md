@@ -1,12 +1,12 @@
 # OpenBook
 
-**Don't trust the agent. Read the OpenBook.**
+**Agent work, written for humans.**
 
-Writing contracts that make long-horizon agent work readable to humans who don't live in the terminal.
+OpenBook is a small open-source kit for turning long-horizon agent runs into reports people can actually read — on screen, on paper, or on e-ink.
 
-Agents are getting good at *doing* work. They are still bad at leaving a trail a human can trust. OpenBook is a small, stealable kit: opinionated Markdown formats, one voice card, a structural checker, and a frameless letter PDF renderer for paper and e-ink.
+Agents are getting good at *doing* work. What they leave behind is often a status dump: lists, greens, and jargon that only makes sense in the terminal. OpenBook gives agents a durable report shape so a human can skim what happened, follow the story, and answer the questions that need a pen.
 
-It is not an agent framework. It is the document shape between the run and the human.
+It is not an agent framework. It is the handoff layer between the run and the reader.
 
 ---
 
@@ -33,19 +33,19 @@ Never browser-print a `file://` tab. Chrome injects date and URL footers. Use `r
 
 ---
 
-## What you get
+## What's in the kit
 
 | Piece | Job |
 |-------|-----|
-| [formats/report.md](./formats/report.md) | The Report contract: sixty-second lead, Hybrid decisions (chapter pens + closing index/cross-cuts), receipts |
-| [styles/librarian.md](./styles/librarian.md) | Voice card: economical, honest, no hype |
-| [scripts/check_report.py](./scripts/check_report.py) | Structural gate (missing sections fail; long essays never fail) |
-| [scripts/render_report.py](./scripts/render_report.py) | Markdown → Georgia letter PDF via Playwright |
-| [examples/](./examples/) | Before/after of the same night + Hybrid pattern demo + coding-agent sample |
+| [formats/](./formats/) | Report formats agents load and humans read |
+| [styles/](./styles/) | Voice and prose guidance for clearer writing |
+| [scripts/](./scripts/) | Structural checks and frameless letter PDF rendering |
+| [examples/](./examples/) | Before/after of the same night, plus shorter samples |
+| [render/](./render/) | Georgia essay CSS and print notes for paper / e-ink |
 
-Long chaptered essays are valid. OpenBook standardizes **shape and trust**, not shortness. Length is earned; padding is not.
+OpenBook standardizes **shape and readability**, not length. Short reports are fine when the work is small. Long chaptered essays are valid when the night earned them.
 
-**Hybrid (long reports):** put chapter-owned asks at the end of the chapter that explains them; close with an index plus any cross-cutting asks. Plain language only — no bare ticket IDs that earn a handwritten "What?"
+For long reports, prefer **Hybrid** decisions: chapter-owned asks at the end of the chapter that explains them, then a short closing index plus any cross-cutting questions. Write in plain language — a reader with a pen has no terminal to decode ticket IDs.
 
 ---
 
@@ -57,7 +57,7 @@ Same night. Two shapes.
 |---|-------------|---------|
 | Read | Lists and greens | Sixty-second story, then chapters |
 | Decide | Re-enter the terminal | Chapter pens while context is warm; short closing index |
-| Trust | Asserted | Receipts in the appendix |
+| Follow-up | Asserted | Receipts in the appendix |
 
 Start here: [examples/before-after/](./examples/before-after/). Compact Hybrid demo: [examples/embedded-decisions.md](./examples/embedded-decisions.md).
 
@@ -79,7 +79,7 @@ Why this exists, who it is for, and where it goes: [VISION.md](./VISION.md)
 
 ## From Mirror Factory
 
-OpenBook is extracted from how [Mirror Factory](https://www.mirrorfactory.com) runs overnight agents: narrative morning reports, pen-ready decisions, receipts underneath. We open-sourced the contract so any coding agent can speak clearly to a human.
+OpenBook comes from how [Mirror Factory](https://www.mirrorfactory.com) runs overnight agents: narrative morning reports, pen-ready decisions, receipts underneath. We open-sourced the kit so any coding agent can leave work that a human can read.
 
 ---
 
