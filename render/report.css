@@ -1,0 +1,222 @@
+/* OpenBook Report — letter essay for e-ink / reMarkable
+   Georgia body, frameless print, pen room under decisions. */
+
+@page {
+  size: letter;
+  margin: 2.6cm 2.8cm;
+  @bottom-center {
+    content: counter(page);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9pt;
+    color: #333;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: #111;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1, h2, h3, h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #000;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 20pt;
+  margin: 0 0 6pt;
+}
+
+h2 {
+  font-size: 14.5pt;
+  margin: 28pt 0 10pt;
+  border-bottom: 1px solid #999;
+  padding-bottom: 3pt;
+  break-after: avoid;
+}
+
+h3 {
+  font-size: 12pt;
+  margin: 18pt 0 8pt;
+  break-after: avoid;
+}
+
+p {
+  margin: 0 0 10pt;
+  text-align: justify;
+  orphans: 3;
+  widows: 3;
+}
+
+ul, ol {
+  margin: 0 0 10pt 18pt;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5pt;
+}
+
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: bold;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #999;
+  margin: 18pt 0;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+  padding-top: 140pt;
+  min-height: 70vh;
+}
+
+.cover h1 {
+  font-size: 22pt;
+}
+
+.cover .rule {
+  width: 40%;
+  border-top: 1px solid #000;
+  margin: 18pt auto;
+}
+
+.cover .sub {
+  font-size: 12pt;
+  color: #333;
+  text-align: center;
+}
+
+.cover .stats {
+  margin-top: 36pt;
+  font-size: 10.5pt;
+  color: #222;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.pagebreak {
+  break-before: page;
+}
+
+/* Decisions + pen room */
+.qblock {
+  margin: 16pt 0 0;
+  break-inside: avoid;
+}
+
+.qblock .q {
+  font-weight: bold;
+  text-align: left;
+}
+
+.qblock .ctx {
+  font-size: 9.5pt;
+  color: #222;
+  margin: 4pt 0 0;
+  text-align: left;
+}
+
+.penroom {
+  height: 88pt;
+  border-bottom: 1px dotted #999;
+  margin: 8pt 0 16pt;
+}
+
+.small {
+  font-size: 9.5pt;
+  color: #222;
+}
+
+.nojust {
+  text-align: left;
+}
+
+/* Figures */
+figure {
+  margin: 14pt 0;
+  break-inside: avoid;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  max-height: 8.4cm;
+  border: 1px solid #bbb;
+}
+
+figcaption {
+  font-size: 9pt;
+  color: #333;
+  margin-top: 5pt;
+  text-align: center;
+  font-style: italic;
+}
+
+pre, code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 8.5pt;
+}
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 8pt;
+  overflow: hidden;
+  white-space: pre-wrap;
+  break-inside: avoid;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 9.5pt;
+  margin: 0 0 12pt;
+  break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #999;
+  padding: 4pt 6pt;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eee;
+}
+
+blockquote {
+  margin: 0 0 10pt 12pt;
+  padding-left: 10pt;
+  border-left: 2px solid #999;
+  color: #222;
+}

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.tmp-rm-read/
+*.pdf
+*.html
+!render/template.html
+.DS_Store
+Thumbs.db
