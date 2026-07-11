@@ -48,6 +48,29 @@ def count_decisions(whats_next: str) -> int:
     return len(re.findall(r"^###\s+\d+\.", whats_next, re.MULTILINE))
 
 
+BARE_ID_RE = re.compile(
+    r"(?<![\w/])#\d{1,6}\b"      # bare issue/PR style: #123
+    r"|\bPR ?#?\d{1,6}\b"        # PR 123 / PR #123
+    r"|\b[A-Z]{2,6}-\d{2,6}\b"   # tracker style: ABC-123 (2+ digits)
+)
+
+# technical tokens that look like tracker IDs but are not references
+ID_ALLOWLIST_PREFIXES = ("UTF-", "ISO-", "SHA-", "MD-", "RFC-", "EC-", "AES-")
+
+
+def paragraphs_of(section: str) -> list[str]:
+    blocks: list[str] = []
+    for raw in re.split(r"\n\s*\n", section):
+        block = raw.strip()
+        if not block:
+            continue
+        first = block.splitlines()[0].lstrip()
+        if first.startswith(("#", "-", "*", ">", "|", "```")) or re.match(r"^\d+\.\s", first):
+            continue
+        blocks.append(block)
+    return blocks
+
+
 def check(md: str) -> list[str]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -73,19 +96,34 @@ def check(md: str) -> list[str]:
         errors.append("## The sixty-second version is empty or too thin")
 
     nxt = section_body(md, "What's next")
+    narrative_body = section_body(md, "Narrative")
+    embedded = len(
+        re.findall(r"^###\s+(?:\d+\.\s*)?\[\?\]", narrative_body, re.MULTILINE)
+    )
     if "What's next" in h2:
         n = count_decisions(nxt)
         if n < 1:
             # also accept bold numbered lines without ###
             n_alt = len(re.findall(r"^\d+\.\s+\[\?\]|^\d+\.\s+\*\*", nxt, re.MULTILINE))
-            if n_alt < 1 and len(nxt) < 20:
+            if embedded >= 1:
+                # decisions live in their chapters; What's next is an index
+                # and only needs a body
+                if len(nxt) < 20:
+                    errors.append(
+                        "## What's next must index the embedded decisions "
+                        "(one line each)"
+                    )
+            elif n_alt < 1 and len(nxt) < 20:
                 errors.append("## What's next has no decision blocks")
             elif n < 1 and n_alt < 1:
                 errors.append(
                     "## What's next needs at least one ### N. decision heading"
                 )
-        if n > 5:
-            warnings.append(f"What's next has {n} decisions; prefer ≤5")
+        if n + embedded > 5:
+            warnings.append(
+                f"What's next has {n + embedded} decisions (embedded plus "
+                "trailing); prefer <=5"
+            )
 
     appendix = section_body(md, "Appendix")
     if "Appendix" in h2 and len(appendix) < 1:
@@ -94,6 +132,44 @@ def check(md: str) -> list[str]:
     narrative = section_body(md, "Narrative")
     if "Narrative" in h2 and len(narrative) < 40:
         errors.append("## Narrative is empty or too thin")
+
+    # Plain-reference rule: an internal ID must never be the only name for a
+    # thing. Warn (never fail) so the writer can double-check each mention is
+    # explained in words on the page.
+    ids = sorted(
+        m
+        for m in set(BARE_ID_RE.findall(md))
+        if not m.startswith(ID_ALLOWLIST_PREFIXES)
+    )
+    if ids:
+        shown = ", ".join(ids[:8]) + ("..." if len(ids) > 8 else "")
+        warnings.append(
+            f"bare IDs found ({shown}): say what each thing IS in words; "
+            "IDs in parentheses at most"
+        )
+
+    # Wall paragraphs: one idea per paragraph; three parallel items are a
+    # list. Warn on very long paragraphs in the Narrative.
+    if narrative:
+        walls = [p for p in paragraphs_of(narrative) if len(p.split()) > 130]
+        if walls:
+            warnings.append(
+                f"{len(walls)} paragraph(s) over 130 words in Narrative: "
+                "consider lists, bold leads, or a split (one idea per paragraph)"
+            )
+
+    # Embedded decisions: in a long report, trailing-only questions fight
+    # human memory. Suggest embedding when the narrative is long and holds no
+    # decision blocks of its own.
+    if narrative and len(narrative.split()) > 2500:
+        embedded = re.findall(r"^###\s+(?:\d+\.\s*)?\[\?\]", narrative, re.MULTILINE)
+        trailing = count_decisions(section_body(md, "What's next"))
+        if not embedded and trailing >= 3:
+            warnings.append(
+                "long narrative with all decisions trailing: consider embedding "
+                "each decision in the chapter that explains it and making "
+                "What's next an index"
+            )
 
     return errors, warnings
 

@@ -37,7 +37,7 @@ Never browser-print a `file://` tab. Chrome injects date and URL footers. Use `r
 
 | Piece | Job |
 |-------|-----|
-| [formats/report.md](./formats/report.md) | The Report contract: sixty-second lead, chaptered narrative, ranked decisions, receipts |
+| [formats/report.md](./formats/report.md) | The Report contract: sixty-second lead, chaptered narrative, decisions where their context lives, receipts |
 | [styles/librarian.md](./styles/librarian.md) | Voice card: economical, honest, no hype |
 | [scripts/check_report.py](./scripts/check_report.py) | Structural gate (missing sections fail; long essays never fail) |
 | [scripts/render_report.py](./scripts/render_report.py) | Markdown → Georgia letter PDF via Playwright |
@@ -57,7 +57,9 @@ Same night. Two shapes.
 | Decide | Re-enter the terminal | ≤5 plain questions with room for a pen |
 | Trust | Asserted | Receipts in the appendix |
 
-Start here: [examples/before-after/](./examples/before-after/).
+Start here: [examples/before-after/](./examples/before-after/). For the long-report pattern
+(decisions embedded in their chapters, indexed at the end), see
+[examples/embedded-decisions.md](./examples/embedded-decisions.md).
 
 ---
 

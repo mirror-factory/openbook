@@ -35,16 +35,28 @@ The whole run in one short read. Most important item first. A reader who stops h
 
 Chaptered prose. Bezos-memo energy: detailed, honest, story-shaped. Include failures and dead ends. Length is **earned**, never padded.
 
+**Formatting is load-bearing, not decoration.** Long-form field-tested rules:
+
+- One idea per paragraph. A paragraph that compresses three parallel items into prose is a list wearing a costume; give it bullets or numbers.
+- **Bold the lead** of a paragraph or bullet when a scanning reader should catch it (textbook and workbook practice: the bold layer alone should tell the chapter's story).
+- Use ordered lists when order carries meaning, unordered when it does not, and tables only for genuinely tabular facts.
+- Italics for emphasis and titles, sparingly; emphasis everywhere is emphasis nowhere.
+
+**Decisions live where their context lives.** In a long report, a decision block (`### N. [?] …` or `### [?] …`) may be embedded at the end of the chapter that explains it — the renderer gives it a pen room wherever it appears. Human memory is the reason: by the time a reader reaches a trailing question list, chapter three is gone. If you embed, What's next becomes a short **index** of the embedded decisions (one line each, with the chapter that holds it), not their home.
+
 ### What's next
 
-Ranked decisions for the human. Each item:
+Ranked decisions for the human — either the decisions themselves (short reports) or a one-line index of decisions embedded in their chapters (long reports). Each full decision block:
 
 - One plain-language question
 - One short context line if needed
-- Room to answer (in Markdown: a blank block or `<!-- pen room -->`; in PDF: pen room under each ask)
+- **Self-contained**: answerable from the block alone, with no references to things introduced elsewhere and not restated here
+- Room to answer (in Markdown: a blank block or `<!-- pen room -->`; in PDF: **generous** pen room under each ask — a human answers in ink, and cramped pen room reads as not really wanting an answer)
 - Optional `[?]` marker on open decisions
 
 **Rules:** prefer ≤5 questions; one ask per block; no jargon stacks; no laundry-list "bless or reverse" dumps.
+
+**Plain-reference rule (whole document):** never let an internal ID be the only name for a thing. Ticket numbers, PR numbers, and shorthand codenames mean nothing on paper; say what the thing is in words ("the review workflow change"), with the ID in parentheses at most. A reader with a pen has no terminal to look it up in.
 
 ### What we learned
 
@@ -86,6 +98,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - Do not inflate stats or invent timestamps.
 - Human-dependent items stay explicitly unresolved.
 - Delivery failures (e.g. PDF not uploaded) must be loud, never quiet.
+- **Audit before handoff.** A long run's report accretes stats that go stale as the run continues (counts, totals, lists of artifacts). Before delivery, verify every number and referenced artifact against ground truth — ideally with fresh eyes that did not write the report. One stale count erodes trust in every honest sentence around it.
 
 ---
 
