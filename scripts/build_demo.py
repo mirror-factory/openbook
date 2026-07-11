@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build local demo assets under docs/ (no network, no Pages publish).
+"""Build demo assets under docs/ for GitHub Pages.
 
 Usage (from repo root):
   python scripts/build_demo.py
@@ -191,7 +191,7 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
   </section>
 
   <footer class="foot">
-    <p>Self-contained preview — open this file alone in a browser.</p>
+    <p>Self-contained preview — also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
     <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
   </footer>
 

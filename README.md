@@ -18,23 +18,7 @@ It is not an agent framework. It's a simple handoff layer between the run and th
 | Decide | Re-enter the terminal | Plain asks with room for a pen |
 | Follow-up | Asserted | Receipts in the appendix |
 
-[Interactive demo](./docs/index.html)
-
----
-
-## Try the demo (local)
-
-Open [`docs/index.html`](./docs/index.html) in a browser after cloning (generated assets are included). Drag the slider to compare a dense agent transcript with an OpenBook **Brief**.
-
-For a single shareable file (no other assets needed), open or send [`docs/openbook-demo.html`](./docs/openbook-demo.html) — it works via `file://`.
-
-Rebuild panes anytime:
-
-```bash
-python scripts/build_demo.py
-```
-
-(Standard and Essay panes are still generated for local inspection; the live demo shows Brief.)
+[Interactive demo](https://mirror-factory.github.io/openbook/)
 
 ---
 
@@ -82,7 +66,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
-| [docs/](./docs/) | Interactive before/after demo |
+| [docs/](./docs/) | Source for the [live demo](https://mirror-factory.github.io/openbook/) |
 | [CHANGELOG.md](./CHANGELOG.md) | Release notes |
 
 ---

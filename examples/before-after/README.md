@@ -11,7 +11,7 @@ Same night (July 8 design + contract shift). Four shapes.
 
 **Accuracy:** `before.md` is the same July 8 night as the after-* files. It is noisy on purpose; it is not a different story.
 
-**How to compare:** skim the transcript, then read `after-brief.md`. Open Standard or Essay when you want more story. Interactive wipe: [`docs/index.html`](../../docs/index.html).
+**How to compare:** skim the transcript, then read `after-brief.md`. Open Standard or Essay when you want more story. Live wipe: [mirror-factory.github.io/openbook](https://mirror-factory.github.io/openbook/).
 
 ## Production rules (for future examples)
 

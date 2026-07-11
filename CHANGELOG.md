@@ -9,7 +9,7 @@ Public default is **Brief**: a one-page prose handoff, not a short essay wearing
 ### Added
 
 - **Length profiles** — Brief (default), Standard, and Essay in [`formats/report.md`](./formats/report.md)
-- **Before/after demo** — wipe comparison at [`docs/index.html`](./docs/index.html); shareable single file at [`docs/openbook-demo.html`](./docs/openbook-demo.html)
+- **Before/after demo** — live wipe at [mirror-factory.github.io/openbook](https://mirror-factory.github.io/openbook/) (GitHub Pages from `docs/`)
 - **Demo builder** — [`scripts/build_demo.py`](./scripts/build_demo.py) regenerates panes from the example pack
 - **Example pack** — same July 8 night as transcript + Brief / Standard / Essay reports under [`examples/before-after/`](./examples/before-after/)
 
