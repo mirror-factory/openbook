@@ -37,13 +37,15 @@ Never browser-print a `file://` tab. Chrome injects date and URL footers. Use `r
 
 | Piece | Job |
 |-------|-----|
-| [formats/report.md](./formats/report.md) | The Report contract: sixty-second lead, chaptered narrative, decisions where their context lives, receipts |
+| [formats/report.md](./formats/report.md) | The Report contract: sixty-second lead, Hybrid decisions (chapter pens + closing index/cross-cuts), receipts |
 | [styles/librarian.md](./styles/librarian.md) | Voice card: economical, honest, no hype |
 | [scripts/check_report.py](./scripts/check_report.py) | Structural gate (missing sections fail; long essays never fail) |
 | [scripts/render_report.py](./scripts/render_report.py) | Markdown → Georgia letter PDF via Playwright |
-| [examples/](./examples/) | Before/after of the same night + a shorter coding-agent sample |
+| [examples/](./examples/) | Before/after of the same night + Hybrid pattern demo + coding-agent sample |
 
 Long chaptered essays are valid. OpenBook standardizes **shape and trust**, not shortness. Length is earned; padding is not.
+
+**Hybrid (long reports):** put chapter-owned asks at the end of the chapter that explains them; close with an index plus any cross-cutting asks. Plain language only — no bare ticket IDs that earn a handwritten "What?"
 
 ---
 
@@ -54,12 +56,10 @@ Same night. Two shapes.
 | | Status dump | OpenBook |
 |---|-------------|---------|
 | Read | Lists and greens | Sixty-second story, then chapters |
-| Decide | Re-enter the terminal | ≤5 plain questions with room for a pen |
+| Decide | Re-enter the terminal | Chapter pens while context is warm; short closing index |
 | Trust | Asserted | Receipts in the appendix |
 
-Start here: [examples/before-after/](./examples/before-after/). For the long-report pattern
-(decisions embedded in their chapters, indexed at the end), see
-[examples/embedded-decisions.md](./examples/embedded-decisions.md).
+Start here: [examples/before-after/](./examples/before-after/). Compact Hybrid demo: [examples/embedded-decisions.md](./examples/embedded-decisions.md).
 
 ---
 

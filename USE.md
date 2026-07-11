@@ -5,6 +5,8 @@ At the end of this long-horizon run, write `REPORT.md` following:
 - `formats/report.md`
 - `styles/librarian.md`
 
+**Hybrid (when the narrative is long):** put each chapter-owned decision at the end of the chapter that explains it, with pen room. Make `What's next` an index of those asks plus any cross-cutting questions. Every decision block must be self-contained and plain-language — never a bare ticket or PR number as the only name for a thing.
+
 Then:
 
 ```bash
