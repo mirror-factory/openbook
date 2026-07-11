@@ -24,6 +24,11 @@ REQUIRED_H2 = [
     "Appendix",
 ]
 
+DECISION_HEADING_RE = re.compile(
+    r"^###\s+(?:\d+\.\s*)?\[\?\]|^###\s+\d+\.",
+    re.MULTILINE,
+)
+
 
 def extract_h2(md: str) -> list[str]:
     return [
@@ -43,12 +48,37 @@ def section_body(md: str, heading: str) -> str:
     return md[start:end].strip()
 
 
-def count_decisions(whats_next: str) -> int:
-    # ### 1. or ### 1. [?] or lines starting with ### and a number
-    return len(re.findall(r"^###\s+\d+\.", whats_next, re.MULTILINE))
+def count_decision_blocks(text: str) -> int:
+    """Count ### decision headings (numbered and/or [?])."""
+    return len(DECISION_HEADING_RE.findall(text))
 
 
-def check(md: str) -> list[str]:
+BARE_ID_RE = re.compile(
+    r"(?<![\w/])#\d{1,6}\b"  # bare issue/PR style: #123
+    r"|\bPR ?#?\d{1,6}\b"  # PR 123 / PR #123
+    r"|\b[A-Z]{2,6}-\d{2,6}\b"  # tracker style: ABC-123 (2+ digits)
+)
+
+# technical tokens that look like tracker IDs but are not references
+ID_ALLOWLIST_PREFIXES = ("UTF-", "ISO-", "SHA-", "MD-", "RFC-", "EC-", "AES-")
+
+
+def paragraphs_of(section: str) -> list[str]:
+    blocks: list[str] = []
+    for raw in re.split(r"\n\s*\n", section):
+        block = raw.strip()
+        if not block:
+            continue
+        first = block.splitlines()[0].lstrip()
+        if first.startswith(("#", "-", "*", ">", "|", "```")) or re.match(
+            r"^\d+\.\s", first
+        ):
+            continue
+        blocks.append(block)
+    return blocks
+
+
+def check(md: str) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
     h2 = extract_h2(md)
@@ -57,7 +87,6 @@ def check(md: str) -> list[str]:
         if req not in h2:
             errors.append(f"Missing required H2: ## {req}")
 
-    # Order among those that exist
     positions = []
     for req in REQUIRED_H2:
         if req in h2:
@@ -73,27 +102,71 @@ def check(md: str) -> list[str]:
         errors.append("## The sixty-second version is empty or too thin")
 
     nxt = section_body(md, "What's next")
+    narrative = section_body(md, "Narrative")
+    embedded = count_decision_blocks(narrative)
+    cross_cut = count_decision_blocks(nxt)
+
     if "What's next" in h2:
-        n = count_decisions(nxt)
-        if n < 1:
-            # also accept bold numbered lines without ###
-            n_alt = len(re.findall(r"^\d+\.\s+\[\?\]|^\d+\.\s+\*\*", nxt, re.MULTILINE))
-            if n_alt < 1 and len(nxt) < 20:
-                errors.append("## What's next has no decision blocks")
-            elif n < 1 and n_alt < 1:
+        n_alt = len(
+            re.findall(r"^\d+\.\s+\[\?\]|^\d+\.\s+\*\*", nxt, re.MULTILINE)
+        )
+        if embedded >= 1:
+            # Hybrid: What's next must index chapter decisions (body required).
+            # Cross-cut ### blocks are allowed in addition to the index.
+            if len(nxt) < 20:
                 errors.append(
-                    "## What's next needs at least one ### N. decision heading"
+                    "## What's next must index the embedded decisions "
+                    "(one line each) and may add cross-cutting asks"
                 )
-        if n > 5:
-            warnings.append(f"What's next has {n} decisions; prefer ≤5")
+        elif cross_cut < 1 and n_alt < 1 and len(nxt) < 20:
+            errors.append("## What's next has no decision blocks")
+        elif cross_cut < 1 and n_alt < 1:
+            errors.append(
+                "## What's next needs at least one ### N. decision heading "
+                "(or embed chapter decisions and write an index here)"
+            )
+
+        total = embedded + cross_cut
+        if total > 5:
+            warnings.append(
+                f"{total} decisions (chapter embeds plus cross-cuts); prefer <=5"
+            )
 
     appendix = section_body(md, "Appendix")
     if "Appendix" in h2 and len(appendix) < 1:
         errors.append("## Appendix heading exists but body is empty")
 
-    narrative = section_body(md, "Narrative")
     if "Narrative" in h2 and len(narrative) < 40:
         errors.append("## Narrative is empty or too thin")
+
+    ids = sorted(
+        m
+        for m in set(BARE_ID_RE.findall(md))
+        if not m.startswith(ID_ALLOWLIST_PREFIXES)
+    )
+    if ids:
+        shown = ", ".join(ids[:8]) + ("..." if len(ids) > 8 else "")
+        warnings.append(
+            f"bare IDs found ({shown}): say what each thing IS in words; "
+            "IDs in parentheses at most"
+        )
+
+    if narrative:
+        walls = [p for p in paragraphs_of(narrative) if len(p.split()) > 130]
+        if walls:
+            warnings.append(
+                f"{len(walls)} paragraph(s) over 130 words in Narrative: "
+                "consider lists, bold leads, or a split (one idea per paragraph)"
+            )
+
+    # Long report + trailing-only: nudge toward Hybrid
+    if narrative and len(narrative.split()) > 2500:
+        if embedded < 1 and cross_cut >= 3:
+            warnings.append(
+                "long narrative with all decisions trailing: prefer Hybrid — "
+                "embed chapter-owned asks at chapter end, make What's next an "
+                "index plus any cross-cutting asks"
+            )
 
     return errors, warnings
 

@@ -26,6 +26,11 @@ def md_to_html(md: str) -> tuple[str, str]:
     """Convert OpenBook markdown to HTML body + title. Stdlib only."""
     lines = md.replace("\r\n", "\n").split("\n")
     title = "OpenBook Report"
+    # When a "## Cover" section exists, a leading H1 is a title, not a second
+    # cover page (issue #1: the doubled cover).
+    has_cover_section = any(
+        line.strip().lower() == "## cover" for line in lines
+    )
     out: list[str] = []
     i = 0
     in_ul = False
@@ -94,8 +99,9 @@ def md_to_html(md: str) -> tuple[str, str]:
             flush_para()
             close_lists()
             title = line[2:].strip()
-            out.append(f'<div class="cover"><h1>{inline(title)}</h1></div>')
-            out.append('<div class="pagebreak"></div>')
+            if not has_cover_section:
+                out.append(f'<div class="cover"><h1>{inline(title)}</h1></div>')
+                out.append('<div class="pagebreak"></div>')
             i += 1
             continue
 
@@ -143,6 +149,11 @@ def md_to_html(md: str) -> tuple[str, str]:
                 out.append('<div class="qblock">')
                 out.append(f'<p class="q nojust">{inline(h)}</p>')
                 i += 1
+                # standard markdown style puts a blank line after a heading;
+                # the context is still the context (issue #2: the orphaned
+                # paragraph below the pen room)
+                while i < len(lines) and not lines[i].strip():
+                    i += 1
                 ctx: list[str] = []
                 while i < len(lines) and lines[i].strip() and not lines[i].startswith("#"):
                     ctx.append(lines[i].strip())

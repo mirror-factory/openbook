@@ -146,7 +146,9 @@ hr {
 }
 
 .penroom {
-  height: 88pt;
+  /* generous by default: a human answers in ink, and cramped pen room
+     reads as not really wanting an answer */
+  height: 130pt;
   border-bottom: 1px dotted #999;
   margin: 8pt 0 16pt;
 }
