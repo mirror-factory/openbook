@@ -116,6 +116,15 @@ def md_to_html(md: str) -> tuple[str, str]:
         )
         return s
 
+    PAGEBREAK = '<div class="pagebreak"></div>'
+
+    def emit_pagebreak() -> None:
+        """One break between blocks, never two: consecutive break-before
+        elements render a blank page (the cover used to emit one and the
+        first section heading immediately emitted another)."""
+        if out and out[-1] != PAGEBREAK:
+            out.append(PAGEBREAK)
+
     def parse_meta_line(raw: str) -> tuple[str, str] | None:
         m = re.match(r"\*\*([^*]+):\*\*\s*(.+)$", raw) or re.match(
             r"^([A-Za-z][^:]{0,40}):\s*(.+)$", raw
@@ -188,7 +197,7 @@ def md_to_html(md: str) -> tuple[str, str]:
             title = line[2:].strip()
             if not has_cover_section:
                 out.append(f'<div class="cover"><h1>{inline(title)}</h1></div>')
-                out.append('<div class="pagebreak"></div>')
+                emit_pagebreak()
             i += 1
             continue
 
@@ -235,11 +244,11 @@ def md_to_html(md: str) -> tuple[str, str]:
                 out.append("</div>")
                 # Brief: no pagebreak after cover — lede opens the page
                 if length != "Brief":
-                    out.append('<div class="pagebreak"></div>')
+                    emit_pagebreak()
                 continue
             close_sixty()
             if out and length != "Brief":
-                out.append('<div class="pagebreak"></div>')
+                emit_pagebreak()
             if h.lower() == "the sixty-second version":
                 cls = "sixty brief-lede" if length == "Brief" else "sixty"
                 out.append(f'<section class="{cls}">')
