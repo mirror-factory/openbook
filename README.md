@@ -2,11 +2,11 @@
 
 **Agent work, written for humans.**
 
-OpenBook is a small open-source kit for turning long-horizon agent runs into reports people can actually read — on screen, on paper, or on e-ink.
+OpenBook is a small open-source kit for turning long-horizon agent runs into reports people can actually read: on screen, on paper, or on e-ink.
 
 Agents are getting good at *doing* work. What they leave behind is often a status dump: lists, greens, and jargon that only makes sense in the terminal. OpenBook gives agents a durable report shape so a human can skim what happened, follow the story, and answer the questions that need a pen.
 
-It is not an agent framework. It is the handoff layer between the run and the reader.
+It is not an agent framework. It's a simple handoff layer between the run and the reader.
 
 ---
 
