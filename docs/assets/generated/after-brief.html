@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>After — Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
 /* OpenBook Report
    Layer 1: tokens
    Layer 2: screen (rem)
@@ -402,3 +411,86 @@ blockquote {
     break-inside: avoid;
   }
 }
+
+@media screen {
+  html { height: 100%; }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: #faf7f2;
+  }
+  .demo-shell {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem 3.5rem;
+  }
+  .demo-shell > .kicker {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    color: #57534e;
+    margin: 0 0 1.5rem;
+    font-weight: 600;
+  }
+  .demo-shell .report {
+    padding: 0 0 1rem;
+  }
+  .demo-shell .cover {
+    margin-top: 0.25rem;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="demo-shell">
+<p class="kicker">OpenBook · Brief</p>
+<article class="report length-brief">
+<div class="cover">
+<h1>The Night of July 8th</h1>
+<p class="dek">Design ready for pen; markdown contract battle-tested</p>
+<p class="byline">Dewey · 2026-07-08 · shift 11:24pm–7:00am Eastern · 2-min read</p>
+<div class="masthead-rule" aria-hidden="true"></div>
+</div>
+<section class="sixty brief-lede">
+<h2>The sixty-second version</h2>
+<p class="standfirst">The design direction is ready for your pen, and one layout question blocks the shell re-spec. The Library should be one surface with two states: a Desk that greets you with what changed while you were away, and a Catalog that answers when you ask. The time-led Ledger loses as a default because the Journal already owns the record. Sessions become guided worksheets. Everything obeys one law: information moves between the periphery and the center without demanding attention.</p>
+<p>The markdown contract survived an adversarial review. Fifty-four tests were green when a fleet of review agents went looking anyway and found seven data-integrity bugs behind the checkmark, including a Windows byte-order mark that would have silently destroyed frontmatter on save. All seven are fixed and sixty-eight tests now pass. The night’s best lesson rode along for free: green is a hypothesis until someone tries to break it.</p>
+<p>One find arrived uninvited. Goal intake asks what done looks like tonight, and that answer is already an acceptance line. Sessions could carry the same contract shape Specs do. Nobody decided this; the design wants it, and it is yours to bless or refuse.</p>
+<p>Three decisions below want your pen. The first gates the next design pass; an answer before tomorrow evening keeps the shell re-spec off the critical path.</p>
+</section>
+<h2>What’s next</h2>
+<div class="qblock">
+<p class="decision-kicker">Decision 1 · where a Document opens</p>
+<p class="q">With the Library in the center and the Journal on the right, where does a Document or Folio open: replace the center, split it, or displace the Journal? This blocks the shell re-spec, whose acceptance criteria still encode the pre-kickoff layout.</p>
+<div class="penroom"></div>
+</div>
+<div class="qblock">
+<p class="decision-kicker">Decision 2 · one Library, two states</p>
+<p class="q">Do you buy Desk and Catalog as two states of one Library (Desk on arrival, Catalog when you ask), with Ledger surviving only as a by-time lens? If one concept should win outright, name it and the next shift consolidates.</p>
+<div class="penroom"></div>
+</div>
+<div class="qblock">
+<p class="decision-kicker">Decision 3 · Sessions with acceptance lines</p>
+<p class="q">Should Sessions carry acceptance criteria from goal intake (“what does done look like”), checked at close? It expands what a Session is, and it fell out of the worksheet design uninvited. Bless or refuse.</p>
+<div class="penroom"></div>
+</div>
+<h2>What we learned</h2>
+<ul>
+<li>Research notes lint the mockups.</li>
+<li>Review-after-green is non-negotiable.</li>
+<li>A known-wrong build can still donate parts (the Ledger did).</li>
+</ul>
+<h2>Appendix</h2>
+<p><strong>By the numbers:</strong> 6 research notes · 3 Library concepts · 2 pull requests · 68 tests green</p>
+<ul>
+<li>Markdown contract pull request · acceptance 5/5 · 68 tests</li>
+<li>Design research pull request · Library concepts, worksheets, shell composition</li>
+<li>Pending human: shell re-spec; the three decisions above</li>
+<li>This example is redacted from a real night shift.</li>
+</ul>
+</article>
+</div>
+</body>
+</html>

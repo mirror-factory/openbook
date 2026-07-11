@@ -3,7 +3,15 @@ __pycache__/
 *.pyc
 .tmp-rm-read/
 *.pdf
+
+# Ignore ad-hoc HTML next to examples; keep demo + template
 *.html
 !render/template.html
+!docs/**/*.html
+
 .DS_Store
 Thumbs.db
+
+# Local planning / packaging (never publish)
+V0-PLAN.md
+openbook.zip

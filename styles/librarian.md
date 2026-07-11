@@ -17,6 +17,7 @@ Load with the Report format when the handoff should read like a careful memo, no
 - Prefer plain names over internal IDs; a reader with a pen has no terminal. Say what the thing is in words; put ticket or PR numbers in parentheses at most.
 - Chapter decision blocks must stand alone: restate the choice in the block, do not make the reader flip back.
 - Short paragraphs inside a long essay are fine; chapters carry the length.
+- At Brief length, the sixty-second version is continuous prose. Bold leads are a Standard/Essay scanning tool, not a Brief voice.
 - When you infer, say so. When you do not know, say so.
 - Corrections invited in product copy; in reports, leave room for the human's pen.
 

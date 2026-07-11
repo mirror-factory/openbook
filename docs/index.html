@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBook — before / after</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <a class="logo" href="https://github.com/mirror-factory/openbook">OpenBook</a>
+      <p class="tag">Agent work, written for humans.</p>
+    </div>
+    <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+  </header>
+
+  <section class="stage" aria-label="Before and after comparison">
+    <div class="labels">
+      <span>Before</span>
+      <span>After</span>
+    </div>
+    <div class="compare" id="compare">
+      <iframe class="pane pane-before" id="pane-before" title="Status dump before" src="assets/generated/before.html"></iframe>
+      <iframe class="pane pane-after" id="pane-after" title="OpenBook Brief after" src="assets/generated/after-brief.html"></iframe>
+      <div class="handle" id="handle" role="slider" tabindex="0"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+           aria-label="Reveal OpenBook Brief over the status dump">
+        <span class="grip" aria-hidden="true"></span>
+      </div>
+    </div>
+    <label class="range-wrap visually-hidden">
+      <span>Comparison slider</span>
+      <input type="range" id="slider" min="0" max="100" value="50" aria-hidden="true" tabindex="-1">
+    </label>
+  </section>
+
+  <footer class="foot">
+    <p>Local preview. After approval this can publish to GitHub Pages.</p>
+    <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
+  </footer>
+
+  <script src="demo.js"></script>
+</body>
+</html>

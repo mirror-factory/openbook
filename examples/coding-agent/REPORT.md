@@ -1,6 +1,7 @@
 ## Cover
 
 **Title:** Auth middleware: the night the budget actually stopped
+**Length:** Brief
 **Author:** Example coding agent (OpenBook sample)
 **For:** A tech lead who asked for a long-horizon fix and went to sleep
 **When:** 2026-07-11 · ~3 hours
@@ -14,19 +15,9 @@
 
 ## Narrative
 
-### Chapter 1 · Survey before code
-
-The task file called this the most important unbuilt feature. Walking acceptance against the code showed why: the read path summed spend events that did not exist. "Merged" and "works" had drifted apart quietly.
-
-### Chapter 2 · What landed
-
-A price list with a spine (Anthropic rates verified; other providers flagged `priced: false` rather than invented). Middleware that records spend after every model call, scope-resolved once per thread, unable to break a run. Discord stop notice with Extend. Warning threshold moved to a per-budget column.
-
-Honesty section: sandbox time still unmetered (no provider rate in repo); subagent calls outside the metered stack noted in code; rollover stored but unenforced.
-
-### Chapter 3 · Review after green
-
-An adversarial pass found a billing skip when after-model hooks reordered messages, and a cache-write shape the unit tests had not covered. Both fixed with regression tests before handoff. Suite green before and after; the bugs lived in seams between individually tested pieces.
+- Task file called this the most important unbuilt feature; acceptance vs code showed spend events were never written, so burn stayed zero.
+- Shipped: verified Anthropic rate card; middleware debit after every model call; Discord stop notice with Extend; other providers marked unpriced rather than invented.
+- Review-after-green found a billing skip on reordered messages and a cache-write shape tests missed; both fixed with regressions. Suite green.
 
 ## What's next
 

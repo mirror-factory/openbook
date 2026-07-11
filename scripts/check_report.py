@@ -15,7 +15,15 @@ import re
 import sys
 from pathlib import Path
 
-REQUIRED_H2 = [
+REQUIRED_H2_BRIEF = [
+    "Cover",
+    "The sixty-second version",
+    "What's next",
+    "What we learned",
+    "Appendix",
+]
+
+REQUIRED_H2_LONG = [
     "Cover",
     "The sixty-second version",
     "Narrative",
@@ -24,9 +32,30 @@ REQUIRED_H2 = [
     "Appendix",
 ]
 
+# Preferred: ### Decision N · handle
+# Legacy: ### N. [?] … or ### N. …
 DECISION_HEADING_RE = re.compile(
-    r"^###\s+(?:\d+\.\s*)?\[\?\]|^###\s+\d+\.",
+    r"^###\s+Decision\s+\d+\s*·"
+    r"|^###\s+(?:\d+\.\s*)?\[\?\]"
+    r"|^###\s+\d+\.",
     re.MULTILINE,
+)
+
+LEGACY_DECISION_RE = re.compile(
+    r"^###\s+(?:\d+\.\s*)?\[\?\]|^###\s+\d+\.(?!\s*Decision)",
+    re.MULTILINE,
+)
+
+BARE_ID_RE = re.compile(
+    r"(?<![\w/])#\d{1,6}\b"
+    r"|\bPR ?#?\d{1,6}\b"
+    r"|\b[A-Z]{2,6}-\d{2,6}\b"
+)
+
+ID_ALLOWLIST_PREFIXES = ("UTF-", "ISO-", "SHA-", "MD-", "RFC-", "EC-", "AES-")
+
+BOLD_LEAD_RE = re.compile(
+    r"(?:^|\n\n)\*\*[^*\n]{2,80}\*\*",
 )
 
 
@@ -49,18 +78,7 @@ def section_body(md: str, heading: str) -> str:
 
 
 def count_decision_blocks(text: str) -> int:
-    """Count ### decision headings (numbered and/or [?])."""
     return len(DECISION_HEADING_RE.findall(text))
-
-
-BARE_ID_RE = re.compile(
-    r"(?<![\w/])#\d{1,6}\b"  # bare issue/PR style: #123
-    r"|\bPR ?#?\d{1,6}\b"  # PR 123 / PR #123
-    r"|\b[A-Z]{2,6}-\d{2,6}\b"  # tracker style: ABC-123 (2+ digits)
-)
-
-# technical tokens that look like tracker IDs but are not references
-ID_ALLOWLIST_PREFIXES = ("UTF-", "ISO-", "SHA-", "MD-", "RFC-", "EC-", "AES-")
 
 
 def paragraphs_of(section: str) -> list[str]:
@@ -78,23 +96,48 @@ def paragraphs_of(section: str) -> list[str]:
     return blocks
 
 
+def detect_length(md: str) -> str | None:
+    m = re.search(
+        r"^\*\*Length:\*\*\s*(Brief|Standard|Essay)\s*$",
+        md,
+        re.MULTILINE | re.IGNORECASE,
+    )
+    if not m:
+        return None
+    return m.group(1).title()
+
+
+def required_h2_for(length: str | None) -> list[str]:
+    if length == "Brief":
+        return list(REQUIRED_H2_BRIEF)
+    return list(REQUIRED_H2_LONG)
+
+
 def check(md: str) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
     h2 = extract_h2(md)
+    length = detect_length(md)
+    required = required_h2_for(length)
 
-    for req in REQUIRED_H2:
+    if length == "Brief" and "Narrative" in h2:
+        errors.append(
+            "Brief has a Narrative section: either fold it into the "
+            "sixty-second version or declare Standard"
+        )
+
+    for req in required:
         if req not in h2:
             errors.append(f"Missing required H2: ## {req}")
 
     positions = []
-    for req in REQUIRED_H2:
+    for req in required:
         if req in h2:
             positions.append(h2.index(req))
     if positions != sorted(positions):
         errors.append(
             "Required H2 sections are out of order. Expected: "
-            + " -> ".join(REQUIRED_H2)
+            + " -> ".join(required)
         )
 
     sixty = section_body(md, "The sixty-second version")
@@ -105,14 +148,22 @@ def check(md: str) -> tuple[list[str], list[str]]:
     narrative = section_body(md, "Narrative")
     embedded = count_decision_blocks(narrative)
     cross_cut = count_decision_blocks(nxt)
+    narrative_words = len(narrative.split()) if narrative else 0
+    chapter_heads = len(
+        re.findall(r"^###\s+Chapter\b", narrative, re.MULTILINE | re.IGNORECASE)
+    )
+
+    if LEGACY_DECISION_RE.search(md):
+        warnings.append(
+            "legacy decision heading ### N. [?] (or ### N.): prefer "
+            "### Decision N · short handle"
+        )
 
     if "What's next" in h2:
         n_alt = len(
             re.findall(r"^\d+\.\s+\[\?\]|^\d+\.\s+\*\*", nxt, re.MULTILINE)
         )
         if embedded >= 1:
-            # Hybrid: What's next must index chapter decisions (body required).
-            # Cross-cut ### blocks are allowed in addition to the index.
             if len(nxt) < 20:
                 errors.append(
                     "## What's next must index the embedded decisions "
@@ -122,12 +173,16 @@ def check(md: str) -> tuple[list[str], list[str]]:
             errors.append("## What's next has no decision blocks")
         elif cross_cut < 1 and n_alt < 1:
             errors.append(
-                "## What's next needs at least one ### N. decision heading "
+                "## What's next needs at least one ### Decision N · heading "
                 "(or embed chapter decisions and write an index here)"
             )
 
         total = embedded + cross_cut
-        if total > 5:
+        if length == "Brief" and total > 3:
+            warnings.append(
+                f"{total} decisions on a Brief; prefer <=3 for a one-pager"
+            )
+        elif total > 5:
             warnings.append(
                 f"{total} decisions (chapter embeds plus cross-cuts); prefer <=5"
             )
@@ -136,8 +191,32 @@ def check(md: str) -> tuple[list[str], list[str]]:
     if "Appendix" in h2 and len(appendix) < 1:
         errors.append("## Appendix heading exists but body is empty")
 
-    if "Narrative" in h2 and len(narrative) < 40:
+    if length != "Brief" and "Narrative" in h2 and len(narrative) < 40:
         errors.append("## Narrative is empty or too thin")
+
+    cover = section_body(md, "Cover")
+    if re.search(r"^\*\*Stats:\*\*", cover, re.MULTILINE):
+        warnings.append(
+            "**Stats:** under Cover: move numbers to "
+            "**By the numbers:** in Appendix"
+        )
+
+    if length == "Brief" and sixty:
+        if re.search(r"^[-*]\s+", sixty, re.MULTILINE):
+            warnings.append(
+                "Brief sixty-second contains bullet lines: use continuous prose"
+            )
+        bold_leads = BOLD_LEAD_RE.findall(sixty)
+        if len(bold_leads) > 1:
+            warnings.append(
+                f"{len(bold_leads)} bold-lead openers in Brief sixty-second: "
+                "prefer zero (writing carries emphasis)"
+            )
+        elif len(bold_leads) == 1:
+            warnings.append(
+                "bold lead in Brief sixty-second: prefer continuous prose "
+                "without bold leads"
+            )
 
     ids = sorted(
         m
@@ -158,15 +237,35 @@ def check(md: str) -> tuple[list[str], list[str]]:
                 f"{len(walls)} paragraph(s) over 130 words in Narrative: "
                 "consider lists, bold leads, or a split (one idea per paragraph)"
             )
-
-    # Long report + trailing-only: nudge toward Hybrid
-    if narrative and len(narrative.split()) > 2500:
-        if embedded < 1 and cross_cut >= 3:
+        only_bullets = bool(narrative.strip()) and not paragraphs_of(narrative)
+        has_bullets = bool(re.search(r"^[-*]\s+", narrative, re.MULTILINE))
+        if length == "Standard" and only_bullets and has_bullets:
             warnings.append(
-                "long narrative with all decisions trailing: prefer Hybrid — "
+                "Standard Narrative is only bullets: write prose-first "
+                "(bullets for genuinely parallel facts)"
+            )
+
+    if length == "Brief":
+        pass  # Narrative presence already errors above
+    elif length == "Standard":
+        if narrative_words > 1800:
+            warnings.append(
+                "Length is Standard but Narrative is very long: "
+                "consider Essay, or cut toward 2-4 pages"
+            )
+    elif length == "Essay":
+        if narrative_words > 2500 and embedded < 1 and cross_cut >= 3:
+            warnings.append(
+                "Essay with all decisions trailing: prefer Hybrid — "
                 "embed chapter-owned asks at chapter end, make What's next an "
                 "index plus any cross-cutting asks"
             )
+    elif narrative_words > 2500 and embedded < 1 and cross_cut >= 3:
+        warnings.append(
+            "long narrative with all decisions trailing: prefer Hybrid — "
+            "embed chapter-owned asks at chapter end, make What's next an "
+            "index plus any cross-cutting asks"
+        )
 
     return errors, warnings
 

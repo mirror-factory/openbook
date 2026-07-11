@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Before — agent transcript</title>
+<style>
+
+body {
+  margin: 0;
+  padding: 14px 16px 40px;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 11px;
+  line-height: 1.38;
+  color: #c4c4c4;
+  background: #111;
+}
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111;
+  background: #888;
+  padding: 2px 7px;
+  margin-bottom: 10px;
+}
+.cli {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cli .ln { display: block; }
+.cli .fail { color: #e07070; }
+.cli .ok { color: #6aab6a; }
+
+</style>
+</head>
+<body>
+<div class="badge">agent session · transcript</div>
+<div class="cli">
+<span class="ln">$ agent resume --cwd /work/atrium</span>
+<span class="ln">session 2026-07-08T23:24:00-04:00  permission=unrestricted  goal=night-shift</span>
+<span class="ln"></span>
+<span class="ln">&gt; continue night shift. finish markdown contract + design research.</span>
+<span class="ln">&gt; update NIGHT-REPORT.md. leave decisions for human.</span>
+<span class="ln"></span>
+<span class="ln">[read] NIGHT-REPORT.md  (847 lines)</span>
+<span class="ln">[read] tasks/T001-markdown-contract.md  (214 lines)</span>
+<span class="ln"></span>
+<span class="ln">$ rg -n &quot;acceptance|PASS|FAIL&quot; packages/model/src -g &#x27;*.ts&#x27; | head -80</span>
+<span class="ln">packages/model/src/frontmatter.ts:41: export type AcceptanceItem = {</span>
+<span class="ln">packages/model/src/frontmatter.ts:88: if (!parsed.ok) throw new ParseError(...)</span>
+<span class="ln">packages/model/src/ready.ts:12: export function assertReady(spec: Spec): void {</span>
+<span class="ln">packages/model/src/projections.ts:63: case &quot;Full&quot;: return fullProjection(doc)</span>
+<span class="ln">packages/model/src/serialize.ts:19: // byte-identical while frontmatter untouched</span>
+<span class="ln">… +47 lines</span>
+<span class="ln"></span>
+<span class="ln">$ git status -sb &amp;&amp; git log --oneline -12</span>
+<span class="ln">## night/2026-07-08...origin/night/2026-07-08 [ahead 9]</span>
+<span class="ln">?? design/proposals/2026-07-08/</span>
+<span class="ln"> M packages/model/src/frontmatter.ts</span>
+<span class="ln"> M packages/model/src/serialize.ts</span>
+<span class="ln">a1f3c02 wip: projections</span>
+<span class="ln">9ee2b10 wip: parser fixtures</span>
+<span class="ln">c4d91aa wip: ready-flip</span>
+<span class="ln">… +9 more</span>
+<span class="ln"></span>
+<span class="ln">[read] seed/specs/legacy-brand-narrative.md  (156 lines)</span>
+<span class="ln">note: pre-schema keys — matters for round-trip byte-identity</span>
+<span class="ln"></span>
+<span class="ln">[edit] packages/model/src/serialize.ts  (+38 -11)</span>
+<span class="ln"></span>
+<span class="ln">$ pnpm exec vitest run packages/model --reporter=verbose</span>
+<span class="ln"> RUN  v2.1.9 /work/atrium</span>
+<span class="ln"></span>
+<span class="ln"> ✓ packages/model/src/frontmatter.test.ts &gt; parse canonical (12)</span>
+<span class="ln"> ✓ packages/model/src/frontmatter.test.ts &gt; serialize untouched preserves bytes (3)</span>
+<span class="ln"> ✓ packages/model/src/serialize.test.ts &gt; round-trip folio index (2)</span>
+<span class="ln"> ✓ packages/model/src/ready.test.ts &gt; ready-flip (4)</span>
+<span class="ln fail"> ❯ packages/model/src/serialize.test.ts &gt; BOM fixture</span>
+<span class="ln fail">   → expected false to be true // Object.is equality</span>
+<span class="ln"></span>
+<span class="ln fail"> Test Files  1 failed | 4 passed (5)</span>
+<span class="ln fail"> Tests       1 failed | 53 passed (54)</span>
+<span class="ln"> Duration   3.82s</span>
+<span class="ln"></span>
+<span class="ln">BOM path broken. Investigating.</span>
+<span class="ln"></span>
+<span class="ln">$ xxd seed/specs/bom-spec.md | head -3</span>
+<span class="ln">00000000: efbb bf2d 2d2d 0a74 6974 6c65 3a20 426f  ...---.title: Bo</span>
+<span class="ln">00000010: 6d20 4669 7874 7572 650a 7374 6174 7573  m Fixture.status</span>
+<span class="ln">00000020: 3a20 6472 6166 740a 2d2d 2d0a            : draft.---.</span>
+<span class="ln"></span>
+<span class="ln">[edit] packages/model/src/frontmatter.ts</span>
+<span class="ln">  strip BOM before fence detect</span>
+<span class="ln">[edit] packages/model/src/frontmatter.test.ts  (+regression)</span>
+<span class="ln"></span>
+<span class="ln">$ pnpm exec vitest run packages/model 2&gt;&amp;1 | tail -12</span>
+<span class="ln ok"> Test Files  5 passed (5)</span>
+<span class="ln"> Tests       54 passed (54)</span>
+<span class="ln"> Duration   2.91s</span>
+<span class="ln"></span>
+<span class="ln">$ pnpm exec tsc --noEmit -p packages/model</span>
+<span class="ln">(clean)</span>
+<span class="ln"></span>
+<span class="ln">[spawn] review-fleet  agents=28  mode=adversarial</span>
+<span class="ln">  finders: 16 distinct</span>
+<span class="ln">  verified: 10</span>
+<span class="ln">  confirmed data-integrity: 7</span>
+<span class="ln fail">    - BOM silent double-frontmatter on save  [CRITICAL]</span>
+<span class="ln">    - corrective edit matching normalized value never reaches disk</span>
+<span class="ln">    - invalid form: destroyed by unrelated checkbox click</span>
+<span class="ln">    - NaN breaks byte-identity check</span>
+<span class="ln">    - unterminated frontmatter duplicates stale text</span>
+<span class="ln">    - ready asserted with open acceptance boxes</span>
+<span class="ln">    - Full projection drops preamble content</span>
+<span class="ln">  tokens≈843000  wall=14m22s</span>
+<span class="ln"></span>
+<span class="ln">[edit] packages/model/src/{frontmatter,serialize,ready,projections}.ts</span>
+<span class="ln">[edit] packages/model/src/*.test.ts  (+14 regression tests)</span>
+<span class="ln">note: pnpm version pin left unchanged for conscious merge</span>
+<span class="ln"></span>
+<span class="ln">$ pnpm exec vitest run &amp;&amp; pnpm exec tsc --noEmit</span>
+<span class="ln ok"> Test Files  5 passed (5)</span>
+<span class="ln ok"> Tests       68 passed (68)</span>
+<span class="ln"> Duration   4.11s</span>
+<span class="ln"> tsc: clean (strict, noUncheckedIndexedAccess)</span>
+<span class="ln"></span>
+<span class="ln">$ gh pr create --title &quot;feat(model): T001 markdown contract&quot;</span>
+<span class="ln">https://github.com/example/atrium/pull/1</span>
+<span class="ln">acceptance 5/5 PASS · self-review comment posted</span>
+<span class="ln"></span>
+<span class="ln">================================================================================</span>
+<span class="ln">parallel track: design research + Library concepts</span>
+<span class="ln"></span>
+<span class="ln">[write] design/research/quiet-ui.md</span>
+<span class="ln">[write] design/research/calm-density.md</span>
+<span class="ln">[write] design/research/library-archive-patterns.md</span>
+<span class="ln">[write] design/research/opendesign.md</span>
+<span class="ln">[write] design/research/semantic-zoom.md</span>
+<span class="ln">[write] design/research/markdown-reading.md</span>
+<span class="ln">  6 notes · sources · adopt/reject</span>
+<span class="ln">  through-line: calm tech; generous interface (search box withholds collection)</span>
+<span class="ln"></span>
+<span class="ln">[write] design/proposals/2026-07-08/library-a-the-desk.html       (+v1→v3)</span>
+<span class="ln">[write] design/proposals/2026-07-08/library-a-the-desk-critique.md</span>
+<span class="ln">  data-ink fail: conflict counted three times; cut to judgment-only prose</span>
+<span class="ln"></span>
+<span class="ln">[write] design/proposals/2026-07-08/library-b-the-catalog.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/library-b-the-catalog-critique.md</span>
+<span class="ln">  answer-in-prose before receipts · fixed facet/verb vocabulary</span>
+<span class="ln"></span>
+<span class="ln">[write] design/proposals/2026-07-08/library-c-the-ledger.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/library-c-the-ledger-critique.md</span>
+<span class="ln">  built known-wrong (second journal vs charter)</span>
+<span class="ln">  organ donor: custody box + trails → salvaged into Desk/Catalog</span>
+<span class="ln"></span>
+<span class="ln">[write] design/proposals/2026-07-08/shell-composition.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/shell-composition-critique.md</span>
+<span class="ln">  panes: nav | Library center | Journal right · light+graphite</span>
+<span class="ln">  HARD: Document/Folio open location undecided</span>
+<span class="ln">  shell task still encodes pre-kickoff layout (Journal inside navigator)</span>
+<span class="ln"></span>
+<span class="ln">[write] design/proposals/2026-07-08/worksheet-goal-intake.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/worksheet-correction-state.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/worksheet-decision-weigh-in.html</span>
+<span class="ln">[write] design/proposals/2026-07-08/worksheet-handoff-chooser.html</span>
+<span class="ln">  worksheets 4/5 mockuped (BMC + audience-and-offer not mockuped)</span>
+<span class="ln">  accidental: goal-intake &quot;what does done look like&quot; → session acceptance ???</span>
+<span class="ln"></span>
+<span class="ln">$ git add -A &amp;&amp; git commit -m &quot;docs(design): night research + library concepts&quot;</span>
+<span class="ln">$ gh pr create --title &quot;docs(design): night-shift research + Library concepts&quot;</span>
+<span class="ln">https://github.com/example/atrium/pull/2</span>
+<span class="ln"></span>
+<span class="ln">$ git diff --stat origin/main...HEAD | tail -8</span>
+<span class="ln"> design/research/quiet-ui.md                         |  68 +++</span>
+<span class="ln"> design/proposals/2026-07-08/library-a-the-desk.html | 412 ++++++++++++++</span>
+<span class="ln"> design/proposals/2026-07-08/library-b-the-catalog.html | 288 ++++++++++</span>
+<span class="ln"> design/proposals/2026-07-08/library-c-the-ledger.html | 241 +++++++++</span>
+<span class="ln"> packages/model/src/frontmatter.ts                   | 142 ++++++-</span>
+<span class="ln"> packages/model/src/serialize.ts                     |  97 ++++-</span>
+<span class="ln"> 47 files changed, 3821 insertions(+), 219 deletions(-)</span>
+<span class="ln"></span>
+<span class="ln">================================================================================</span>
+<span class="ln">$ sed -n &#x27;/PENDING-HUMAN/,+18p&#x27; NIGHT-REPORT.md</span>
+<span class="ln"></span>
+<span class="ln">## PENDING-HUMAN (do not invent)</span>
+<span class="ln">1. Document/Folio open — Library center + Journal right (blocks shell re-spec)</span>
+<span class="ln">2. Desk+Catalog as two Library states; Ledger as by-time lens only? or one winner</span>
+<span class="ln">3. Sessions carry acceptance from goal-intake (&quot;what does done look like&quot;) at close?</span>
+<span class="ln">4. arrangement-weights vocab (decisions-first / recency / trail-affinity / kind-mix)</span>
+<span class="ln">5. resume cues worth session-state memory?</span>
+<span class="ln">6. DESIGN.md draft review (proposal)</span>
+<span class="ln">7. package-manager pin riding contract PR</span>
+<span class="ln"></span>
+<span class="ln">## stats</span>
+<span class="ln">research_notes=6  library_concepts=3  worksheets=4/5</span>
+<span class="ln">prs=2  tests=68  review_confirmed=7  themes=light+graphite</span>
+<span class="ln">floors_met=23:53 (29m in) then depth until ~07:00</span>
+<span class="ln"></span>
+<span class="ln">$ echo DONE</span>
+<span class="ln"># scroll up for tool traces. everything green.</span>
+<span class="ln"># questions 1-3 match what a one-page handoff would ask; 4-7 still open in the log.</span>
+</div>
+</body>
+</html>

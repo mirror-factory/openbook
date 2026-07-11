@@ -10,6 +10,22 @@ It is not an agent framework. It's a simple handoff layer between the run and th
 
 ---
 
+## Try the demo (local)
+
+Open [`docs/index.html`](./docs/index.html) in a browser after cloning (generated assets are included). Drag the slider to compare a dense agent transcript with an OpenBook **Brief**.
+
+For a single shareable file (no other assets needed), open or send [`docs/openbook-demo.html`](./docs/openbook-demo.html) — it works via `file://`.
+
+Rebuild panes anytime:
+
+```bash
+python scripts/build_demo.py
+```
+
+(Standard and Essay panes are still generated for local inspection; the live demo shows Brief.)
+
+---
+
 ## 60-second install
 
 ```bash
@@ -18,7 +34,7 @@ cd openbook
 ```
 
 1. Point your coding agent at this folder (or paste [USE.md](./USE.md) into `CLAUDE.md`, a Cursor rule, or the session prompt).
-2. At the end of a long run, the agent writes `REPORT.md` using [formats/report.md](./formats/report.md).
+2. At the end of a long run, the agent writes `REPORT.md` using [formats/report.md](./formats/report.md). **Default length: Brief** (~one page).
 3. Check structure, then optionally render PDF:
 
 ```bash
@@ -33,33 +49,41 @@ Never browser-print a `file://` tab. Chrome injects date and URL footers. Use `r
 
 ---
 
+## Length profiles
+
+| Profile | Target | Role |
+|---------|--------|------|
+| **Brief** (default) | ~1 page | Prose lede carries the story; no Narrative section |
+| **Standard** | ~2–4 pages | Sixty-second abstract + short prose Narrative |
+| **Essay** | long, when earned | Chaptered Hybrid (pens where context lives) |
+
+See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings often prefer Essay; most public handoffs should start at Brief.
+
+---
+
 ## What's in the kit
 
 | Piece | Job |
 |-------|-----|
 | [formats/](./formats/) | Report formats agents load and humans read |
 | [styles/](./styles/) | Voice and prose guidance for clearer writing |
-| [scripts/](./scripts/) | Structural checks and frameless letter PDF rendering |
-| [examples/](./examples/) | Before/after of the same night, plus shorter samples |
-| [render/](./render/) | Georgia essay CSS and print notes for paper / e-ink |
-
-OpenBook standardizes **shape and readability**, not length. Short reports are fine when the work is small. Long chaptered essays are valid when the night earned them.
-
-For long reports, prefer **Hybrid** decisions: chapter-owned asks at the end of the chapter that explains them, then a short closing index plus any cross-cutting questions. Write in plain language — a reader with a pen has no terminal to decode ticket IDs.
+| [scripts/](./scripts/) | Structural checks, PDF render, demo build |
+| [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
+| [render/](./render/) | Report CSS (warm paper screen + Letter print) |
+| [docs/](./docs/) | Interactive before/after demo |
+| [CHANGELOG.md](./CHANGELOG.md) | Release notes |
 
 ---
 
 ## See the difference
 
-Same night. Two shapes.
-
 | | Status dump | OpenBook |
 |---|-------------|---------|
-| Read | Lists and greens | Sixty-second story, then chapters |
-| Decide | Re-enter the terminal | Chapter pens while context is warm; short closing index |
+| Read | Lists and greens | Sixty-second story at the right depth |
+| Decide | Re-enter the terminal | Plain asks with room for a pen |
 | Follow-up | Asserted | Receipts in the appendix |
 
-Start here: [examples/before-after/](./examples/before-after/). Compact Hybrid demo: [examples/embedded-decisions.md](./examples/embedded-decisions.md).
+Markdown examples: [examples/before-after/](./examples/before-after/). Interactive: [docs/index.html](./docs/index.html).
 
 ---
 

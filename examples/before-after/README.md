@@ -1,21 +1,23 @@
 # Before / after
 
-Same night. Two shapes.
+Same night (July 8 design + contract shift). Four shapes.
 
 | File | What you get |
 |------|----------------|
-| [before.md](./before.md) | Status dump: lists, greens, bare ticket/PR IDs, undecided pile |
-| [after.md](./after.md) | OpenBook Hybrid essay: sixty-second, chapters with pen rooms, closing index + cross-cuts, plain language, receipts |
+| [before.md](./before.md) | Dense generic agent-session transcript |
+| [after-brief.md](./after-brief.md) | **Default OpenBook** — prose lede, no Narrative |
+| [after-standard.md](./after-standard.md) | ~2–4 page narrative |
+| [after-essay.md](./after-essay.md) | Long Hybrid essay (chapter pens + closing index) |
 
-**How to compare:** read the sixty-second version and one chapter ending in a `[?]` ask in `after.md`, then skim `before.md`. You can decide while the chapter is warm; the dump makes you re-enter the terminal and decode `T003` / `PR #1`.
+**Accuracy:** `before.md` is the same July 8 night as the after-* files. It is noisy on purpose; it is not a different story.
 
-**Hybrid pattern:** chapter-owned decisions sit at chapter end; What's next indexes them and holds only cross-cutting asks. That is the fix for "forgot by the end."
+**How to compare:** skim the transcript, then read `after-brief.md`. Open Standard or Essay when you want more story. Interactive wipe: [`docs/index.html`](../../docs/index.html).
 
 ## Production rules (for future examples)
 
-- Same night for before and after (fictional or carefully redacted).
-- After must be renderable (`scripts/render_report.py`) and essay-quality on e-ink.
+- Same night for before and all after-* lengths.
+- Each after-* must pass `scripts/check_report.py` and render via `scripts/render_report.py`.
 - No secrets. Plain-reference always (words first; IDs in parentheses at most).
-- Marketing screenshot targets: sixty-second page, one chapter with pen room, What's next index + cross-cut page.
+- Brief: prose lede only; numbers in Appendix `**By the numbers:**`.
 
-Length is not the point. Trust and finishability are. The after example is long on purpose when the night earned it.
+Length is a product choice. Trust and finishability matter more than page count.

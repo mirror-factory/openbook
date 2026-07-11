@@ -2,13 +2,33 @@
 
 **Load this file** when writing an end-of-run handoff for a human who was not in the loop.
 
-**One line:** A narrative memo with a sixty-second lead, chaptered story, decisions where their context lives, a short closing index with any cross-cutting asks, and receipts underneath.
+**One line:** A readable report with a sixty-second lead, the right amount of story for the length you chose, decisions a human can answer, and receipts underneath.
+
+**Public default length: Brief** (~one page). Use Standard or Essay when the work earns more depth.
 
 ---
 
 ## Required section headings (exact H2 titles)
 
-Use these headings exactly (checker matches them):
+Declare length near the top of Cover (recommended):
+
+```markdown
+**Length:** Brief
+```
+
+Allowed values: `Brief` | `Standard` | `Essay`.
+
+### Brief (default)
+
+1. `## Cover`
+2. `## The sixty-second version`
+3. `## What's next`
+4. `## What we learned`
+5. `## Appendix`
+
+**Do not include `## Narrative` on Brief.** If the sixty-second version cannot hold the story, promote to Standard.
+
+### Standard / Essay
 
 1. `## Cover`
 2. `## The sixty-second version`
@@ -21,68 +41,111 @@ Optional H3 chapters under Narrative (e.g. `### Chapter 1 · …`).
 
 ---
 
+## Length profiles
+
+| Profile | Target (letter PDF) | Story | Decisions | When to use |
+|---------|---------------------|-------|-----------|-------------|
+| **Brief** (default) | ~1 page | Prose lede carries the story; **no Narrative section** | Trailing only; prefer ≤3 asks | Most coding-agent handoffs; small or medium runs |
+| **Standard** | ~2–4 pages | Sixty-second as abstract; Narrative is short chapters or continuous prose | Trailing, or light Hybrid if two+ chapter-owned asks | Multi-hour runs with a real story but not an overnight essay |
+| **Essay** | 10–15+ pages when earned | Sixty-second as abstract; full chaptered Narrative | **Hybrid:** chapter pens + closing index + optional cross-cuts | High-substance nights; Mirror Factory morning preference |
+
+Shared at every length: Cover, sixty-second, What's next, What we learned, Appendix. Plain-reference and self-contained asks. Length is **earned**, never padded.
+
+There is **no maximum** page count. Padding a Brief into an essay, or shipping a status dump as any length, are both anti-patterns.
+
+---
+
 ## Section order and jobs
 
 ### Cover
 
-What this is, who wrote it, for whom, when, and headline stats. Title + one subtitle. No padding.
+Title + one subtitle. Who wrote it, when. Include `**Length:** …` when known. No padding.
+
+Prefer labeled fields:
+
+```markdown
+**Title:** …
+**Subtitle:** …
+**Length:** Brief
+**Author:** …
+**When:** …
+```
+
+Optional machine-readable `**For:**` is ignored in the rendered byline (a document describing its audience to its audience is chrome).
+
+**Do not put `**Stats:**` on Cover.** Numbers belong in Appendix as `**By the numbers:** …`.
+
+The renderer builds a masthead: title, dek, byline (`Author · When · N-min read`), then a short rule into the body.
 
 ### The sixty-second version
 
-The whole run in one short read. Most important item first. A reader who stops here should still know what happened and what needs them.
+A reader who stops here should still know what happened and what needs them.
+
+**Brief:** continuous prose, 3–6 paragraphs, ~150–350 words. First sentence is the bottom line. **No bold leads** — the writing carries emphasis. No bullets. End with one plain sentence naming what needs the reader, pointing at the decisions below. This IS the narrative at Brief length.
+
+**Standard / Essay:** an abstract of the Narrative. Maximum 3 paragraphs. Bold leads allowed, maximum one per paragraph, one short sentence each. If the abstract needs a fourth paragraph, the Narrative is under-summarized, not the abstract under-sized.
 
 ### Narrative
 
-Chaptered prose. Bezos-memo energy: detailed, honest, story-shaped. Include failures and dead ends. Length is **earned**, never padded.
+**Brief:** forbidden. Fold into the sixty-second version or declare Standard.
 
-**Formatting is load-bearing, not decoration.** Long-form field-tested rules:
+**Standard:** 2–5 short chapters or one continuous narrative, *prose-first*. Bullets only for genuinely parallel facts. A Narrative that is only bullets fails review. Include failures and dead ends that matter.
 
-- One idea per paragraph. A paragraph that compresses three parallel items into prose is a list wearing a costume; give it bullets or numbers.
-- **Bold the lead** of a paragraph or bullet when a scanning reader should catch it (textbook and workbook practice: the bold layer alone should tell the chapter's story).
-- Use ordered lists when order carries meaning, unordered when it does not, and tables only for genuinely tabular facts.
-- Italics for emphasis and titles, sparingly; emphasis everywhere is emphasis nowhere.
+**Essay:** Chaptered prose. Bezos-memo energy: detailed, honest, story-shaped. Include failures and dead ends.
 
-**Hybrid decisions (long reports):** Chapter-owned asks live at the **end of the chapter that explains them**, as decision blocks (`### N. [?] …`). The renderer gives each block a generous pen room wherever it appears. Human memory is the reason: a trailing-only question list is a memory test the reader did not sign up for. Prefer answering while the chapter is still warm.
+**Formatting is load-bearing, not decoration** (Standard and Essay especially):
+
+- One idea per paragraph. Parallel items become lists.
+- **Bold the lead** when a scanning reader should catch it — one short sentence, not a dense bold run. (Brief: do not use bold leads.)
+- Ordered lists when order matters; tables only for tabular facts (renderer uses booktabs-style rules).
+- Italics sparingly.
+- Flush-left body; aim for a readable measure (~65 characters). Do not pad lines to justify.
+
+**Hybrid decisions (Essay; optional light use on Standard):** Chapter-owned asks live at the **end of the chapter that explains them** (`### Decision N · short handle`). The renderer gives each block a generous pen room in print. Human memory is the reason: a trailing-only list on a long essay is a memory test the reader did not sign up for.
 
 ### What's next
 
-**Hybrid close** (preferred for long reports):
+**Brief / Standard (trailing):** Ranked decision blocks here. Prefer ≤3 on Brief, ≤5 on Standard.
 
-1. An **index** of chapter-embedded decisions (one plain line each, naming the chapter that holds the pen room).
-2. Optional **cross-cutting** decision blocks for asks that span the whole night (company-wide, not owned by one chapter). Same block rules as below. Prefer ≤5 total across chapter embeds + cross-cuts.
+**Essay (Hybrid close):**
 
-**Short reports** may keep all decisions trailing here (no embeds required). Still use self-contained plain-language blocks.
+1. An **index** of chapter-embedded decisions (one plain line each, naming the chapter).
+2. Optional **cross-cutting** decision blocks for asks that span the whole run. Prefer ≤5 total across embeds + cross-cuts.
 
-Each full decision block (in a chapter or as a cross-cut):
+Each full decision block:
 
-- One plain-language question
+```markdown
+### Decision N · short handle
+
+Plain-language question. One context line. Self-contained.
+```
+
+- One plain-language question as the first paragraph
 - One short context line if needed
-- **Self-contained**: answerable from the block alone; restate anything the reader needs (no "see chapter 3")
-- Room to answer (in Markdown: a blank block or `<!-- pen room -->`; in PDF: **generous** pen room — cramped pen room reads as not really wanting an answer)
-- Optional `[?]` marker on open decisions
+- **Self-contained**: answerable from the block alone
+- Room to answer in print (PDF: generous pen room; screen: no pen chrome)
 
-**Rules:** prefer ≤5 questions total; one ask per block; no jargon stacks; no laundry-list "bless or reverse" dumps.
+Legacy `### N. [?]` headings still parse with a deprecation warning; prefer `### Decision N · …`.
 
-**Plain-reference rule (whole document):** never let an internal ID be the only name for a thing. Ticket numbers, PR numbers, and shorthand codenames mean nothing on paper; say what the thing is in words ("the markdown contract pull request"), with the ID in parentheses at most. A reader with a pen has no terminal to look it up in.
+**Rules:** one ask per block; no jargon stacks; no laundry-list dumps.
+
+**Plain-reference rule (whole document):** never let an internal ID be the only name for a thing. Say what it is in words; ID in parentheses at most.
 
 ### What we learned
 
-Short. Portable to the next run. Bullets are fine. Not a pen section.
+Short. Portable to the next run. 1–3 lines on Brief. Bullets are fine. Not a pen section.
 
 ### Appendix
 
-Receipts: pull requests, commits, tests, paths, ledgers, sources, PENDING-HUMAN. Flat and honest. Name artifacts in words first; IDs in parentheses at most.
+Receipts: pull requests, commits, tests, paths, sources, PENDING-HUMAN. Flat and honest.
 
----
+Optional leading line:
 
-## Length profiles
+```markdown
+**By the numbers:** 6 research notes · 2 pull requests · 68 tests green
+```
 
-| Profile | Guidance |
-|---------|----------|
-| **Default (public OpenBook)** | Length earned by substance. Short is fine when the work is small. Always keep the sixty-second layer. Trailing-only decisions are OK when the report is short. |
-| **Long-essay morning** (Mirror Factory) | When the night has substance, prefer a **chaptered essay of 15+ pages** in PDF with **Hybrid** decisions (chapter pens + closing index and any cross-cuts). Do **not** collapse a rich night into a 2–4 page stub. A Georgia letter essay with pen room is the quality bar. |
-
-There is **no maximum** page count. The anti-pattern is a thin status dump, not a long essay.
+Brief: a few receipt lines is enough.
 
 ---
 
@@ -90,11 +153,11 @@ There is **no maximum** page count. The anti-pattern is a thin status dump, not 
 
 ### Full report
 
-One document with all six sections. Default for a single agent or an editor-assembled night.
+One document with the required sections for its length. Default for a single agent or an editor-assembled night.
 
 ### Section contribution
 
-A multi-agent contributor may write a Narrative-shaped section in their own voice for an editor to assemble. Still tell the truth; still leave receipts. The editor may cut for length and flow, never rewrite voice or soften failures. Missing sections are named, not invented.
+A multi-agent contributor may write a Narrative-shaped section in their own voice for an editor to assemble (Standard/Essay). Still tell the truth; still leave receipts. The editor may cut for length and flow, never rewrite voice or soften failures. Missing sections are named, not invented.
 
 ---
 
@@ -105,18 +168,16 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - Do not inflate stats or invent timestamps.
 - Human-dependent items stay explicitly unresolved.
 - Delivery failures (e.g. PDF not uploaded) must be loud, never quiet.
-- **Audit before handoff.** A long run's report accretes stats that go stale as the run continues (counts, totals, lists of artifacts). Before delivery, verify every number and referenced artifact against ground truth — ideally with fresh eyes that did not write the report. One stale count erodes trust in every honest sentence around it.
+- **Audit before handoff.** Verify counts and artifacts against ground truth before delivery, ideally with fresh eyes.
 
 ---
 
 ## Print / PDF
 
-When rendering for paper or e-ink:
-
-- Use OpenBook `render/` (Georgia essay CSS + frameless template + `scripts/render_report.py`)
-- US Letter; margins ≥2.6cm; page numbers; pen room under decisions (chapter and cross-cut)
+- Use OpenBook `render/` + `scripts/render_report.py`
+- US Letter; margins ≥2.4cm; page numbers; pen room under decisions (print only)
 - Grayscale-safe figures with captions
-- **Never** browser-print a `file://` tab (no Chrome date/URL footers)
+- **Never** browser-print a `file://` tab
 
 ---
 
@@ -124,10 +185,13 @@ When rendering for paper or e-ink:
 
 - Status dump / PR laundry list with no story
 - Confident summary with no appendix receipts
-- Shrinking a rich night into 2–4 pages to look efficient
-- **Trailing-only decisions on a long report** (forces the reader to remember chapter three from the back of the essay)
-- Bare internal IDs as the only name for a thing (earns a handwritten "What?")
-- Decision blocks that require flipping back to earlier chapters to answer
+- Declaring **Brief** while shipping chaptered essay length (or the reverse without cause)
+- **A Brief with a Narrative section** (fold into sixty-second or promote to Standard)
+- **Stats strip thinking:** leading with numbers instead of the story
+- Shrinking a rich Essay night into a stub to look efficient
+- **Trailing-only decisions on an Essay** (forgot-by-the-end)
+- Bare internal IDs as the only name for a thing
+- Decision blocks that require flipping back to earlier chapters
 - More than five fuzzy decision questions
 - Jargon that earns a handwritten "What?"
 - Browser-chrome PDFs
@@ -135,16 +199,45 @@ When rendering for paper or e-ink:
 
 ---
 
-## Minimal skeleton (short report)
+## Skeleton — Brief (default)
 
 ```markdown
 ## Cover
 
 **Title:** …
+**Subtitle:** …
+**Length:** Brief
 **Author:** …
-**For:** …
 **When:** …
-**Stats:** …
+
+## The sixty-second version
+
+(3–6 paragraphs of continuous prose. First sentence is the bottom line.
+No box, no bold leads, no bullets. This IS the narrative at Brief length.)
+
+## What's next
+
+### Decision 1 · short handle
+
+Plain-language question. One context line. Self-contained.
+
+## What we learned
+
+- … (1–3 lines max)
+
+## Appendix
+
+**By the numbers:** 6 research notes · 2 pull requests · 68 tests green
+- receipts …
+```
+
+## Skeleton — Standard
+
+```markdown
+## Cover
+
+**Length:** Standard
+…
 
 ## The sixty-second version
 
@@ -152,13 +245,13 @@ When rendering for paper or e-ink:
 
 ## Narrative
 
-### Chapter 1 · …
+### …
 
 …
 
 ## What's next
 
-### 1. [?] …
+### Decision 1 · …
 
 …
 
@@ -168,14 +261,16 @@ When rendering for paper or e-ink:
 
 ## Appendix
 
+**By the numbers:** …
 - …
 ```
 
-## Long-report skeleton (Hybrid)
+## Skeleton — Essay (Hybrid)
 
 ```markdown
 ## Cover
 
+**Length:** Essay
 …
 
 ## The sixty-second version
@@ -188,15 +283,15 @@ When rendering for paper or e-ink:
 
 …
 
-### 1. [?] Plain-language chapter ask?
+### Decision 1 · chapter ask
 
-One self-contained context line. Restate the choice in words.
+…
 
 ### Chapter 2 · …
 
 …
 
-### 2. [?] Another chapter ask?
+### Decision 2 · another chapter ask
 
 …
 
@@ -207,9 +302,9 @@ Chapter decisions (pen rooms above):
 1. … (end of chapter 1)
 2. … (end of chapter 2)
 
-### 3. [?] Cross-cutting ask that spans the night?
+### Decision 3 · cross-cutting ask
 
-Self-contained context. No chapter flip required.
+…
 
 ## What we learned
 

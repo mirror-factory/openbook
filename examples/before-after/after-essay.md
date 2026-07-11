@@ -2,10 +2,9 @@
 
 **Title:** The Night of July 8th
 **Subtitle:** Design research, three Libraries, five worksheets, and the humbling of a green checkmark
-**Author:** Dewey (OpenBook example, redacted from a real night shift)
-**For:** A founder reading over coffee, with a pen
+**Length:** Essay
+**Author:** Dewey
 **When:** 2026-07-08 · shift 11:24pm–7:00am Eastern
-**Stats:** 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 17 working commits · 68 tests green · every claim has a file behind it
 
 ## The sixty-second version
 
@@ -13,9 +12,7 @@
 
 **The markdown contract is done and battle-tested.** Parser, serializer, projections, ready-flip, byte-identical round-trips. All acceptance items passed. A 28-agent review fleet then found seven confirmed data-integrity bugs behind a green checkmark, including a Windows BOM that would have silently destroyed real frontmatter on save. All fixed. Sixty-eight tests green. That story is the best argument for review-after-green in the repo.
 
-**The most interesting finding** was not in a mockup. Goal intake asks what done looks like tonight; the answer is an acceptance line. Sessions can carry the same contract shape Specs do. Nobody decided this; the design wants it.
-
-**What needs you:** chapter pens where the context lives, then a short closing index with two cross-cutting asks. The urgent chapter ask: with the Library in the center and the Journal on the right, where does a Document or Folio open?
+**What needs you, including one uninvited find:** goal intake asks what done looks like tonight, and that answer is already an acceptance line (Sessions shaped like Specs). Chapter pens where the context lives, then a short closing index with two cross-cutting asks. Urgent: with the Library in the center and the Journal on the right, where does a Document or Folio open?
 
 ## Narrative
 
@@ -83,7 +80,9 @@ This is also a concrete answer to generative UI: generative composition, determi
 
 It is recommended against as a default, and it was built anyway, because it teaches. The charter gives "the record" to the Journal. A Library-as-ledger center pane is a second journal. So C dies as a default and lives as an organ donor: custody box, trails, and milestone cards salvaged into everything else. Dead ends are content; this one came with parts.
 
-### 1. [?] Do you buy Desk and Catalog as two states of one Library surface (arrival and ask), with Ledger as a by-time lens only?
+### Decision 1 · one Library, two states
+
+Do you buy Desk and Catalog as two states of one Library surface (arrival and ask), with Ledger as a by-time lens only?
 
 If yes, the next shift consolidates around one surface with two modes. If one concept should win outright, say which. Ledger stays available as an arrangement lens, not a home.
 
@@ -99,7 +98,9 @@ Building the composition did what mockup polish cannot: it exposed the layout's 
 
 **The dark theme pass earned its keep as a linter:** hardcoded colors lit up like errors the moment graphite tokens landed. A DESIGN.md draft (nine sections, including the anti-pattern list) sits in the design pull request marked proposal, unreviewed.
 
-### 2. [?] With the Library in the center and the Journal on the right, where does a Document or Folio open?
+### Decision 2 · where a Document opens
+
+With the Library in the center and the Journal on the right, where does a Document or Folio open?
 
 Replace the center, split it, or displace the Journal? This blocks the shell re-spec (whose acceptance criteria still encode the pre-kickoff layout). It also decides whether the six-state shell contract survives or doubles.
 
@@ -121,7 +122,9 @@ All five are built from one interaction primitive already validated: state, infe
 
 What was not mockuped (audience-and-offer, business model canvas in full) is named rather than faked.
 
-### 3. [?] Should Sessions carry acceptance criteria from goal intake ("what does done look like"), checked at close?
+### Decision 3 · Sessions with acceptance lines
+
+Should Sessions carry acceptance criteria from goal intake ("what does done look like"), checked at close?
 
 It fell out of the worksheet design uninvited. It expands what a Session is. Yours to bless or refuse.
 
@@ -169,11 +172,15 @@ Chapter decisions (pen rooms above):
 2. Where Document or Folio opens (end of chapter 5)
 3. Sessions carrying acceptance from goal intake (end of chapter 6)
 
-### 4. [?] Is the arrangement-weights vocabulary right: decisions first, recency, trail affinity, kind mix?
+### Decision 4 · arrangement-weights vocabulary
+
+Is the arrangement-weights vocabulary right: decisions first, recency, trail affinity, kind mix?
 
 The Catalog concept makes reweighting real with these four labels. If they should be plainer for non-technical readers, rename them now. This ask spans the Library recommendation, not one mockup page.
 
-### 5. [?] Are resume cues ("you were checking the overage math") worth the session-state memory, or is a wrong cue worse than none?
+### Decision 5 · resume cues
+
+Are resume cues ("you were checking the overage math") worth the session-state memory, or is a wrong cue worse than none?
 
 If yes, say so knowing the UI must stay calm. If no, cut them before they ship as noise. The Desk arrival state and Sessions both surface this tradeoff.
 
@@ -187,6 +194,8 @@ If yes, say so knowing the UI must stay calm. If no, cut them before they ship a
 - Next shift: read the clock, stage the report early, put chapter pens where the context lives.
 
 ## Appendix
+
+**By the numbers:** 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 17 working commits · 68 tests green
 
 ### Pull requests
 

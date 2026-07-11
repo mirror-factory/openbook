@@ -22,10 +22,26 @@ CSS_PATH = ROOT / "render" / "report.css"
 TEMPLATE_PATH = ROOT / "render" / "template.html"
 
 
+def detect_length(md: str) -> str:
+    m = re.search(
+        r"^\*\*Length:\*\*\s*(Brief|Standard|Essay)\s*$",
+        md,
+        re.MULTILINE | re.IGNORECASE,
+    )
+    return m.group(1).title() if m else "Standard"
+
+
+def read_minutes(md: str) -> int:
+    words = len(re.findall(r"[A-Za-z0-9']+", md))
+    return max(1, round(words / 220))
+
+
 def md_to_html(md: str) -> tuple[str, str]:
     """Convert OpenBook markdown to HTML body + title. Stdlib only."""
     lines = md.replace("\r\n", "\n").split("\n")
     title = "OpenBook Report"
+    length = detect_length(md)
+    minutes = read_minutes(md)
     # When a "## Cover" section exists, a leading H1 is a title, not a second
     # cover page (issue #1: the doubled cover).
     has_cover_section = any(
@@ -36,16 +52,23 @@ def md_to_html(md: str) -> tuple[str, str]:
     in_ul = False
     in_ol = False
     in_pre = False
+    in_sixty = False
+    sixty_first = False
     pre_buf: list[str] = []
     para: list[str] = []
 
     def flush_para() -> None:
-        nonlocal para
+        nonlocal para, sixty_first
         if not para:
             return
         text = " ".join(para).strip()
         para = []
-        if text:
+        if not text:
+            return
+        if in_sixty and sixty_first:
+            out.append(f'<p class="standfirst">{inline(text)}</p>')
+            sixty_first = False
+        else:
             out.append(f"<p>{inline(text)}</p>")
 
     def close_lists() -> None:
@@ -57,8 +80,32 @@ def md_to_html(md: str) -> tuple[str, str]:
             out.append("</ol>")
             in_ol = False
 
+    def close_sixty() -> None:
+        nonlocal in_sixty, sixty_first
+        if in_sixty:
+            out.append("</section>")
+            in_sixty = False
+            sixty_first = False
+
+    def smarten(s: str) -> str:
+        """Light micro-typography before HTML escape (quotes, dashes, spaces)."""
+        s = re.sub(r" {2,}", " ", s)
+        s = s.replace("---", "\u2014").replace("--", "\u2013")
+        parts: list[str] = []
+        open_dq = True
+        for ch in s:
+            if ch == '"':
+                parts.append("\u201c" if open_dq else "\u201d")
+                open_dq = not open_dq
+            else:
+                parts.append(ch)
+        s = "".join(parts)
+        s = re.sub(r"(?<=\w)'(?=\w)", "\u2019", s)
+        s = re.sub(r"'(?=s\b)", "\u2019", s)
+        return s
+
     def inline(s: str) -> str:
-        s = html.escape(s)
+        s = html.escape(smarten(s))
         s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
         s = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", s)
         s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
@@ -68,6 +115,45 @@ def md_to_html(md: str) -> tuple[str, str]:
             s,
         )
         return s
+
+    def parse_meta_line(raw: str) -> tuple[str, str] | None:
+        m = re.match(r"\*\*([^*]+):\*\*\s*(.+)$", raw) or re.match(
+            r"^([A-Za-z][^:]{0,40}):\s*(.+)$", raw
+        )
+        if not m:
+            return None
+        return m.group(1).strip(), m.group(2).strip()
+
+    def emit_decision(kicker: str) -> None:
+        """Emit a decision block; following paragraphs are question then context."""
+        nonlocal i
+        out.append('<div class="qblock">')
+        out.append(f'<p class="decision-kicker">{inline(kicker)}</p>')
+        i += 1
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+        chunks: list[str] = []
+        buf: list[str] = []
+        while i < len(lines) and not lines[i].startswith("#"):
+            if not lines[i].strip():
+                if buf:
+                    chunks.append(" ".join(buf))
+                    buf = []
+                    if len(chunks) >= 2:
+                        i += 1
+                        break
+                i += 1
+                continue
+            buf.append(lines[i].strip())
+            i += 1
+        if buf:
+            chunks.append(" ".join(buf))
+        if chunks:
+            out.append(f'<p class="q">{inline(chunks[0])}</p>')
+            if len(chunks) > 1:
+                out.append(f'<p class="ctx">{inline(" ".join(chunks[1:]))}</p>')
+        out.append('<div class="penroom"></div>')
+        out.append("</div>")
 
     while i < len(lines):
         line = lines[i]
@@ -98,6 +184,7 @@ def md_to_html(md: str) -> tuple[str, str]:
         if line.startswith("# ") and not line.startswith("## "):
             flush_para()
             close_lists()
+            close_sixty()
             title = line[2:].strip()
             if not has_cover_section:
                 out.append(f'<div class="cover"><h1>{inline(title)}</h1></div>')
@@ -110,32 +197,57 @@ def md_to_html(md: str) -> tuple[str, str]:
             close_lists()
             h = line[3:].strip()
             if h.lower() == "cover":
+                close_sixty()
                 i += 1
-                meta: list[str] = []
+                fields: dict[str, str] = {}
                 cover_title = title
+                dek = ""
                 while i < len(lines) and not lines[i].startswith("## "):
                     raw = lines[i].strip()
                     if raw:
-                        meta.append(raw)
-                        mt = re.match(
-                            r"\*\*Title:\*\*\s*(.+)$", raw, re.IGNORECASE
-                        ) or re.match(r"Title:\s*(.+)$", raw, re.IGNORECASE)
-                        if mt:
-                            cover_title = mt.group(1).strip()
-                            title = cover_title
+                        parsed = parse_meta_line(raw)
+                        if parsed:
+                            key, val = parsed
+                            kl = key.lower()
+                            if kl == "title":
+                                cover_title = val
+                                title = cover_title
+                            elif kl == "subtitle":
+                                dek = val
+                            else:
+                                fields[kl] = val
                     i += 1
                 out.append('<div class="cover">')
                 out.append(f"<h1>{inline(cover_title)}</h1>")
-                out.append('<div class="rule"></div>')
-                for s in meta:
-                    if re.match(r"(\*\*)?Title:", s, re.IGNORECASE):
-                        continue
-                    out.append(f'<div class="sub">{inline(s)}</div>')
+                if dek:
+                    out.append(f'<p class="dek">{inline(dek)}</p>')
+                # Byline: Author · When · N-min read (For/Length/Stats ignored here)
+                byline_bits: list[str] = []
+                if fields.get("author"):
+                    byline_bits.append(inline(fields["author"]))
+                if fields.get("when"):
+                    byline_bits.append(inline(fields["when"]))
+                byline_bits.append(f"{minutes}-min read")
+                out.append(
+                    '<p class="byline">' + " · ".join(byline_bits) + "</p>"
+                )
+                out.append('<div class="masthead-rule" aria-hidden="true"></div>')
                 out.append("</div>")
-                out.append('<div class="pagebreak"></div>')
+                # Brief: no pagebreak after cover — lede opens the page
+                if length != "Brief":
+                    out.append('<div class="pagebreak"></div>')
                 continue
-            if out:
+            close_sixty()
+            if out and length != "Brief":
                 out.append('<div class="pagebreak"></div>')
+            if h.lower() == "the sixty-second version":
+                cls = "sixty brief-lede" if length == "Brief" else "sixty"
+                out.append(f'<section class="{cls}">')
+                out.append(f"<h2>{inline(h)}</h2>")
+                in_sixty = True
+                sixty_first = True
+                i += 1
+                continue
             out.append(f"<h2>{inline(h)}</h2>")
             i += 1
             continue
@@ -144,24 +256,12 @@ def md_to_html(md: str) -> tuple[str, str]:
             flush_para()
             close_lists()
             h = line[4:].strip()
-            # Decision blocks under What's next
+            m_dec = re.match(r"^Decision\s+(\d+)\s*·\s*(.+)$", h, re.IGNORECASE)
+            if m_dec:
+                emit_decision(f"Decision {m_dec.group(1)} · {m_dec.group(2).strip()}")
+                continue
             if re.match(r"^\d+\.\s*", h) or h.startswith("[?]"):
-                out.append('<div class="qblock">')
-                out.append(f'<p class="q nojust">{inline(h)}</p>')
-                i += 1
-                # standard markdown style puts a blank line after a heading;
-                # the context is still the context (issue #2: the orphaned
-                # paragraph below the pen room)
-                while i < len(lines) and not lines[i].strip():
-                    i += 1
-                ctx: list[str] = []
-                while i < len(lines) and lines[i].strip() and not lines[i].startswith("#"):
-                    ctx.append(lines[i].strip())
-                    i += 1
-                if ctx:
-                    out.append(f'<p class="ctx">{inline(" ".join(ctx))}</p>')
-                out.append('<div class="penroom"></div>')
-                out.append("</div>")
+                emit_decision(h)
                 continue
             out.append(f"<h3>{inline(h)}</h3>")
             i += 1
@@ -205,7 +305,11 @@ def md_to_html(md: str) -> tuple[str, str]:
 
     flush_para()
     close_lists()
-    return title, "\n".join(out)
+    close_sixty()
+    body = "\n".join(out)
+    # Wrap so CSS can key off length (Brief suppresses sixty H2)
+    body = f'<article class="report length-{length.lower()}">\n{body}\n</article>'
+    return title, body
 
 
 def build_html(md_path: Path) -> str:
@@ -286,7 +390,7 @@ def main() -> None:
     pdf_path = args.output or md_path.with_suffix(".pdf")
     render_pdf(html_doc, pdf_path.resolve())
     print(f"PDF  -> {pdf_path.resolve()}")
-    print("QA: open PDF - Georgia body, pen rooms, no browser URL/date footer.")
+    print("QA: open PDF — body serif, pen rooms, no browser URL/date footer.")
 
 
 if __name__ == "__main__":
