@@ -10,6 +10,18 @@ It is not an agent framework. It's a simple handoff layer between the run and th
 
 ---
 
+## See the difference
+
+| | Status dump | OpenBook |
+|---|-------------|---------|
+| Read | Lists and greens | Sixty-second story at the right depth |
+| Decide | Re-enter the terminal | Plain asks with room for a pen |
+| Follow-up | Asserted | Receipts in the appendix |
+
+[Interactive demo](./docs/index.html)
+
+---
+
 ## Try the demo (local)
 
 Open [`docs/index.html`](./docs/index.html) in a browser after cloning (generated assets are included). Drag the slider to compare a dense agent transcript with an OpenBook **Brief**.
@@ -72,18 +84,6 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
 | [docs/](./docs/) | Interactive before/after demo |
 | [CHANGELOG.md](./CHANGELOG.md) | Release notes |
-
----
-
-## See the difference
-
-| | Status dump | OpenBook |
-|---|-------------|---------|
-| Read | Lists and greens | Sixty-second story at the right depth |
-| Decide | Re-enter the terminal | Plain asks with room for a pen |
-| Follow-up | Asserted | Receipts in the appendix |
-
-Markdown examples: [examples/before-after/](./examples/before-after/). Interactive: [docs/index.html](./docs/index.html).
 
 ---
 
