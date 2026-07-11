@@ -2,7 +2,7 @@
 
 At the end of this long-horizon run, write `REPORT.md` following:
 
-- `formats/report.md`
+- `formats/report.md` (or `formats/runbook.md` when the deliverable is a system the human will operate)
 - `styles/librarian.md`
 
 **Default length: Brief** (~one page). Set `**Length:** Brief` in Cover. Use **Standard** (~2–4 pages) or **Essay** (long Hybrid chapters) only when the work earns that depth — see length profiles in `formats/report.md`.
