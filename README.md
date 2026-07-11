@@ -61,7 +61,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 
 | Piece | Job |
 |-------|-----|
-| [formats/](./formats/) | Report formats agents load and humans read |
+| [formats/](./formats/) | Report and Runbook formats agents load and humans read |
 | [styles/](./styles/) | Voice and prose guidance for clearer writing |
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
