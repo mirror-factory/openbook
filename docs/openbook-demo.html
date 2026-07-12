@@ -429,18 +429,60 @@ html[data-theme="night"] .foot a {
   text-transform: uppercase;
 }
 
-/* Reading pages (Vision, About) */
-.page {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0.5rem 1.5rem 3rem;
+/* Reading pages (Vision, About): one shared column for chrome, copy, footer */
+body.reading .top,
+body.reading .page,
+body.reading .foot {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
+body.reading .top {
+  padding-top: 2rem;
+  padding-bottom: 0;
+}
+
+body.reading .chrome {
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(26, 25, 21, 0.12);
+}
+
+html[data-theme="night"] body.reading .chrome {
+  border-bottom-color: rgba(231, 228, 216, 0.15);
+}
+
+body.reading .chrome-actions {
+  gap: 1rem;
+}
+
+body.reading .page {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+body.reading .foot {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid rgba(26, 25, 21, 0.12);
+}
+
+html[data-theme="night"] body.reading .foot {
+  border-top-color: rgba(231, 228, 216, 0.15);
+}
+
+body.reading .foot-nav {
+  margin-bottom: 1rem;
 }
 
 .prose {
-  max-width: 36rem;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   line-height: 1.7;
   color: var(--ink);
 }
@@ -451,19 +493,20 @@ html[data-theme="night"] .prose {
 
 .prose h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
 }
 
 .prose .tagline {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 500;
+  line-height: 1.45;
   color: var(--soft);
-  margin: 0 0 2.5rem;
+  margin: 0 0 2.75rem;
 }
 
 html[data-theme="night"] .prose .tagline {
@@ -471,15 +514,19 @@ html[data-theme="night"] .prose .tagline {
 }
 
 .prose p {
-  margin: 0 0 1.15rem;
+  margin: 0 0 1.35rem;
 }
 
 .prose .stanza {
-  margin: 0 0 2rem;
+  margin: 0 0 2.5rem;
 }
 
 .prose .stanza p {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.4rem;
+}
+
+.prose .stanza p:last-child {
+  margin-bottom: 0;
 }
 
 .prose strong {
@@ -494,25 +541,26 @@ html[data-theme="night"] .prose .tagline {
 
 .prose .closing {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  margin-top: 2.5rem;
+  line-height: 1.3;
+  margin: 0.85rem 0 0;
 }
 
 .prose .note {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.04em;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--muted);
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(26, 25, 21, 0.15);
+  margin: 3.5rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(26, 25, 21, 0.12);
 }
 
 html[data-theme="night"] .prose .note {
   color: var(--night-muted);
-  border-top-color: rgba(231, 228, 216, 0.2);
+  border-top-color: rgba(231, 228, 216, 0.15);
 }
 
 .prose .note a {
@@ -528,9 +576,10 @@ html[data-theme="night"] .prose .note a {
 
 .prose .cta-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
-  margin: 2rem 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 2.75rem 0 0;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
@@ -541,7 +590,7 @@ html[data-theme="night"] .prose .note a {
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid rgba(26, 25, 21, 0.35);
-  padding-bottom: 0.15rem;
+  padding-bottom: 0.2rem;
 }
 
 html[data-theme="night"] .prose .cta-row a {
@@ -567,7 +616,26 @@ html[data-theme="night"] .prose .cta-row a {
     justify-content: flex-end;
   }
   .logo { white-space: normal; }
-  .prose { font-size: 1.05rem; }
+  body.reading .top,
+  body.reading .page,
+  body.reading .foot {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  body.reading .page {
+    padding-top: 2.25rem;
+    padding-bottom: 3rem;
+  }
+  .prose {
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+  .prose .tagline {
+    margin-bottom: 2rem;
+  }
+  .prose .stanza {
+    margin-bottom: 2rem;
+  }
 }
 
   </style>
