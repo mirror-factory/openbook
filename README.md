@@ -61,12 +61,12 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 
 | Piece | Job |
 |-------|-----|
-| [formats/](./formats/) | Report formats agents load and humans read |
+| [formats/](./formats/) | Report formats agents load and humans read ([assembly](./formats/assembly.md) for multi-agent nights) |
 | [styles/](./styles/) | Voice cards: [librarian](./styles/librarian.md) (default), [senior engineer](./styles/senior-engineer.md), [coach](./styles/coach.md) |
 | [skills/openbook/](./skills/openbook/) | `/openbook` skill: end-of-run handoff authoring |
 | [evals/](./evals/) | Structural CI, faithfulness fixtures, eval protocols |
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |
-| [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
+| [examples/](./examples/) | Same-night before / Brief / Standard / Essay · [parallel-night](./examples/parallel-night/) assembly pack |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
 | [docs/](./docs/) | Source for the [live demo](https://mirror-factory.github.io/openbook/) |
 | [docs/receipts.md](./docs/receipts.md) | Machine receipts (`receipts.jsonl`) for verifiable appendices |

@@ -31,6 +31,7 @@ MUST_PASS = [
     ROOT / "examples" / "before-after" / "after-brief.md",
     ROOT / "examples" / "before-after" / "after-standard.md",
     ROOT / "examples" / "before-after" / "after-essay.md",
+    ROOT / "examples" / "parallel-night" / "REPORT.md",
 ]
 
 MUST_FAIL = [

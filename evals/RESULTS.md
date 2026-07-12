@@ -18,6 +18,6 @@ Do not average away a single run that invents optimism. The standing rule: a rep
 |---------|-----------|---------|-----------------------|------------------------|---------------------|-------|
 | before-after/before.md | n/a | n/a | n/a | n/a | n/a | July 8 night |
 | seeded-flaw/transcript.md | n/a | n/a | n/a | n/a | n/a | 3 dead ends, 1 masked, 2 forks |
-| parallel-night (when present) | n/a | n/a | n/a | n/a | n/a | multi-agent |
+| parallel-night/transcript.md | n/a | n/a | n/a | n/a | n/a | synthetic multi-agent |
 
 Layer 1 CI does not fill this table. Layer 3 hooks: `python evals/run_evals.py --layer3 REPORT.md`.

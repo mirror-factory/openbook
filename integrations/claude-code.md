@@ -48,4 +48,4 @@ When the night has substance, prefer **Essay**: a chaptered narrative that rende
 
 **PDF:** OpenBook `render_report.py` only. **Delivery:** upload to reMarkable `/Reports/YYYY-MM`; on failure, loud `REPORT NOT DELIVERED` plus the local path.
 
-See also: `formats/report.md` length profiles and `render/print.md`.
+See also: `formats/report.md` length profiles, `formats/assembly.md` for multi-agent mornings, and `render/print.md`.

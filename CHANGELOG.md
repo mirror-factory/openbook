@@ -15,6 +15,8 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 - **[`evals/`](./evals/)** — Layer 1 CI harness, seeded-flaw faithfulness fixture, Layer 2–4 protocols
 - **[`docs/receipts.md`](./docs/receipts.md)** — `receipts.jsonl` shape; appendix lines extracted never paraphrased
 - **[`styles/senior-engineer.md`](./styles/senior-engineer.md)** / **[`styles/coach.md`](./styles/coach.md)** — alternate voice cards (pager-owner precision; teach-the-next-run)
+- **[`formats/assembly.md`](./formats/assembly.md)** — multi-agent night → one morning report (lede writer, decision merge, checker owner)
+- **[`examples/parallel-night/`](./examples/parallel-night/)** — synthetic parallel-night transcript + assembled Brief
 
 ### Changed
 
