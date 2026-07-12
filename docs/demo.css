@@ -103,6 +103,10 @@ html[data-theme="night"] body::before {
   display: block;
 }
 
+.brand-row img[hidden] {
+  display: none;
+}
+
 .brand-mark {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -185,12 +189,14 @@ html[data-theme="night"] .theme-toggle:hover {
 
 .logo {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-size: clamp(1.85rem, 4.5vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--ink);
   margin: 0;
+  white-space: nowrap;
+  max-width: none;
 }
 
 html[data-theme="night"] .logo {
@@ -223,44 +229,6 @@ html[data-theme="night"] .tag {
 
 html[data-theme="night"] .lede {
   color: var(--night-soft);
-}
-
-.ctas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.cta {
-  display: inline-block;
-  padding: 0.85rem 1.4rem;
-  border-radius: 3px;
-  text-decoration: none;
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.cta-ghost {
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid rgba(26, 25, 21, 0.35);
-}
-
-html[data-theme="night"] .cta {
-  color: var(--night);
-  background: var(--dune);
-}
-
-html[data-theme="night"] .cta-ghost {
-  color: var(--night-ink);
-  border-color: rgba(231, 228, 216, 0.4);
-  background: transparent;
 }
 
 .stage {
@@ -443,4 +411,5 @@ html[data-theme="night"] .foot a {
   .top { padding-top: 1.25rem; }
   .hero { padding-top: 2rem; }
   .chrome-actions .nav-link { display: none; }
+  .logo { white-space: normal; }
 }

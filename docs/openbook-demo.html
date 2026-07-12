@@ -114,6 +114,10 @@ html[data-theme="night"] body::before {
   display: block;
 }
 
+.brand-row img[hidden] {
+  display: none;
+}
+
 .brand-mark {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -196,12 +200,14 @@ html[data-theme="night"] .theme-toggle:hover {
 
 .logo {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-size: clamp(1.85rem, 4.5vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--ink);
   margin: 0;
+  white-space: nowrap;
+  max-width: none;
 }
 
 html[data-theme="night"] .logo {
@@ -234,44 +240,6 @@ html[data-theme="night"] .tag {
 
 html[data-theme="night"] .lede {
   color: var(--night-soft);
-}
-
-.ctas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.cta {
-  display: inline-block;
-  padding: 0.85rem 1.4rem;
-  border-radius: 3px;
-  text-decoration: none;
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.cta-ghost {
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid rgba(26, 25, 21, 0.35);
-}
-
-html[data-theme="night"] .cta {
-  color: var(--night);
-  background: var(--dune);
-}
-
-html[data-theme="night"] .cta-ghost {
-  color: var(--night-ink);
-  border-color: rgba(231, 228, 216, 0.4);
-  background: transparent;
 }
 
 .stage {
@@ -454,6 +422,7 @@ html[data-theme="night"] .foot a {
   .top { padding-top: 1.25rem; }
   .hero { padding-top: 2rem; }
   .chrome-actions .nav-link { display: none; }
+  .logo { white-space: normal; }
 }
 
   </style>
@@ -467,19 +436,14 @@ html[data-theme="night"] .foot a {
         <span class="brand-mark">Mirror Factory / OpenBook</span>
       </a>
       <div class="chrome-actions">
-        <a class="nav-link" href="https://github.com/mirror-factory/openbook#readme">Formats</a>
-        <a class="nav-link" href="https://github.com/mirror-factory/openbook" aria-current="page">GitHub ↗</a>
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
       </div>
     </div>
     <div class="hero">
-      <h1 class="logo">Agent work,<br>written for humans.</h1>
+      <h1 class="logo">Agent work, written for humans.</h1>
       <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
       <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
-      <div class="ctas">
-        <a class="cta" href="#compare">Read a sample run</a>
-        <a class="cta cta-ghost" href="https://github.com/mirror-factory/openbook">Star on GitHub</a>
-      </div>
     </div>
   </header>
 
@@ -502,7 +466,7 @@ body {
   font-family: &quot;DM Mono&quot;, ui-monospace, &quot;Cascadia Mono&quot;, Consolas, &quot;Courier New&quot;, monospace;
   font-size: 11px;
   line-height: 1.38;
-  color: #55534A;
+  color: #7D7A6E;
   background: #050505;
 }
 .badge {
@@ -511,7 +475,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #050505;
-  background: #55534A;
+  background: #7D7A6E;
   padding: 2px 7px;
   margin-bottom: 10px;
 }

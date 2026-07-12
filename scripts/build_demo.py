@@ -63,7 +63,7 @@ body {
   font-family: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
   font-size: 11px;
   line-height: 1.38;
-  color: #55534A;
+  color: #7D7A6E;
   background: #050505;
 }
 .badge {
@@ -72,7 +72,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #050505;
-  background: #55534A;
+  background: #7D7A6E;
   padding: 2px 7px;
   margin-bottom: 10px;
 }
@@ -180,19 +180,14 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
         <span class="brand-mark">Mirror Factory / OpenBook</span>
       </a>
       <div class="chrome-actions">
-        <a class="nav-link" href="https://github.com/mirror-factory/openbook#readme">Formats</a>
-        <a class="nav-link" href="https://github.com/mirror-factory/openbook" aria-current="page">GitHub ↗</a>
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
       </div>
     </div>
     <div class="hero">
-      <h1 class="logo">Agent work,<br>written for humans.</h1>
+      <h1 class="logo">Agent work, written for humans.</h1>
       <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
       <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
-      <div class="ctas">
-        <a class="cta" href="#compare">Read a sample run</a>
-        <a class="cta cta-ghost" href="https://github.com/mirror-factory/openbook">Star on GitHub</a>
-      </div>
     </div>
   </header>
 
