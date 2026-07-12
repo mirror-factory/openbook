@@ -45,6 +45,10 @@
     });
   }
 
+  if (!compare || !slider || !handle) {
+    return;
+  }
+
   function setPos(pct) {
     const v = Math.max(0, Math.min(100, pct));
     compare.style.setProperty("--pos", v + "%");

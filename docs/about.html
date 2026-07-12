@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBook · About</title>
+  <meta name="description" content="OpenBook is a small open-source kit for turning long-horizon agent runs into reports people can read.">
+  <meta property="og:title" content="OpenBook · About">
+  <meta property="og:description" content="Agent work, written for humans.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mirror-factory.github.io/openbook/about.html">
+  <meta property="og:image" content="https://mirror-factory.github.io/openbook/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="top">
+    <div class="chrome">
+      <a class="brand-row" href="index.html">
+        <img class="logo-day" src="assets/logo/mf-icon-true_black.svg" alt="">
+        <img class="logo-night" src="assets/logo/mf-icon-true_white.svg" alt="" hidden>
+        <span class="brand-mark">Mirror Factory / OpenBook</span>
+      </a>
+      <div class="chrome-actions">
+        <a class="nav-link" href="index.html">Demo</a>
+        <a class="nav-link" href="vision.html">Vision</a>
+        <a class="nav-link" href="about.html" aria-current="page">About</a>
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <article class="prose">
+      <h1>About</h1>
+      <p class="tagline">Agent work, written for humans.</p>
+
+      <p>OpenBook is a small open-source kit for turning long-horizon agent runs into reports people can actually read: on screen, on paper, or on e-ink.</p>
+
+      <p>Agents are getting good at doing work. What they leave behind is often a status dump: lists, greens, and jargon that only makes sense in the terminal. OpenBook gives agents a durable report shape so a human can skim what happened, follow the story, and answer the questions that need a pen.</p>
+
+      <p>It is not an agent framework. It is a simple handoff layer between the run and the reader. Not a platform. Not a login. Markdown in a folder.</p>
+
+      <p>What you get: a Brief by default (about one page), a structural checker that fails reports that cheat the shape, and a renderer that prints to warm paper. Longer nights can earn Standard or Essay. At the end of a run, invoke <code>/openbook</code> (or the paste fallback in the repo).</p>
+
+      <p>OpenBook comes from how <a href="https://www.mirrorfactory.com">Mirror Factory</a> runs overnight agents: narrative morning reports, pen-ready decisions, receipts underneath.</p>
+
+      <div class="cta-row">
+        <a href="index.html">See the demo</a>
+        <a href="vision.html">Read the vision</a>
+        <a href="https://github.com/mirror-factory/openbook">Steal the kit</a>
+        <a href="https://github.com/mirror-factory/openbook/blob/main/skills/openbook/SKILL.md">/openbook skill</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Site">
+      <a href="index.html">Demo</a>
+      <a href="vision.html">Vision</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="https://github.com/mirror-factory/openbook">GitHub</a>
+    </nav>
+    <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
+  </footer>
+
+  <script src="demo.js"></script>
+</body>
+</html>

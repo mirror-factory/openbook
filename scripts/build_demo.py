@@ -174,12 +174,15 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
 <body>
   <header class="top">
     <div class="chrome">
-      <a class="brand-row" href="https://github.com/mirror-factory/openbook">
+      <a class="brand-row" href="https://mirror-factory.github.io/openbook/">
         <img class="logo-day" src="{black_data}" alt="">
         <img class="logo-night" src="{white_data}" alt="" hidden>
         <span class="brand-mark">Mirror Factory / OpenBook</span>
       </a>
       <div class="chrome-actions">
+        <a class="nav-link" href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
+        <a class="nav-link" href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
+        <a class="nav-link" href="https://mirror-factory.github.io/openbook/about.html">About</a>
         <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
       </div>
@@ -212,6 +215,12 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
   </section>
 
   <footer class="foot">
+    <nav class="foot-nav" aria-label="Site">
+      <a href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
+      <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
+      <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
+      <a href="https://github.com/mirror-factory/openbook">GitHub</a>
+    </nav>
     <p>Self-contained preview · also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
     <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
   </footer>
