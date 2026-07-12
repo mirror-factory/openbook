@@ -12,6 +12,16 @@
   let activePointerId = null;
   let scrollBound = false;
 
+  const narrowMq = window.matchMedia("(max-width: 480px)");
+
+  function isVertical() {
+    return narrowMq.matches;
+  }
+
+  function defaultPos() {
+    return isVertical() ? 50 : 70;
+  }
+
   function setTheme(theme) {
     const next = theme === "night" ? "night" : "light";
     document.documentElement.setAttribute("data-theme", next);
@@ -54,10 +64,19 @@
     compare.style.setProperty("--pos", v + "%");
     slider.value = String(Math.round(v));
     handle.setAttribute("aria-valuenow", String(Math.round(v)));
+    handle.setAttribute(
+      "aria-label",
+      isVertical()
+        ? "Reveal OpenBook Brief below the status dump"
+        : "Reveal OpenBook Brief over the status dump"
+    );
   }
 
-  function posFromClientX(clientX) {
+  function posFromClient(clientX, clientY) {
     const rect = compare.getBoundingClientRect();
+    if (isVertical()) {
+      return ((clientY - rect.top) / rect.height) * 100;
+    }
     return ((clientX - rect.left) / rect.width) * 100;
   }
 
@@ -66,21 +85,21 @@
     dragging = true;
     activePointerId = e.pointerId;
     compare.classList.add("is-dragging");
-    document.body.style.cursor = "ew-resize";
+    document.body.style.cursor = isVertical() ? "ns-resize" : "ew-resize";
     document.body.style.userSelect = "none";
     try {
       handle.setPointerCapture(e.pointerId);
     } catch (_) {
       /* older browsers */
     }
-    setPos(posFromClientX(e.clientX));
+    setPos(posFromClient(e.clientX, e.clientY));
     e.preventDefault();
   }
 
   function moveDrag(e) {
     if (!dragging) return;
     if (activePointerId !== null && e.pointerId !== activePointerId) return;
-    setPos(posFromClientX(e.clientX));
+    setPos(posFromClient(e.clientX, e.clientY));
     e.preventDefault();
   }
 
@@ -169,5 +188,16 @@
   paneAfter.addEventListener("load", syncScroll);
   // srcdoc iframes may already be complete
   syncScroll();
-  setPos(Number(slider.value) || 70);
+  function applyLayout() {
+    const stored = Number(slider.value);
+    const fallback = defaultPos();
+    if (!stored || (isVertical() && stored === 70) || (!isVertical() && stored === 50)) {
+      setPos(fallback);
+    } else {
+      setPos(stored);
+    }
+  }
+
+  narrowMq.addEventListener("change", applyLayout);
+  applyLayout();
 })();

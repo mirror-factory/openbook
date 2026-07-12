@@ -30,6 +30,8 @@
   --field: #818C64;
   --dump: #050505;
   --max: 1200px;
+  --page-pad-x: clamp(1.125rem, 4.8vw, 1.5rem);
+  --page-pad-y: clamp(1.25rem, 3.5vw, 1.75rem);
   --font-display: "Manrope", system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
   --font-serif: "Source Serif 4", Georgia, serif;
@@ -91,7 +93,7 @@ html[data-theme="night"] body::before {
 .top {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 1.75rem 1.5rem 0.5rem;
+  padding: var(--page-pad-y) var(--page-pad-x) 0.5rem;
 }
 
 .chrome {
@@ -127,6 +129,10 @@ html[data-theme="night"] body::before {
   letter-spacing: 0.22em;
   color: var(--soft);
   text-transform: uppercase;
+}
+
+.brand-short {
+  display: none;
 }
 
 html[data-theme="night"] .brand-mark {
@@ -202,14 +208,14 @@ html[data-theme="night"] .theme-toggle:hover {
 
 .logo {
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 4.5vw, 3.5rem);
+  font-size: clamp(1.65rem, 5.2vw + 0.5rem, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.05;
+  line-height: 1.12;
   color: var(--ink);
   margin: 0;
-  white-space: nowrap;
-  max-width: none;
+  max-width: 20ch;
+  text-wrap: balance;
 }
 
 html[data-theme="night"] .logo {
@@ -247,7 +253,7 @@ html[data-theme="night"] .lede {
 .stage {
   max-width: var(--max);
   margin: 0.25rem auto 2rem;
-  padding: 0 1.5rem;
+  padding: 0 var(--page-pad-x);
 }
 
 .labels {
@@ -395,7 +401,7 @@ html[data-theme="night"] .grip {
 .foot {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 0 var(--page-pad-x) 3rem;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
@@ -440,8 +446,8 @@ body.reading .foot {
   max-width: var(--max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: var(--page-pad-x);
+  padding-right: var(--page-pad-x);
 }
 
 body.reading .top {
@@ -615,38 +621,207 @@ html[data-theme="night"] .prose .start-code {
   color: inherit;
 }
 
+/* Phones and fold cover screens (Galaxy Z Fold3 outer ~280–360px) */
+@media (max-width: 480px) {
+  :root {
+    --page-pad-x: clamp(1.25rem, 6vw, 1.5rem);
+  }
+
+  .chrome {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .brand-row {
+    justify-content: center;
+  }
+
+  .brand-mark {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+
+  .brand-full {
+    display: none;
+  }
+
+  .brand-short {
+    display: inline;
+  }
+
+  .chrome-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 0.35rem;
+    width: 100%;
+    justify-items: center;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .chrome-actions .theme-toggle {
+    justify-self: stretch;
+    width: 100%;
+    padding: 0.5rem 0.35rem;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 1.75rem 0 1.5rem;
+    gap: 0.9rem;
+  }
+
+  .logo {
+    max-width: none;
+    font-size: clamp(1.5rem, 7.5vw, 1.85rem);
+    line-height: 1.15;
+  }
+
+  .tag {
+    font-size: 1rem;
+    line-height: 1.45;
+    max-width: none;
+    padding: 0 0.25rem;
+  }
+
+  .lede {
+    font-size: 0.95rem;
+    max-width: none;
+    padding: 0 0.25rem;
+  }
+
+  .labels {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    letter-spacing: 0.14em;
+    font-size: 0.66rem;
+  }
+
+  .compare {
+    height: min(72vh, 720px);
+    border-radius: 4px;
+  }
+
+  .pane-after {
+    clip-path: inset(var(--pos, 50%) 0 0 0);
+  }
+
+  .handle {
+    top: var(--pos, 50%);
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 44px;
+    margin-left: 0;
+    margin-top: -22px;
+    cursor: ns-resize;
+  }
+
+  .handle::before {
+    top: 50%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 10px;
+    margin-left: 0;
+    margin-top: -5px;
+  }
+
+  .compare.is-dragging {
+    cursor: ns-resize;
+  }
+
+  .grip {
+    min-width: auto;
+    font-size: 0;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.4rem;
+  }
+
+  .grip::before {
+    content: "▴ Drag ▾";
+    font-size: 0.58rem;
+  }
+
+  .foot {
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .foot-nav {
+    gap: 0.65rem 1rem;
+    font-size: 0.72rem;
+  }
+
+  .foot p {
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+  }
+
+  body.reading .page {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .prose {
+    font-size: 1.02rem;
+    line-height: 1.62;
+  }
+
+  .prose h1 {
+    font-size: clamp(1.65rem, 7vw, 2rem);
+    text-wrap: balance;
+  }
+
+  .prose .tagline {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .prose .indent-ital {
+    padding-left: 1rem;
+  }
+
+  .prose .start-code {
+    font-size: 0.76rem;
+    padding: 0.75rem 0.85rem;
+    margin-left: -0.15rem;
+    margin-right: -0.15rem;
+  }
+}
+
+/* Standard mobile */
 @media (max-width: 640px) {
   .compare { height: 70vh; }
   .top { padding-top: 1.25rem; }
   .hero { padding-top: 2rem; }
-  .chrome {
-    align-items: flex-start;
-  }
-  .chrome-actions {
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    justify-content: flex-end;
-  }
-  .logo { white-space: normal; }
-  body.reading .top,
-  body.reading .page,
-  body.reading .foot {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-  body.reading .page {
-    padding-top: 2.25rem;
-    padding-bottom: 3rem;
-  }
-  .prose {
-    font-size: 1.05rem;
-    line-height: 1.65;
-  }
   .prose .tagline {
     margin-bottom: 2rem;
   }
   .prose .stanza {
     margin-bottom: 2rem;
+  }
+}
+
+/* Fold inner display and small tablets */
+@media (min-width: 481px) and (max-width: 900px) {
+  .chrome-actions {
+    flex-wrap: wrap;
+    gap: 0.85rem 1.15rem;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    max-width: none;
+    text-wrap: balance;
+  }
+
+  .hero {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -686,6 +861,7 @@ html[data-theme="night"] .prose .start-code {
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
 &lt;title&gt;Before — agent transcript&lt;/title&gt;
 &lt;style&gt;
 
@@ -716,6 +892,20 @@ body {
 .cli .ln { display: block; }
 .cli .fail { color: #F54C26; }
 .cli .ok { color: #CEF25A; }
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px 12px 28px;
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .badge {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    padding: 2px 5px;
+    margin-bottom: 8px;
+  }
+}
 
 &lt;/style&gt;
 &lt;/head&gt;
@@ -784,6 +974,7 @@ body {
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
 &lt;title&gt;After — Brief&lt;/title&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
@@ -1265,6 +1456,38 @@ blockquote {
   }
 }
 
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .demo-shell {
+    max-width: none;
+    padding: 1.35rem 1.1rem 2.25rem;
+  }
+  .demo-shell &gt; .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+  .cover .dek {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  h2 {
+    font-size: 0.7rem;
+    margin-top: 1.75rem;
+  }
+  h3 {
+    font-size: 1rem;
+    margin-top: 1.25rem;
+  }
+}
+
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -1358,6 +1581,16 @@ blockquote {
   let activePointerId = null;
   let scrollBound = false;
 
+  const narrowMq = window.matchMedia("(max-width: 480px)");
+
+  function isVertical() {
+    return narrowMq.matches;
+  }
+
+  function defaultPos() {
+    return isVertical() ? 50 : 70;
+  }
+
   function setTheme(theme) {
     const next = theme === "night" ? "night" : "light";
     document.documentElement.setAttribute("data-theme", next);
@@ -1400,10 +1633,19 @@ blockquote {
     compare.style.setProperty("--pos", v + "%");
     slider.value = String(Math.round(v));
     handle.setAttribute("aria-valuenow", String(Math.round(v)));
+    handle.setAttribute(
+      "aria-label",
+      isVertical()
+        ? "Reveal OpenBook Brief below the status dump"
+        : "Reveal OpenBook Brief over the status dump"
+    );
   }
 
-  function posFromClientX(clientX) {
+  function posFromClient(clientX, clientY) {
     const rect = compare.getBoundingClientRect();
+    if (isVertical()) {
+      return ((clientY - rect.top) / rect.height) * 100;
+    }
     return ((clientX - rect.left) / rect.width) * 100;
   }
 
@@ -1412,21 +1654,21 @@ blockquote {
     dragging = true;
     activePointerId = e.pointerId;
     compare.classList.add("is-dragging");
-    document.body.style.cursor = "ew-resize";
+    document.body.style.cursor = isVertical() ? "ns-resize" : "ew-resize";
     document.body.style.userSelect = "none";
     try {
       handle.setPointerCapture(e.pointerId);
     } catch (_) {
       /* older browsers */
     }
-    setPos(posFromClientX(e.clientX));
+    setPos(posFromClient(e.clientX, e.clientY));
     e.preventDefault();
   }
 
   function moveDrag(e) {
     if (!dragging) return;
     if (activePointerId !== null && e.pointerId !== activePointerId) return;
-    setPos(posFromClientX(e.clientX));
+    setPos(posFromClient(e.clientX, e.clientY));
     e.preventDefault();
   }
 
@@ -1515,7 +1757,18 @@ blockquote {
   paneAfter.addEventListener("load", syncScroll);
   // srcdoc iframes may already be complete
   syncScroll();
-  setPos(Number(slider.value) || 70);
+  function applyLayout() {
+    const stored = Number(slider.value);
+    const fallback = defaultPos();
+    if (!stored || (isVertical() && stored === 70) || (!isVertical() && stored === 50)) {
+      setPos(fallback);
+    } else {
+      setPos(stored);
+    }
+  }
+
+  narrowMq.addEventListener("change", applyLayout);
+  applyLayout();
 })();
 
   </script>
