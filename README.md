@@ -29,8 +29,8 @@ git clone https://github.com/mirror-factory/openbook.git
 cd openbook
 ```
 
-1. Point your coding agent at this folder (or paste [USE.md](./USE.md) into `CLAUDE.md`, a Cursor rule, or the session prompt).
-2. At the end of a long run, the agent writes `REPORT.md` using [formats/report.md](./formats/report.md). **Default length: Brief** (~one page).
+1. Point your coding agent at this folder and load [`skills/openbook`](./skills/openbook/) (or paste the short fallback in [USE.md](./USE.md) into `CLAUDE.md`, a Cursor rule, or the session prompt).
+2. At the end of a long run, invoke `/openbook` (or ask for the handoff). The agent writes `REPORT.md` using [formats/report.md](./formats/report.md). **Default length: Brief** (~one page).
 3. Check structure, then optionally render PDF:
 
 ```bash
@@ -63,6 +63,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 |-------|-----|
 | [formats/](./formats/) | Report formats agents load and humans read |
 | [styles/](./styles/) | Voice and prose guidance for clearer writing |
+| [skills/openbook/](./skills/openbook/) | `/openbook` skill: end-of-run handoff authoring |
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
@@ -74,7 +75,9 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 
 ## For Claude Code / Cursor
 
-Paste-ready prompt: [USE.md](./USE.md)
+Install path: [`skills/openbook/SKILL.md`](./skills/openbook/SKILL.md). Invoke `/openbook` or an end-of-run handoff phrase.
+
+Agents without skill support: short paste fallback in [USE.md](./USE.md).
 
 Longer Claude Code notes: [integrations/claude-code.md](./integrations/claude-code.md)
 

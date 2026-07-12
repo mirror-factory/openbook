@@ -13,6 +13,10 @@ OpenBook is an open-source kit of Markdown report formats that make long-horizon
 
 All repo prose follows styles/librarian.md: economical, warm through specificity, no exclamation points, no em dashes, failures named plainly.
 
+## End-of-run handoff
+
+Prefer [`skills/openbook/SKILL.md`](./skills/openbook/SKILL.md) (`/openbook`). Agents without skill support use the short fallback in [`USE.md`](./USE.md).
+
 ## Commands
 
 ```

@@ -1,6 +1,8 @@
 # Claude Code
 
-Paste the block below into a Claude Code session (or add [USE.md](../USE.md) to `CLAUDE.md`).
+**Preferred:** load [`skills/openbook/SKILL.md`](../skills/openbook/SKILL.md) and invoke `/openbook` (or `/openbook brief|standard|essay`) at the end of a long run. Phrases such as "write the handoff" also trigger the skill.
+
+**Fallback:** paste the block below into a Claude Code session (or add the short pointer in [USE.md](../USE.md) to `CLAUDE.md`).
 
 For Mirror Factory morning reports (e-ink, long essay preference, reMarkable delivery), use the **Morning profile** section at the bottom.
 
@@ -12,9 +14,10 @@ Read and follow OpenBook for the end-of-run handoff.
 
 **Read first** (relative to the OpenBook repo root):
 
-1. `formats/report.md`
-2. `styles/librarian.md`
-3. `render/print.md`
+1. `skills/openbook/SKILL.md` (if present; follow it)
+2. `formats/report.md`
+3. `styles/librarian.md`
+4. `render/print.md`
 
 **At assembly:**
 
