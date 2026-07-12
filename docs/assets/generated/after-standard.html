@@ -110,7 +110,9 @@ strong, b { font-weight: 600; }
 
 a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.12em;
 }
 
 hr {
@@ -448,69 +450,60 @@ blockquote {
 <p class="kicker">OpenBook · Standard</p>
 <article class="report length-standard">
 <div class="cover">
-<h1>The Night of July 8th</h1>
-<p class="dek">Three Libraries, worksheets, and the humbling of a green checkmark</p>
-<p class="byline">Dewey · 2026-07-08 · shift 11:24pm–7:00am Eastern · 3-min read</p>
+<h1>I made you something called OpenBook</h1>
+<p class="dek">Same night as the Brief, with the chapters the morning can afford</p>
+<p class="byline">Your coding agent · 2026-07-12 · overnight shift · 3-min read</p>
 <div class="masthead-rule" aria-hidden="true"></div>
 </div>
 <div class="pagebreak"></div>
 <section class="sixty">
-<h2>The sixty-second version</h2>
-<p class="standfirst"><strong>Design direction is ready for your pen.</strong> The Library should be one surface with two states: Desk on arrival, Catalog when you ask. The time-led Ledger loses as a default because the Journal already owns the record. Sessions become guided worksheets under one calm-technology law.</p>
-<p><strong>The markdown contract survived adversarial review.</strong> A fleet found seven data-integrity bugs behind a green checkmark, including a Windows byte-order mark that would have destroyed frontmatter on save. All fixed; sixty-eight tests pass.</p>
-<p><strong>Three decisions need you.</strong> Where a Document or Folio opens in the new shell; whether Desk and Catalog are the recommendation; whether Sessions carry acceptance from goal intake.</p>
+<h2>Sixty Seconds</h2>
+<p class="standfirst"><strong>I built OpenBook while you were away, and you are reading the product.</strong> Last night’s transcript is still behind the wipe. This page is the other option: a report shaped so a long run ends in a story you can skim, decisions you can answer with a pen, and receipts underneath.</p>
+<p><strong>The contract, checker, and renderer shipped.</strong> <em>My first draft opened with a grid of nine statistics early in the night. Impressive, empty.</em> Numbers live in the Appendix now. The demo wipe stole an hour while the handle kept surrendering to the page underneath. That hour stays in the transcript, because <strong>I may cut, but I may never invent.</strong></p>
+<p><strong>Three decisions are yours.</strong> Whether this becomes how your agents report, whether Brief stays the morning default, and whether receipts stay mechanically extracted.</p>
 </section>
 <div class="pagebreak"></div>
 <h2>Narrative</h2>
-<h3>The room and the thesis</h3>
-<p>Floors fell in under half an hour: research notes, three Library concepts, and the markdown-contract pull request. The rest of the night went to depth rather than more surface area.</p>
-<p>Quiet-UI research and archival patterns diagnose the current Library as a search box that withholds the collection. Whitelaw’s generous interface is the through-line: show the shelves, rich surrogates, multiple entries into the same material. That thesis steered every mockup that followed.</p>
-<h3>Three Libraries</h3>
-<p>Desk opens on what happened while you were away, then returns your shelves. The first pass double-counted conflicts and read like a status dump; later passes cut to judgment-only prose with expandable evidence cards underneath.</p>
-<p>Catalog answers in prose before receipts. It locks a fixed facet and verb vocabulary so generative UI cannot invent fields mid-session. That constraint is the product.</p>
-<p>Ledger is beautiful and wrong as a default. It becomes a second journal. We built it anyway; custody boxes and trails migrated into Desk and Catalog where they belong.</p>
-<h3>Composition and Sessions</h3>
-<p>Assembling navigation, Library, and Journal in both themes exposed the hard layout question: with Library in the center and Journal on the right, where does a Document or Folio open? Replace the center, split it, or displace the Journal. That question blocks the shell re-spec.</p>
-<p>Goal-intake worksheets accidentally gave Sessions an acceptance line. Asking “what does done look like tonight” produces the same contract shape Specs already use. Four of five session activities are mocked; the fifth waits on the shell answer.</p>
-<h3>Green was a hypothesis</h3>
-<p>Fifty-four tests were green on the first contract run. A late review fleet went looking anyway and found seven integrity bugs, including the BOM. The lesson that outlives the shift: review-after-green is non-negotiable. Green is a hypothesis until someone tries to break it.</p>
+<h3>The contract</h3>
+<p>I wrote <code>formats/report.md</code> as the load-bearing file: three length profiles, decision blocks a human can answer without opening the transcript, truthfulness rules that treat dead ends as content. The checker, <code>scripts/check_report.py</code>, fails any report that cheats the shape. Draft one failed for putting a statistics grid on the Cover and for lede claims without receipts. Draft two passed with warnings about byline and pen-room depth. Those warnings were the point. The seatbelt works when it bites.</p>
+<h3>The renderer</h3>
+<p>Warm paper lives in <code>render/report.css</code>: Source Serif 4 for the body, pen rooms that stay print-only, a masthead that names author, when, and read time. The first PDF clipped pen rooms at the Letter margin because screen overrides were winning the cascade. Moving print styles last fixed it. A report that looks right on screen and wrong on paper is not finished.</p>
+<h3>The lost hour</h3>
+<p>The before/after wipe demo kept surrendering the drag to the iframe underneath the handle. Pointer events on the panes, capture on the handle, both. From 02:14 to 03:19 the handle dropped at every pane boundary. <code>setPointerCapture</code> and inert panes during drag closed it. One hour gone, logged, not rewritten as a victory lap. Then <code>build_demo.py</code> regenerated the panes, scroll sync held, and the final checker pass at 06:12 was clean.</p>
 <div class="pagebreak"></div>
 <h2>What’s next</h2>
 <div class="qblock">
-<p class="decision-kicker">Decision 1 · where a Document opens</p>
-<p class="q">With the Library in the center and the Journal on the right, where does a Document or Folio open: replace the center, split it, or displace the Journal? This blocks the shell re-spec.</p>
+<p class="decision-kicker">Decision 1 · whether this becomes normal</p>
+<p class="q">Should your agents end every long run with a page like this? Adopting costs <strong>one pasted paragraph</strong>. If the transcript behind the wipe serves you better, <em>say so and I will stand down</em>.</p>
 <div class="penroom"></div>
 </div>
 <div class="qblock">
-<p class="decision-kicker">Decision 2 · one Library, two states</p>
-<p class="q">Do you buy Desk and Catalog as two states of one Library, with Ledger as a by-time lens only? If one concept should win outright, name it and the next shift consolidates.</p>
+<p class="decision-kicker">Decision 2 · how much greets you by default</p>
+<p class="q">This page is a <strong>Standard</strong>. <em>Brief</em> is the morning default; <em>Essay</em> is for nights that earn chapters with pens. <strong>Bless Brief as default, or name your profile.</strong></p>
 <div class="penroom"></div>
 </div>
 <div class="qblock">
-<p class="decision-kicker">Decision 3 · Sessions with acceptance lines</p>
-<p class="q">Should Sessions carry acceptance criteria from goal intake, checked at close? It expands what a Session is. Bless or refuse.</p>
-<div class="penroom"></div>
-</div>
-<div class="qblock">
-<p class="decision-kicker">Decision 4 · arrangement-weights vocabulary</p>
-<p class="q">Is the arrangement-weights vocabulary right: decisions first, recency, trail affinity, kind mix? Rename now if labels should be plainer for non-technical readers.</p>
+<p class="decision-kicker">Decision 3 · what counts as a receipt</p>
+<p class="q">Strict rule proposed: every claim in the story traces to a receipt I <strong>extracted mechanically</strong>, never one I paraphrased. <em>Slower to write, easier to check.</em> <strong>Confirm or relax.</strong></p>
 <div class="penroom"></div>
 </div>
 <div class="pagebreak"></div>
 <h2>What we learned</h2>
 <ul>
-<li>Research notes lint the mockups.</li>
-<li>A second theme is a free audit.</li>
-<li>Review-after-green catches what confidence misses.</li>
-<li>Known-wrong builds can still donate parts.</li>
+<li><strong>Sixty seconds is a budget</strong>, not a summary. Whatever does not fit was not the point.</li>
+<li><strong>A green checkmark is a hypothesis.</strong> The receipt is the evidence.</li>
+<li><strong>The wall of terminals was never the work.</strong> It was the work’s exhaust.</li>
+<li><strong>Print styles belong last in the cascade</strong>, or the PDF lies about the page.</li>
 </ul>
 <div class="pagebreak"></div>
 <h2>Appendix</h2>
-<p><strong>By the numbers:</strong> 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 68 tests green</p>
+<p><strong>By the numbers:</strong> 1 format contract · 1 checker · 1 renderer · 3 length profiles · 1 hour lost to a drag handle · 41 tests green</p>
 <ul>
-<li>Markdown contract pull request · acceptance 5/5 · 68 tests</li>
-<li>Design research pull request · concepts, worksheets, shell composition</li>
-<li>Pending: shell re-spec; DESIGN.md draft review; asks above</li>
+<li><strong>The contract this page obeys:</strong> <code>formats/report.md</code> · this file passes <code>check_report.py</code> clean</li>
+<li><strong>The wipe bug, found and fixed:</strong> the handle now keeps the drag from iframes (02:14â€“03:19)</li>
+<li><strong>The demoted statistics grid:</strong> first draft, in the transcript at <em>00:41</em></li>
+<li><strong>Cascade fix:</strong> print styles moved last so screen overrides cannot break PDF</li>
+<li><strong>Everything here:</strong> <a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a> · <em>steal it tonight</em></li>
 </ul>
 </article>
 </div>

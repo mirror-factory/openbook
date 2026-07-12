@@ -1,17 +1,17 @@
 # Before / after
 
-Same night (July 8 design + contract shift). Four shapes.
+Same night (2026-07-12): an agent builds OpenBook, then reports in OpenBook. Four shapes.
 
 | File | What you get |
 |------|----------------|
-| [before.md](./before.md) | Dense generic agent-session transcript |
-| [after-brief.md](./after-brief.md) | **Default OpenBook** — prose lede, no Narrative |
-| [after-standard.md](./after-standard.md) | ~2–4 page narrative |
-| [after-essay.md](./after-essay.md) | Long Hybrid essay (chapter pens + closing index) |
+| [before.md](./before.md) | Dense agent-session transcript |
+| [after-brief.md](./after-brief.md) | **Default OpenBook** — the page that explains the product |
+| [after-standard.md](./after-standard.md) | Same night with short Narrative chapters |
+| [after-essay.md](./after-essay.md) | Hybrid essay (chapter pens + closing index) |
 
-**Accuracy:** `before.md` is the same July 8 night as the after-* files. It is noisy on purpose; it is not a different story.
+**Accuracy:** `before.md` is the same night as the after-* files. It is noisy on purpose; it is not a different story.
 
-**How to compare:** skim the transcript, then read `after-brief.md`. Open Standard or Essay when you want more story. Live wipe: [mirror-factory.github.io/openbook](https://mirror-factory.github.io/openbook/).
+**How to compare:** skim the transcript, then read `after-brief.md` (try reading only the bold). Open Standard or Essay when you want more story. Live wipe: [mirror-factory.github.io/openbook](https://mirror-factory.github.io/openbook/).
 
 ## Production rules (for future examples)
 

@@ -110,7 +110,9 @@ strong, b { font-weight: 600; }
 
 a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.12em;
 }
 
 hr {
@@ -448,47 +450,47 @@ blockquote {
 <p class="kicker">OpenBook · Brief</p>
 <article class="report length-brief">
 <div class="cover">
-<h1>The Night of July 8th</h1>
-<p class="dek">Design ready for pen; markdown contract battle-tested</p>
-<p class="byline">Dewey · 2026-07-08 · shift 11:24pm–7:00am Eastern · 2-min read</p>
+<h1>I made you something called OpenBook</h1>
+<p class="dek">It is the page you are reading</p>
+<p class="byline">Your coding agent · 2026-07-12 · overnight shift · 2-min read</p>
 <div class="masthead-rule" aria-hidden="true"></div>
 </div>
 <section class="sixty brief-lede">
-<h2>The sixty-second version</h2>
-<p class="standfirst">The design direction is ready for your pen, and one layout question blocks the shell re-spec. The Library should be one surface with two states: a Desk that greets you with what changed while you were away, and a Catalog that answers when you ask. The time-led Ledger loses as a default because the Journal already owns the record. Sessions become guided worksheets. Everything obeys one law: information moves between the periphery and the center without demanding attention.</p>
-<p>The markdown contract survived an adversarial review. Fifty-four tests were green when a fleet of review agents went looking anyway and found seven data-integrity bugs behind the checkmark, including a Windows byte-order mark that would have silently destroyed frontmatter on save. All seven are fixed and sixty-eight tests now pass. The night’s best lesson rode along for free: green is a hypothesis until someone tries to break it.</p>
-<p>One find arrived uninvited. Goal intake asks what done looks like tonight, and that answer is already an acceptance line. Sessions could carry the same contract shape Specs do. Nobody decided this; the design wants it, and it is yours to bless or refuse.</p>
-<p>Three decisions below want your pen. The first gates the next design pass; an answer before tomorrow evening keeps the shell re-spec off the critical path.</p>
+<h2>Sixty Seconds</h2>
+<p class="standfirst">While you were away I built <strong>OpenBook</strong>, and the fastest way to explain it is that you are holding it. You have agents that work for hours and hand you their homework as a wall of terminal output. Last night’s wall is still there, <strong>one drag of the handle to your left</strong>. This page is the other option: every long run ends in a report shaped like this one. <strong>A story you can skim</strong> in sixty seconds. <strong>Decisions you can answer</strong> with a pen. <strong>Receipts underneath</strong>, for whenever you doubt me.</p>
+<p>The build went well, with one confession. I wrote the <strong>format contract</strong>, a <strong>checker</strong> that fails any report that cheats the shape, and a <strong>renderer</strong> that prints to warm paper. <em>My first draft of this page opened with a grid of nine statistics. It looked impressive and said nothing.</em> The numbers now live in the appendix, where they belong. I also lost an hour to the demo’s wipe handle, which kept surrendering the drag to the page underneath it. That hour is in the transcript, because the rule here is simple: <strong>I may cut, but I may never invent.</strong></p>
+<p>Three decisions below are yours. The first is the real one: whether your own agents should report to you this way. Saying yes costs <strong>one paste</strong>.</p>
 </section>
 <h2>What’s next</h2>
 <div class="qblock">
-<p class="decision-kicker">Decision 1 · where a Document opens</p>
-<p class="q">With the Library in the center and the Journal on the right, where does a Document or Folio open: replace the center, split it, or displace the Journal? This blocks the shell re-spec, whose acceptance criteria still encode the pre-kickoff layout.</p>
+<p class="decision-kicker">Decision 1 · whether this becomes normal</p>
+<p class="q">Should your agents end every long run with a page like this? Adopting costs <strong>one pasted paragraph</strong>. If the transcript behind the wipe serves you better, <em>say so and I will stand down</em>.</p>
 <div class="penroom"></div>
 </div>
 <div class="qblock">
-<p class="decision-kicker">Decision 2 · one Library, two states</p>
-<p class="q">Do you buy Desk and Catalog as two states of one Library (Desk on arrival, Catalog when you ask), with Ledger surviving only as a by-time lens? If one concept should win outright, name it and the next shift consolidates.</p>
+<p class="decision-kicker">Decision 2 · how much greets you by default</p>
+<p class="q">This page is a <strong>Brief</strong>. <em>Standard</em> adds chapters; <em>Essay</em> is for nights that earn one. Brief is the default because mornings are short. <strong>Bless it, or name your profile.</strong></p>
 <div class="penroom"></div>
 </div>
 <div class="qblock">
-<p class="decision-kicker">Decision 3 · Sessions with acceptance lines</p>
-<p class="q">Should Sessions carry acceptance criteria from goal intake (“what does done look like”), checked at close? It expands what a Session is, and it fell out of the worksheet design uninvited. Bless or refuse.</p>
+<p class="decision-kicker">Decision 3 · what counts as a receipt</p>
+<p class="q">Strict rule proposed: every claim in the story traces to a receipt I <strong>extracted mechanically</strong>, never one I paraphrased. <em>Slower to write, easier to check.</em> <strong>Confirm or relax.</strong></p>
 <div class="penroom"></div>
 </div>
 <h2>What we learned</h2>
 <ul>
-<li>Research notes lint the mockups.</li>
-<li>Review-after-green is non-negotiable.</li>
-<li>A known-wrong build can still donate parts (the Ledger did).</li>
+<li><strong>Sixty seconds is a budget</strong>, not a summary. Whatever does not fit was not the point.</li>
+<li><strong>A green checkmark is a hypothesis.</strong> The receipt is the evidence.</li>
+<li><strong>The wall of terminals was never the work.</strong> It was the work’s exhaust.</li>
 </ul>
 <h2>Appendix</h2>
-<p><strong>By the numbers:</strong> 6 research notes · 3 Library concepts · 2 pull requests · 68 tests green</p>
+<p><strong>By the numbers:</strong> 1 format contract · 1 checker · 1 renderer · 3 length profiles · 1 hour lost to a drag handle</p>
 <ul>
-<li>Markdown contract pull request · acceptance 5/5 · 68 tests</li>
-<li>Design research pull request · Library concepts, worksheets, shell composition</li>
-<li>Pending human: shell re-spec; the three decisions above</li>
-<li>This example is redacted from a real night shift.</li>
+<li><strong>The contract this page obeys:</strong> <code>formats/report.md</code> · this file passes <code>check_report.py</code> clean</li>
+<li><strong>The wipe bug, found and fixed:</strong> the handle now keeps the drag from iframes</li>
+<li><strong>The demoted statistics grid:</strong> first draft, in the transcript at <em>00:41</em></li>
+<li><strong>Everything here:</strong> <a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a> · <em>steal it tonight</em></li>
+<li><em>This report describes its own construction. The recursion bottoms out here.</em></li>
 </ul>
 </article>
 </div>

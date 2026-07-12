@@ -2,12 +2,12 @@
 
 **Title:** Embedded Decisions, Demonstrated
 **Subtitle:** Hybrid pattern: chapter pens, then index plus one cross-cutting ask
+**Length:** Essay
 **Author:** An overnight agent (OpenBook example)
 **For:** A human reading on paper, with a pen
 **When:** The morning after a long run
-**Stats:** 2 chapter decisions · 1 cross-cutting ask · every question self-contained
 
-## The sixty-second version
+## Sixty Seconds
 
 **This example shows the Hybrid long-report pattern.** Chapter-owned decisions sit at the end of the chapter that explains them, with pen room there. What's next indexes those asks and holds only cross-cutting questions that span the whole night. Every block is self-contained: no internal IDs, no "see chapter two."
 
@@ -25,9 +25,9 @@ The nightly deploy went from four minutes to eleven over two weeks. The cause is
 
 The image grew because three teams added system dependencies independently. Splitting the image into a slim runtime and a fat build stage would cut deploy time roughly in half, but it changes how every team adds dependencies from now on.
 
-### 1. [?] Split the deploy image into slim-runtime and fat-build stages?
+### Decision 1 · slim-runtime and fat-build stages
 
-Deploys would drop from eleven minutes toward five. The cost: teams add runtime dependencies through one reviewed file instead of anywhere, which is a process change for all three teams. The alternative is accepting slower deploys as the suite grows.
+Split the deploy image into slim-runtime and fat-build stages? Deploys would drop from eleven minutes toward five. The cost: teams add runtime dependencies through one reviewed file instead of anywhere, which is a process change for all three teams. The alternative is accepting slower deploys as the suite grows.
 
 ### Chapter 2 · The flaky checkout test
 
@@ -35,20 +35,20 @@ One end-to-end test failed on roughly one run in nine, always on the payment ste
 
 **The fix shipped during the run.** What remains is a policy question: this is the fourth race found by a flaky test this quarter, and each one was treated as test noise for weeks first.
 
-### 2. [?] Treat any test that flakes twice as a suspected product bug, with a named owner within a day?
+### Decision 2 · flakes as suspected product bugs
 
-The last four flakes were all real races users could hit. The cost is occasional false alarms taking an hour of someone's day. The alternative keeps flakes in the retry pile, where this one sat for three weeks.
+Treat any test that flakes twice as a suspected product bug, with a named owner within a day? The last four flakes were all real races users could hit. The cost is occasional false alarms taking an hour of someone's day. The alternative keeps flakes in the retry pile, where this one sat for three weeks.
 
 ## What's next
 
 Chapter decisions (pen rooms above):
 
-1. Split the deploy image (end of chapter 1)
+1. Slim-runtime and fat-build stages (end of chapter 1)
 2. Flakes as suspected product bugs (end of chapter 2)
 
-### 3. [?] Should deploys that exceed eight minutes page the on-call, or only open a ticket?
+### Decision 3 · slow-deploy paging rule
 
-Both chapter fixes reduce deploy time and flake noise, but the night still needs a standing rule for "slow is broken." Paging wakes someone; a ticket can wait until morning. Pick the threshold behavior once for the whole team.
+Should deploys that exceed eight minutes page the on-call, or only open a ticket? Both chapter fixes reduce deploy time and flake noise, but the night still needs a standing rule for "slow is broken." Paging wakes someone; a ticket can wait until morning. Pick the threshold behavior once for the whole team.
 
 ## What we learned
 
@@ -57,6 +57,8 @@ Both chapter fixes reduce deploy time and flake noise, but the night still needs
 - Cross-cutting asks belong on the closing page, not stuffed into the last chapter.
 
 ## Appendix
+
+**By the numbers:** 2 chapter decisions · 1 cross-cutting ask · every question self-contained
 
 - The cache-key fix, the image measurements, and the race trace live in the run's working log alongside this report.
 - Nothing in this example refers to a real system; the pattern is the content.

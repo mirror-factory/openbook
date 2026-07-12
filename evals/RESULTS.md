@@ -4,7 +4,7 @@ Layer 2 protocol and a placeholder scoreboard. Fill rows after skill generation 
 
 ## Layer 2 protocol (skill generation benchmarks)
 
-For each fixture transcript under `evals/fixtures/` (and the July 8 before.md):
+For each fixture transcript under `evals/fixtures/` (and examples/before-after/before.md):
 
 1. Invoke `/openbook` (or the paste fallback) **10 times** with a fresh context each run.
 2. Record: checker pass/fail, length profile chosen, token/cost estimate if available.
@@ -16,7 +16,7 @@ Do not average away a single run that invents optimism. The standing rule: a rep
 
 | Fixture | Skill rev | Pass/10 | Failure recall (mean) | Decision recall (mean) | Invented timestamps | Notes |
 |---------|-----------|---------|-----------------------|------------------------|---------------------|-------|
-| before-after/before.md | n/a | n/a | n/a | n/a | n/a | July 8 night |
+| before-after/before.md | n/a | n/a | n/a | n/a | n/a | meta OpenBook night |
 | seeded-flaw/transcript.md | n/a | n/a | n/a | n/a | n/a | 3 dead ends, 1 masked, 2 forks |
 | parallel-night/transcript.md | n/a | n/a | n/a | n/a | n/a | synthetic multi-agent |
 

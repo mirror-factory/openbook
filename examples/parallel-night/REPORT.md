@@ -6,7 +6,7 @@
 **Author:** Dewey (editor) · lanes reed, moss, kiln
 **When:** 2026-07-10 · parallel night, assembled 7:10am Eastern
 
-## The sixty-second version
+## Sixty Seconds
 
 Three agents ran in parallel; the morning report is one story. The model package now has 70 tests green after acceptance-parse edge cases, with a legacy `done:` migrate deliberately reverted. Design pushed Desk and Catalog mockups and abandoned a third IA called Stacks after one critique. The public demo before-pane copy refreshed; a night-mode CSS spike was started and discarded so tokens stay a human-owned pass.
 

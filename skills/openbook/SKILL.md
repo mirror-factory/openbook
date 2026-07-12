@@ -46,7 +46,7 @@ Set `**Length:** Brief` (or Standard / Essay) in Cover.
 
 ## Brief shape (public default)
 
-- Continuous prose in `## The sixty-second version` (3–6 paragraphs). First sentence is the bottom line. No bold leads, no bullets, no `## Narrative`.
+- Continuous prose in `## Sixty Seconds` (3–6 paragraphs). First sentence is the bottom line. No bold leads, no bullets, no `## Narrative`.
 - Decisions as `### Decision N · short handle`, then the question as the first paragraph. Prefer ≤3 asks.
 - Put numbers in Appendix as `**By the numbers:** …`, not on Cover.
 

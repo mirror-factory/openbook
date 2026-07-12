@@ -20,6 +20,8 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 
 ### Changed
 
+- **Required H2** — `## Sixty Seconds` replaces `## The sixty-second version` (legacy heading still accepted with a deprecation warning)
+- **Before/after demo pair** — meta night where the Brief is the product pitch ([`examples/before-after/`](./examples/before-after/)); Standard and Essay expand the same facts; Pages demo regenerated
 - **[`VISION.md`](./VISION.md)** — rewritten as a one-page manifesto; detail moved to requirements
 - **[`USE.md`](./USE.md)** — retired to a skill pointer plus one-paragraph paste fallback
 - **README / integrations / AGENTS** — install path points at the skill first

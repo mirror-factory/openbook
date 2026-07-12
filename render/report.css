@@ -101,7 +101,9 @@ strong, b { font-weight: 600; }
 
 a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.12em;
 }
 
 hr {

@@ -74,7 +74,7 @@ What v0.1.0 contains (receipts: [repo](https://github.com/mirror-factory/openboo
 - **styles/senior-engineer.md** / **styles/coach.md** — alternate voice cards (pager-owner precision; teach-the-next-run).
 - **scripts/** — `check_report.py` (length-conditional structural checker: the seatbelt), `render_report.py` (HTML→PDF, never browser-print), `build_demo.py`.
 - **render/report.css** — warm paper, Source Serif 4 with Georgia fallbacks, masthead byline with read time, standfirst lede, print-only pen rooms, US Letter, grayscale-safe.
-- **examples/before-after/** — one real July 8 night as transcript + Brief + Standard + Essay.
+- **examples/before-after/** — one night (OpenBook explaining itself) as transcript + Brief + Standard + Essay.
 - **docs/** — the live [before/after demo](https://mirror-factory.github.io/openbook/) with the wipe interaction.
 - **USE.md** — the paste-into-CLAUDE.md install; **integrations/claude-code.md** for depth.
 

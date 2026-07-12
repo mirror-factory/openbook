@@ -15,9 +15,12 @@ import re
 import sys
 from pathlib import Path
 
+SIXTY_SECONDS = "Sixty Seconds"
+SIXTY_LEGACY = "The sixty-second version"
+
 REQUIRED_H2_BRIEF = [
     "Cover",
-    "The sixty-second version",
+    SIXTY_SECONDS,
     "What's next",
     "What we learned",
     "Appendix",
@@ -25,7 +28,7 @@ REQUIRED_H2_BRIEF = [
 
 REQUIRED_H2_LONG = [
     "Cover",
-    "The sixty-second version",
+    SIXTY_SECONDS,
     "Narrative",
     "What's next",
     "What we learned",
@@ -113,36 +116,56 @@ def required_h2_for(length: str | None) -> list[str]:
     return list(REQUIRED_H2_LONG)
 
 
+def normalize_h2(h2: list[str]) -> list[str]:
+    """Map legacy sixty-second heading onto the canonical name for checks."""
+    return [SIXTY_SECONDS if h == SIXTY_LEGACY else h for h in h2]
+
+
+def sixty_heading(h2: list[str]) -> str | None:
+    if SIXTY_SECONDS in h2:
+        return SIXTY_SECONDS
+    if SIXTY_LEGACY in h2:
+        return SIXTY_LEGACY
+    return None
+
+
 def check(md: str) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
     h2 = extract_h2(md)
+    h2_norm = normalize_h2(h2)
     length = detect_length(md)
     required = required_h2_for(length)
 
     if length == "Brief" and "Narrative" in h2:
         errors.append(
-            "Brief has a Narrative section: either fold it into the "
-            "sixty-second version or declare Standard"
+            "Brief has a Narrative section: either fold it into "
+            f"## {SIXTY_SECONDS} or declare Standard"
+        )
+
+    if SIXTY_LEGACY in h2:
+        warnings.append(
+            f"legacy H2 ## {SIXTY_LEGACY}: prefer ## {SIXTY_SECONDS}"
         )
 
     for req in required:
-        if req not in h2:
+        if req not in h2_norm:
             errors.append(f"Missing required H2: ## {req}")
 
     positions = []
     for req in required:
-        if req in h2:
-            positions.append(h2.index(req))
+        if req in h2_norm:
+            positions.append(h2_norm.index(req))
     if positions != sorted(positions):
         errors.append(
             "Required H2 sections are out of order. Expected: "
             + " -> ".join(required)
         )
 
-    sixty = section_body(md, "The sixty-second version")
-    if "The sixty-second version" in h2 and len(sixty) < 40:
-        errors.append("## The sixty-second version is empty or too thin")
+    sixty_h = sixty_heading(h2)
+    sixty = section_body(md, sixty_h) if sixty_h else ""
+    if sixty_h and len(sixty) < 40:
+        errors.append(f"## {sixty_h} is empty or too thin")
 
     nxt = section_body(md, "What's next")
     narrative = section_body(md, "Narrative")

@@ -2,7 +2,7 @@
 
 Incomplete example
 
-## The sixty-second version
+## Sixty Seconds
 
 ## Narrative
 

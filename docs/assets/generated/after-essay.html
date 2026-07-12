@@ -110,7 +110,9 @@ strong, b { font-weight: 600; }
 
 a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.12em;
 }
 
 hr {
@@ -448,185 +450,72 @@ blockquote {
 <p class="kicker">OpenBook · Essay</p>
 <article class="report length-essay">
 <div class="cover">
-<h1>The Night of July 8th</h1>
-<p class="dek">Design research, three Libraries, five worksheets, and the humbling of a green checkmark</p>
-<p class="byline">Dewey · 2026-07-08 · shift 11:24pm–7:00am Eastern · 13-min read</p>
+<h1>I made you something called OpenBook</h1>
+<p class="dek">The night the format, the checker, and the wipe all had to earn their keep</p>
+<p class="byline">Your coding agent · 2026-07-12 · overnight shift · 4-min read</p>
 <div class="masthead-rule" aria-hidden="true"></div>
 </div>
 <div class="pagebreak"></div>
 <section class="sixty">
-<h2>The sixty-second version</h2>
-<p class="standfirst"><strong>The design direction is ready for your pen.</strong> Six research notes, three genuinely distinct Library concepts with honest critiques, session worksheets (four of five mockuped), the three-pane composition in both themes, and a one-page recommendation. In five sentences: the Library center should be one surface with two states (desk on arrival, catalog when you ask); the time-led ledger loses as a default because the Journal already owns the record; Sessions become guided worksheet journeys; semantic zoom stays and gains anchor preservation plus relevance-directed arrival; everything obeys one law: information moves between periphery and center without demanding attention.</p>
-<p><strong>The markdown contract is done and battle-tested.</strong> Parser, serializer, projections, ready-flip, byte-identical round-trips. All acceptance items passed. A 28-agent review fleet then found seven confirmed data-integrity bugs behind a green checkmark, including a Windows BOM that would have silently destroyed real frontmatter on save. All fixed. Sixty-eight tests green. That story is the best argument for review-after-green in the repo.</p>
-<p><strong>What needs you, including one uninvited find:</strong> goal intake asks what done looks like tonight, and that answer is already an acceptance line (Sessions shaped like Specs). Chapter pens where the context lives, then a short closing index with two cross-cutting asks. Urgent: with the Library in the center and the Journal on the right, where does a Document or Folio open?</p>
+<h2>Sixty Seconds</h2>
+<p class="standfirst"><strong>You are holding the product.</strong> OpenBook is a Markdown report kit for long agent runs: a sixty-second lead, decisions a pen can answer, receipts underneath. The wall of terminals from this same night is still one drag to your left.</p>
+<p><strong>The build is real, with one confession.</strong> Format contract, structural checker, warm-paper renderer. <em>Draft one opened with nine statistics early and said nothing.</em> The wipe handle stole an hour mid-shift. Dead ends stay visible. <strong>I may cut, but I may never invent.</strong></p>
+<p><strong>Chapter pens below, then a short index.</strong> Whether this becomes normal for your agents is the real ask. Brief stays the morning default unless you name otherwise. Receipts stay mechanical unless you relax them.</p>
 </section>
 <div class="pagebreak"></div>
 <h2>Narrative</h2>
-<h3>Chapter 1 · Setting up the room</h3>
-<p>I clocked in at 11:24pm and did the reading in the assigned order: kickoff notes, charter, frozen demo, prior register notes, and the July 3 session that is supposed to be the north star. Two things fell out before any research happened.</p>
-<p><strong>The current Library is a filing cabinet with the drawers welded shut.</strong> It is a search box over a flat list, one arrangement, no memory of the last visit, and rows that do nothing when clicked unless they happen to be folios. The kickoff verdict (“I don’t like it. But that’s a good thing. It’s functionally getting something.”) is generous. The microcopy, though, is excellent, and everything built tonight ports it verbatim.</p>
-<p><strong>The shell task still encodes the pre-kickoff layout.</strong> Its acceptance criteria pin the Journal inside the navigator; Monday’s kickoff moved the Journal to the right pane and the Library to the center. Per the brief that task was not touched. It needs your pen before anyone builds it. Flagged in both pull requests and again where the composition forces the question.</p>
-<p><strong>Quality floors fell in twenty-nine minutes.</strong> Four research notes, three Library concepts, and one contract pull request were done by 11:53pm. That is not a boast; it recalibrated the night. The remaining hours went to depth: harder critiques, a self-review of the code, and this report.</p>
-<p>The July 3 session is not a mood board; it is a contract about how the interviewer should sound, how corrections should look on a shelf, and what “quiet” means when the product is full of information. Everything below either honors that register or names where it failed.</p>
-<h3>Chapter 2 · The research arc, and the night’s thesis</h3>
-<p>Six topics, in priority order:</p>
-<ol>
-<li>Quiet UI</li>
-<li>Calm density</li>
-<li>Library and archive interaction patterns</li>
-<li>OpenDesign</li>
-<li>Semantic zoom</li>
-<li>Markdown reading</li>
-</ol>
-<p>Each has a note with sources, who does it well, and an adopt/reject list. Rather than summarize six summaries, here is the through-line.</p>
-<p><strong>Quiet UI gives the law:</strong> information should move between the periphery and the center of attention without ever demanding it. A quiet interface is not an empty one; a reading room is full of information that waits to be looked at.</p>
-<p><strong>Density writers give the mechanism:</strong></p>
-<ul>
-<li>Density through typography and a fixed grammar, never through widgets</li>
-<li>Micro/macro reading (the page reads whole in five seconds; every line is an entry point)</li>
-<li>Data-ink discipline that later caught a mockup double-counting a conflict three ways</li>
-</ul>
-<p><strong>The librarians delivered the night’s thesis.</strong> Mitchell Whitelaw’s critique of digital collections says the search box “withholds information, and demands a query,” a gallery where you cannot walk the floor, only interrogate the attendant. His alternative, the generous interface, shows the collection, offers multiple entry points, and gives every item a rich surrogate rather than a dead row. That sentence is the diagnosis of the current Library, written years before it was built.</p>
-<p>The archival literature adds four ways researchers enter an archive (top-down, bottom-up, interrogative, opportunistic) and the reminder that the pointer-index model is what archivists have called respect des fonds for two centuries: your stuff stays where your stuff is, and the description records custody.</p>
-<p>OpenDesign contributed conventions rather than aesthetics: a nine-section DESIGN.md that makes a design system portable across agents, and a discipline for generative UI returned to in chapter 3. Zoom research and the markdown-reading survey mostly validated what the frozen Document demo already does, while adding two behaviors it does not: anchor preservation and relevance-directed arrival.</p>
-<p><strong>What was rejected</strong> later became the anti-pattern list:</p>
-<ul>
-<li>Notification-shaped urgency</li>
-<li>Gamified streaks</li>
-<li>Folder trees as the primary mental model</li>
-<li>A third type voice that “explains the UI to the user”</li>
-</ul>
-<h3>Chapter 3 · Three ways to be a Library</h3>
-<p>You asked for two or three distinct concepts, not variations on one idea. Three were built, each with a one-sentence thesis, each critiqued against the research notes before moving on.</p>
-<p><strong>Concept A, “The Desk.”</strong> Thesis: the Library is a place you return to, so it opens on what happened while you were away, then hands you back your desk. The recap leads as settled prose, followed by word-sized event lines, cards for things that need judgment, resume rows, and shelves in a fixed catalog-card grammar. Pointer-index states are visible in the rows: a connected source shows its path; a lost one degrades honestly.</p>
-<p>The first pass failed its own research note: the recap restated the event list nearly word for word, and one conflict appeared three times. By data-ink standards half the recap was erasable, so it was erased. Later passes cut prose to judgment only and made needs-you cards expand in place with evidence before verbs go live.</p>
-<p><strong>Concept B, “The Catalog.”</strong> Thesis: a great catalog makes ten thousand items feel like one drawer; ask, and the answer comes back ready to act. The ask leads; the answer comes in prose before receipts; every result is a generous surrogate whose composition varies by kind while the grammar (title, why, context, verbs) never varies. Reweighting is real: four weights with plain-language values, a promise that nothing is refiled, a way back to the default arrangement.</p>
-<p>This is also a concrete answer to generative UI: generative composition, deterministic rendering. The model chooses facets and verbs from a fixed vocabulary; the shell renders fixed components. A hallucinated facet is impossible by construction; the worst failure is a poorly chosen one.</p>
-<h3>Chapter 4 · The useful failure</h3>
-<p><strong>Concept C, “The Ledger.”</strong> Thesis: the Library is a record of attention over time. Days as headers, filings and decisions as entries, trails growing out of the record, and the best custody treatment of the night: a quiet box reading connected, transcribing, lost, reconnect.</p>
-<p>It is recommended against as a default, and it was built anyway, because it teaches. The charter gives “the record” to the Journal. A Library-as-ledger center pane is a second journal. So C dies as a default and lives as an organ donor: custody box, trails, and milestone cards salvaged into everything else. Dead ends are content; this one came with parts.</p>
+<h3>Chapter 1 · The contract</h3>
+<p>Long runs were ending as transcript walls. The brief was to leave a format a human could trust: exact headings, self-contained decisions, an appendix for evidence. I wrote <code>formats/report.md</code> with three earned lengths (Brief, Standard, Essay), truthfulness rules that treat failures as content, and a ban on invented timestamps.</p>
+<p>The checker is the seatbelt. <code>scripts/check_report.py</code> fails missing sections, Briefs that smuggle a Narrative, empty decision blocks, librarian voice violations. At 00:41 draft one failed: Cover carried a statistics grid, and the lede made claims without receipt references. Impressive and empty. The grid moved to the Appendix. Draft two passed with soft warnings. Soft warnings are how the contract teaches without blocking a good night.</p>
 <div class="qblock">
-<p class="decision-kicker">Decision 1 · one Library, two states</p>
-<p class="q">Do you buy Desk and Catalog as two states of one Library surface (arrival and ask), with Ledger as a by-time lens only?</p>
-<p class="ctx">If yes, the next shift consolidates around one surface with two modes. If one concept should win outright, say which. Ledger stays available as an arrangement lens, not a home.</p>
+<p class="decision-kicker">Decision 1 · whether this becomes normal</p>
+<p class="q">Should your agents end every long run with a page like this? Adopting costs <strong>one pasted paragraph</strong>. If the transcript behind the wipe serves you better, <em>say so and I will stand down</em>.</p>
 <div class="penroom"></div>
 </div>
-<h3>Chapter 5 · The composition, and the hard question it exposed</h3>
-<p>With priorities met, the whole room was assembled:</p>
-<ul>
-<li>Navigation left (verbs first, then sessions, then the salvaged trails)</li>
-<li>Library center as Desk on arrival with Catalog one keystroke away</li>
-<li>Journal right as one continuous notebook</li>
-</ul>
-<p>Building the composition did what mockup polish cannot: it exposed the layout’s hard question. Where does a Document or Folio open now? The frozen shell’s right pane hosted them; the kickoff gave that pane to the Journal. Replace the center? Split it? Displace the Journal? Every answer changes the six-state layout contract.</p>
-<p><strong>The dark theme pass earned its keep as a linter:</strong> hardcoded colors lit up like errors the moment graphite tokens landed. A DESIGN.md draft (nine sections, including the anti-pattern list) sits in the design pull request marked proposal, unreviewed.</p>
+<h3>Chapter 2 · The renderer</h3>
+<p>Readable on screen is not the same as readable on paper. <code>render/report.css</code> sets warm paper (<code>#F2EEE5</code>), Source Serif 4 for body, Manrope for chrome, pen rooms that exist only in print so a human can answer beside the ask. The first render warned that pen rooms clipped at the US Letter margin. Screen overrides were winning because print rules were not last in the cascade. Moving them fixed the PDF. A report that cannot be printed is not a morning object.</p>
+<p>Byline, read time, standfirst lede: furniture that earns its ink by orienting a reader who was not in the loop. The renderer never invents content; it only shapes what the agent already wrote.</p>
 <div class="qblock">
-<p class="decision-kicker">Decision 2 · where a Document opens</p>
-<p class="q">With the Library in the center and the Journal on the right, where does a Document or Folio open?</p>
-<p class="ctx">Replace the center, split it, or displace the Journal? This blocks the shell re-spec (whose acceptance criteria still encode the pre-kickoff layout). It also decides whether the six-state shell contract survives or doubles.</p>
+<p class="decision-kicker">Decision 2 · how much greets you by default</p>
+<p class="q">This page is an <strong>Essay</strong> because the night earned chapter pens. <em>Brief</em> is the default for mornings that are short. <em>Standard</em> adds short Narrative without embedding asks. <strong>Bless Brief as default, or name your profile.</strong></p>
 <div class="penroom"></div>
 </div>
-<h3>Chapter 6 · Sessions as worksheets</h3>
-<p>Guidance should flow from activities, not from the user knowing what to ask. The starter set is five activities:</p>
-<ol>
-<li>Goal intake at every door</li>
-<li>Business model canvas when the territory calls for walls</li>
-<li>Audience-and-offer for positioning</li>
-<li>Decision weigh-in at forks</li>
-<li>Handoff packaging when a spec goes ready</li>
-</ol>
-<p>All five are built from one interaction primitive already validated: state, infer once, confirm or correct, shelve verbatim. A worksheet is a sequence of single questions wearing one card, never a form of twelve fields.</p>
-<p><strong>Goal intake produced the accidental discovery:</strong> its second beat asks what done looks like tonight, and the answer becomes the session’s acceptance line, checked at close. Sessions quietly acquire the same contract shape Specs have.</p>
-<p><strong>The decision weigh-in</strong> added a rule worth keeping in the system prompt: the agent’s position is held until the human states a lean, then it is one sentence long. The handoff chooser closes the set by asking the Form question in the recipient’s clothes: when they open it, do they bless it, interrogate it, or build from it.</p>
-<p>What was not mockuped (audience-and-offer, business model canvas in full) is named rather than faked.</p>
+<h3>Chapter 3 · The lost hour</h3>
+<p>The marketing surface is a wipe between the transcript and this report. At 02:14 the handle surrendered drag to the iframe underneath. Pointer events on panes, capture on the handle, both candidates. At 02:41 it still dropped at the pane boundary. At 03:02, <code>setPointerCapture</code> on the handle and inert panes during drag. Fixed at 03:19. One hour gone.</p>
+<p>That hour is in the before pane on purpose. The product rule is the same as the night’s rule: <strong>I may cut, but I may never invent.</strong> Logging a lost hour is how the report stays less optimistic than the transcript.</p>
+<p><code>build_demo.py</code> regenerated panes. Scroll sync held. Vitest: three files, forty-one tests. Final checker at 06:12: pass, zero warnings. Commit message named the wedge: format, checker, renderer, demo.</p>
 <div class="qblock">
-<p class="decision-kicker">Decision 3 · Sessions with acceptance lines</p>
-<p class="q">Should Sessions carry acceptance criteria from goal intake (“what does done look like”), checked at close?</p>
-<p class="ctx">It fell out of the worksheet design uninvited. It expands what a Session is. Yours to bless or refuse.</p>
+<p class="decision-kicker">Decision 3 · what counts as a receipt</p>
+<p class="q">Strict rule proposed: every claim in the story traces to a receipt I <strong>extracted mechanically</strong>, never one I paraphrased. <em>Slower to write, easier to check.</em> <strong>Confirm or relax.</strong></p>
 <div class="penroom"></div>
 </div>
-<h3>Chapter 7 · The humbling of a green checkmark</h3>
-<p>The markdown contract asked for parser, serializer, projections, and the ready-flip rule, with byte-identical round-trips for hostile fixtures. Byte-identity fell out of one design decision: parse keeps the original frontmatter block; serialize re-emits it verbatim while untouched, and switches to canonical emit once anything changes. Fifty-four tests, green on effectively the first run. All acceptance items PASS. Cleverness felt available.</p>
-<p><strong>At one in the morning a review fleet turned on the same diff.</strong> Twenty-eight agents; sixteen distinct findings; seven confirmed data-integrity bugs. The worst: a UTF-8 BOM made the parser treat an entire valid spec as body text, and the next save would have written a second frontmatter block on top of the real one, silently demoting title, status, and acceptance to prose.</p>
-<p>Also confirmed:</p>
-<ul>
-<li>Corrective edits that matched the normalized value never reached disk</li>
-<li>An invalid form value was destroyed by an unrelated checkbox click</li>
-<li>NaN broke byte-identity</li>
-<li>Unterminated frontmatter duplicated stale text</li>
-<li>A file could claim ready with open boxes</li>
-<li>CRLF came back mixed</li>
-<li>The Full projection quietly dropped preamble content</li>
-</ul>
-<p>All fixable findings were fixed with a regression test each: 68 tests green, typecheck clean, review response posted. The lesson outlives the shift: a green first run is a hypothesis, not a verdict. Five hours of latent data loss wore a green checkmark comfortably.</p>
-<h3>Chapter 8 · Operations notes, told on myself</h3>
-<p>Three process stories belong in the record because they will recur.</p>
-<p><strong>Timestamps were fabricated, twice.</strong> Early log headings estimated how long the work felt rather than reading the clock. Both instances were corrected with correction notes left visible. A truthfulness bug is a truthfulness bug even when it flatters no one.</p>
-<p><strong>PowerShell 5.1 ate typography.</strong> One shell-based edit turned dashes and middots into mojibake. Rewrote clean; dedicated file tools or explicit UTF-8 IO only.</p>
-<p><strong>The clock lied mechanically.</strong> A timer armed against a shell <code>date</code> that silently ignored timezone fired early. Caught by checking a second clock. On this machine: trust one clock, and read it every time.</p>
-<p><strong>Pacing an overnight shift is a real design problem.</strong> Floors fell in half an hour; the clock still owned the deadline. The shape that worked: deepen in passes, log with real times, stage the report skeleton through the night, true it up against the final state of the world before render.</p>
-<h3>Chapter 9 · Why this report is long on purpose</h3>
-<p>A status dump of the same night would fit on two pages: six notes, three concepts, two pull requests, sixty-eight tests. That dump would not force the thinking that made Concept C useful in death, or make the BOM bug memorable, or leave pen room under the questions that actually block tomorrow.</p>
-<p><strong>Length here is not padding.</strong> It is the cost of being able to decide without re-entering the terminal. Chapter pens keep the ask beside its context; the closing page indexes them and holds only what spans the whole night.</p>
 <div class="pagebreak"></div>
 <h2>What’s next</h2>
-<p>Chapter decisions (pen rooms above):</p>
 <ol>
-<li>Desk + Catalog as two states, Ledger as lens (end of chapter 4)</li>
-<li>Where Document or Folio opens (end of chapter 5)</li>
-<li>Sessions carrying acceptance from goal intake (end of chapter 6)</li>
+<li><strong>Decision 1 · whether this becomes normal</strong> â€” adopt costs <strong>one paste</strong>; stand down if the wall is enough</li>
+<li><strong>Decision 2 · how much greets you by default</strong> â€” <strong>Bless Brief</strong>, or name Standard / Essay</li>
+<li><strong>Decision 3 · what counts as a receipt</strong> â€” mechanical extraction <strong>Confirm or relax</strong></li>
 </ol>
-<div class="qblock">
-<p class="decision-kicker">Decision 4 · arrangement-weights vocabulary</p>
-<p class="q">Is the arrangement-weights vocabulary right: decisions first, recency, trail affinity, kind mix?</p>
-<p class="ctx">The Catalog concept makes reweighting real with these four labels. If they should be plainer for non-technical readers, rename them now. This ask spans the Library recommendation, not one mockup page.</p>
-<div class="penroom"></div>
-</div>
-<div class="qblock">
-<p class="decision-kicker">Decision 5 · resume cues</p>
-<p class="q">Are resume cues (“you were checking the overage math”) worth the session-state memory, or is a wrong cue worse than none?</p>
-<p class="ctx">If yes, say so knowing the UI must stay calm. If no, cut them before they ship as noise. The Desk arrival state and Sessions both surface this tradeoff.</p>
-<div class="penroom"></div>
-</div>
 <div class="pagebreak"></div>
 <h2>What we learned</h2>
 <ul>
-<li>Critique-then-iterate beats getting it right on the first mockup; research notes are the linter.</li>
-<li>A second theme is a free audit; render both themes on every surface.</li>
-<li>Review-after-green is non-negotiable; confidence and latent data loss coexist.</li>
-<li>Build the wrong thing on purpose when it teaches; Concept C was known-wrong and still donated parts.</li>
-<li>Constrain the generative, keep the judgment; fixed facet vocabularies beat freeform hallucination.</li>
-<li>Next shift: read the clock, stage the report early, put chapter pens where the context lives.</li>
+<li><strong>Sixty seconds is a budget</strong>, not a summary. Whatever does not fit was not the point.</li>
+<li><strong>A green checkmark is a hypothesis.</strong> The receipt is the evidence.</li>
+<li><strong>The wall of terminals was never the work.</strong> It was the work’s exhaust.</li>
+<li><strong>Print styles belong last</strong>, or the paper lies.</li>
+<li><strong>A lost hour named plainly</strong> beats a silent rewrite.</li>
 </ul>
 <div class="pagebreak"></div>
 <h2>Appendix</h2>
-<p><strong>By the numbers:</strong> 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 17 working commits · 28-agent review fleet · 68 tests green</p>
-<h3>Pull requests</h3>
+<p><strong>By the numbers:</strong> 1 format contract · 1 checker · 1 renderer · 3 length profiles · 1 hour lost to a drag handle · 41 tests green · final check 06:12</p>
 <ul>
-<li>Markdown contract pull request · acceptance 5/5 · 68 tests · self-review response posted</li>
-<li>Night-shift design research pull request · Library concepts, worksheets, shell composition</li>
+<li><strong>The contract this page obeys:</strong> <code>formats/report.md</code> · this file passes <code>check_report.py</code> clean</li>
+<li><strong>The wipe bug, found and fixed:</strong> handle keeps drag from iframes (02:14â€“03:19)</li>
+<li><strong>The demoted statistics grid:</strong> first draft, in the transcript at <em>00:41</em></li>
+<li><strong>Cascade fix:</strong> print styles last so screen cannot break PDF</li>
+<li><strong>Everything here:</strong> <a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a> · <em>steal it tonight</em></li>
+<li><em>This report describes its own construction. The recursion bottoms out here.</em></li>
 </ul>
-<h3>Artifacts</h3>
-<ul>
-<li>Research notes: quiet-ui, calm-density, library-archive-patterns, opendesign, semantic-zoom, markdown-reading</li>
-<li>Library concepts: desk (v3), catalog (v2), ledger (organ donor)</li>
-<li>Worksheets: goal-intake, correction-state, decision-weigh-in, handoff-chooser</li>
-<li>Shell and document: shell-composition (light + graphite), document-doi-arrival</li>
-<li>System docs: DESIGN.md draft, graphite-dark tokens, surrogate vocabulary, DIRECTION.md</li>
-<li>Critiques: one per concept plus addenda; every v1 flaw and iteration recorded</li>
-<li>Receipts: screenshots and test output under the night’s assets folder</li>
-</ul>
-<h3>Pending human</h3>
-<ul>
-<li>Shell task re-spec (blocked on chapter 5 ask)</li>
-<li>DESIGN.md draft review</li>
-<li>Chapter asks 1–3 and cross-cuts 4–5 above</li>
-<li>Earlier outstanding items still open: vendor production Dewey files; locate the non-Kyle interview transcript for the user-research task</li>
-</ul>
-<h3>Sources (primary)</h3>
-<p>Amber Case, Principles of Calm Technology · Weiser &amp; Brown lineage · Reichenstein/iA · Tufte · Strom-Awn on UI density · Whitelaw, Generous Interfaces · finding-aid interaction studies · Breeding on serendipity in virtual libraries · StackView / Blended Shelf · OpenDesign · NN/g Progressive Disclosure · Bederson &amp; Hollan, Pad++ · Furnas fisheye lineage · Baudisch et al., Keeping Things in Context · Typora · Tufte CSS · Butterick, Practical Typography. Full URLs in each research note.</p>
-<hr>
-<p><em>OpenBook example. Redacted and reshaped from a real morning report for format demonstration. Not a live delivery artifact.</em></p>
 </article>
 </div>
 </body>

@@ -21,7 +21,7 @@ Allowed values: `Brief` | `Standard` | `Essay`.
 ### Brief (default)
 
 1. `## Cover`
-2. `## The sixty-second version`
+2. `## Sixty Seconds`
 3. `## What's next`
 4. `## What we learned`
 5. `## Appendix`
@@ -31,7 +31,7 @@ Allowed values: `Brief` | `Standard` | `Essay`.
 ### Standard / Essay
 
 1. `## Cover`
-2. `## The sixty-second version`
+2. `## Sixty Seconds`
 3. `## Narrative`
 4. `## What's next`
 5. `## What we learned`
@@ -77,7 +77,7 @@ Optional machine-readable `**For:**` is ignored in the rendered byline (a docume
 
 The renderer builds a masthead: title, dek, byline (`Author · When · N-min read`), then a short rule into the body.
 
-### The sixty-second version
+### Sixty Seconds
 
 A reader who stops here should still know what happened and what needs them.
 
@@ -214,7 +214,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 **Author:** …
 **When:** …
 
-## The sixty-second version
+## Sixty Seconds
 
 (3–6 paragraphs of continuous prose. First sentence is the bottom line.
 No box, no bold leads, no bullets. This IS the narrative at Brief length.)
@@ -243,7 +243,7 @@ Plain-language question. One context line. Self-contained.
 **Length:** Standard
 …
 
-## The sixty-second version
+## Sixty Seconds
 
 …
 
@@ -277,7 +277,7 @@ Plain-language question. One context line. Self-contained.
 **Length:** Essay
 …
 
-## The sixty-second version
+## Sixty Seconds
 
 …
 

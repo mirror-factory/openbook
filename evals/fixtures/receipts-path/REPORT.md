@@ -6,7 +6,7 @@
 **Author:** OpenBook fixture
 **When:** 2026-07-12
 
-## The sixty-second version
+## Sixty Seconds
 
 The debit middleware ships with 16 billing tests green and the Extend control still unwired. A pull request is open for review. Two numbers below must match extracted receipts, not a softened retelling.
 
