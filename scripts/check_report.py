@@ -191,6 +191,29 @@ def check(md: str) -> tuple[list[str], list[str]]:
     if "Appendix" in h2 and len(appendix) < 1:
         errors.append("## Appendix heading exists but body is empty")
 
+    if sixty and appendix is not None and "Appendix" in h2:
+        claim_nums = set(re.findall(r"\b\d+\b", sixty))
+        # Skip tiny numbers that are usually prose (a, one-word counts under
+        # scrutiny still matter when they appear; keep all digits but ignore
+        # years already in Cover).
+        appendix_nums = set(re.findall(r"\b\d+\b", appendix))
+        missing = sorted(
+            n
+            for n in claim_nums
+            if n not in appendix_nums and not re.fullmatch(r"20\d{2}", n)
+        )
+        if missing and len(appendix) >= 1:
+            shown = ", ".join(missing[:6]) + ("..." if len(missing) > 6 else "")
+            warnings.append(
+                f"lede numeric claim(s) not found in Appendix ({shown}): "
+                "extract a matching receipt rather than paraphrasing"
+            )
+        elif claim_nums and len(appendix) < 1:
+            warnings.append(
+                "sixty-second has numeric claims but Appendix is empty: "
+                "add extracted receipts (see docs/receipts.md)"
+            )
+
     if length != "Brief" and "Narrative" in h2 and len(narrative) < 40:
         errors.append("## Narrative is empty or too thin")
 

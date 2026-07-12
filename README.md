@@ -69,6 +69,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
 | [docs/](./docs/) | Source for the [live demo](https://mirror-factory.github.io/openbook/) |
+| [docs/receipts.md](./docs/receipts.md) | Machine receipts (`receipts.jsonl`) for verifiable appendices |
 | [docs/requirements.md](./docs/requirements.md) | Strategy, personas, roadmap, and product requirements |
 | [CHANGELOG.md](./CHANGELOG.md) | Release notes |
 

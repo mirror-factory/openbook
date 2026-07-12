@@ -1,0 +1,3 @@
+{"kind":"test","summary":"pnpm exec vitest run packages/billing","detail":"16 passed","ts":"2026-07-09T22:18:00-04:00"}
+{"kind":"pr","summary":"feat(billing): rate card JSON + debit after success","ref":"42","detail":"https://github.com/example/ledger-api/pull/42"}
+{"kind":"pending-human","summary":"Extend: add to current scope vs mint child scope"}

@@ -139,13 +139,17 @@ Short. Portable to the next run. 1–3 lines on Brief. Bullets are fine. Not a p
 
 Receipts: pull requests, commits, tests, paths, sources, PENDING-HUMAN. Flat and honest.
 
+**Extracted, never paraphrased.** Appendix lines are copied from the run (commands, tallies, titles, paths). Softening a failure count or inventing a cleaner summary is forbidden. See [docs/receipts.md](../docs/receipts.md).
+
+Optional machine file: `receipts.jsonl` beside the report. `scripts/render_report.py` folds those records into the Appendix on render. Prefer the jsonl (or identical Markdown bullets) over rewriting the same facts in warmer prose.
+
 Optional leading line:
 
 ```markdown
 **By the numbers:** 6 research notes · 2 pull requests · 68 tests green
 ```
 
-Brief: a few receipt lines is enough.
+Brief: a few receipt lines is enough. Every numeric claim in the sixty-second version should be findable here.
 
 ---
 

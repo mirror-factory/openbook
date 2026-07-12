@@ -195,7 +195,7 @@ If yes, say so knowing the UI must stay calm. If no, cut them before they ship a
 
 ## Appendix
 
-**By the numbers:** 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 17 working commits · 68 tests green
+**By the numbers:** 6 research notes · 10 mockups · 6 critiques · 2 pull requests · 17 working commits · 28-agent review fleet · 68 tests green
 
 ### Pull requests
 

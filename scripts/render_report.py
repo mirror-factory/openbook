@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import re
 import sys
 import tempfile
@@ -20,6 +21,88 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CSS_PATH = ROOT / "render" / "report.css"
 TEMPLATE_PATH = ROOT / "render" / "template.html"
+
+RECEIPT_KINDS = frozenset(
+    {
+        "command",
+        "test",
+        "pr",
+        "commit",
+        "path",
+        "source",
+        "pending-human",
+        "other",
+    }
+)
+
+
+def load_receipts_jsonl(path: Path) -> list[dict]:
+    """Load receipts.jsonl; skip blank lines and invalid rows with a warning."""
+    if not path.is_file():
+        return []
+    rows: list[dict] = []
+    for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw.strip()
+        if not line:
+            continue
+        try:
+            obj = json.loads(line)
+        except Exception as e:
+            print(f"WARN: {path.name}:{lineno}: skip invalid JSON ({e})", file=sys.stderr)
+            continue
+        if not isinstance(obj, dict):
+            print(f"WARN: {path.name}:{lineno}: skip non-object", file=sys.stderr)
+            continue
+        kind = str(obj.get("kind", "")).strip().lower()
+        summary = str(obj.get("summary", "")).strip()
+        if kind not in RECEIPT_KINDS or not summary:
+            print(
+                f"WARN: {path.name}:{lineno}: need kind+summary "
+                f"(kind in {sorted(RECEIPT_KINDS)})",
+                file=sys.stderr,
+            )
+            continue
+        rows.append(obj)
+    return rows
+
+
+def format_receipt_bullet(obj: dict) -> str:
+    kind = str(obj.get("kind", "other")).strip().lower()
+    summary = str(obj.get("summary", "")).strip()
+    detail = str(obj.get("detail", "")).strip()
+    ref = str(obj.get("ref", "")).strip()
+    extra = detail or ref
+    if extra and extra not in summary:
+        return f"- [{kind}] {summary} ({extra})"
+    return f"- [{kind}] {summary}"
+
+
+def fold_receipts_into_markdown(md: str, receipts: list[dict]) -> str:
+    """Append jsonl receipts under ## Appendix; skip summaries already present."""
+    if not receipts:
+        return md
+    m = re.search(r"^##\s+Appendix\s*$", md, re.MULTILINE)
+    if not m:
+        bullets = [format_receipt_bullet(r) for r in receipts]
+        return md.rstrip() + "\n\n## Appendix\n\n" + "\n".join(bullets) + "\n"
+
+    start = m.end()
+    nxt = re.search(r"^##\s+", md[start:], re.MULTILINE)
+    end = start + nxt.start() if nxt else len(md)
+    appendix = md[start:end]
+    to_add: list[str] = []
+    for r in receipts:
+        summary = str(r.get("summary", "")).strip()
+        bullet = format_receipt_bullet(r)
+        if summary and summary in appendix:
+            continue
+        if bullet in appendix:
+            continue
+        to_add.append(bullet)
+    if not to_add:
+        return md
+    new_appendix = appendix.rstrip() + "\n" + "\n".join(to_add) + "\n"
+    return md[:start] + new_appendix + md[end:]
 
 
 def detect_length(md: str) -> str:
@@ -321,8 +404,13 @@ def md_to_html(md: str) -> tuple[str, str]:
     return title, body
 
 
-def build_html(md_path: Path) -> str:
+def build_html(md_path: Path, receipts_path: Path | None = None) -> str:
     md = md_path.read_text(encoding="utf-8")
+    jsonl = receipts_path or (md_path.parent / "receipts.jsonl")
+    receipts = load_receipts_jsonl(jsonl)
+    if receipts:
+        md = fold_receipts_into_markdown(md, receipts)
+        print(f"Receipts folded: {len(receipts)} from {jsonl.name}")
     title, body = md_to_html(md)
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     # Embed CSS so the HTML is self-contained for Playwright file:// load
@@ -386,12 +474,18 @@ def main() -> None:
         default=None,
         help="Also write HTML to this path",
     )
+    ap.add_argument(
+        "--receipts",
+        type=Path,
+        default=None,
+        help="receipts.jsonl to fold into Appendix (default: beside the .md)",
+    )
     args = ap.parse_args()
     md_path = args.markdown.resolve()
     if not md_path.is_file():
         raise SystemExit(f"Not found: {md_path}")
 
-    html_doc = build_html(md_path)
+    html_doc = build_html(md_path, receipts_path=args.receipts)
     if args.html_only:
         args.html_only.write_text(html_doc, encoding="utf-8")
         print(f"HTML -> {args.html_only}")
