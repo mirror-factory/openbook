@@ -14,6 +14,8 @@
   --night-dim: #55534A;
   --signal: #F54C26;
   --pulse: #CEF25A;
+  --link: #6A5FD0;
+  --link-night: #CEF25A;
   --field: #818C64;
   --dump: #050505;
   --max: 1200px;
@@ -394,16 +396,18 @@ html[data-theme="night"] .foot {
 }
 
 .foot a {
-  color: var(--ink);
+  color: var(--link);
   text-decoration: none;
 }
 
 html[data-theme="night"] .foot a {
-  color: var(--night-ink);
+  color: var(--link-night);
 }
 
 .foot a:hover {
-  color: var(--signal);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.14em;
 }
 
 .foot-nav {
@@ -506,6 +510,22 @@ html[data-theme="night"] .prose .tagline {
   margin: 0 0 1.35rem;
 }
 
+.prose a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: rgba(106, 95, 208, 0.4);
+  text-underline-offset: 0.14em;
+}
+
+html[data-theme="night"] .prose a {
+  color: var(--link-night);
+  text-decoration-color: rgba(206, 242, 90, 0.45);
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
 .prose .stanza {
   margin: 0 0 2.5rem;
 }
@@ -557,46 +577,6 @@ html[data-theme="night"] .prose .note {
   border-top-color: rgba(231, 228, 216, 0.15);
 }
 
-.prose .note a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(26, 25, 21, 0.35);
-  text-underline-offset: 0.14em;
-}
-
-html[data-theme="night"] .prose .note a {
-  text-decoration-color: rgba(231, 228, 216, 0.35);
-}
-
-.prose .cta-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.9rem;
-  margin: 2.75rem 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.prose .cta-row a {
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(26, 25, 21, 0.35);
-  padding-bottom: 0.2rem;
-}
-
-html[data-theme="night"] .prose .cta-row a {
-  color: var(--night-ink);
-  border-bottom-color: rgba(231, 228, 216, 0.4);
-}
-
-.prose .cta-row a:hover {
-  color: var(--signal);
-  border-bottom-color: var(--signal);
-}
-
 .prose .start-code {
   margin: 0.75rem 0 1.5rem;
   padding: 0.85rem 1rem;
@@ -622,59 +602,6 @@ html[data-theme="night"] .prose .start-code {
 .prose .start-code code {
   font-size: inherit;
   color: inherit;
-}
-
-.hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem 1.25rem;
-  margin: 0.35rem 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.hero-links a {
-  color: var(--soft);
-  text-decoration: none;
-}
-
-.hero-links a:hover {
-  color: var(--ink);
-}
-
-html[data-theme="night"] .hero-links a {
-  color: var(--night-soft);
-}
-
-html[data-theme="night"] .hero-links a:hover {
-  color: var(--night-ink);
-}
-
-.prose .share-note {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  line-height: 1.55;
-  color: var(--muted);
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(26, 25, 21, 0.15);
-}
-
-html[data-theme="night"] .prose .share-note {
-  color: var(--night-muted);
-  border-top-color: rgba(231, 228, 216, 0.2);
-}
-
-.prose .share-note a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(26, 25, 21, 0.35);
-  text-underline-offset: 0.14em;
 }
 
 @media (max-width: 640px) {

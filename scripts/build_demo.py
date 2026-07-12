@@ -192,11 +192,6 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
       <h1 class="logo">Agent work, written for humans.</h1>
       <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
       <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
-      <nav class="hero-links" aria-label="More on this site">
-        <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
-        <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
-        <a href="https://mirror-factory.github.io/openbook/start.html">Start</a>
-      </nav>
     </div>
   </header>
 
