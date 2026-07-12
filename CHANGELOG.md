@@ -12,12 +12,14 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 - **[`docs/requirements.md`](./docs/requirements.md)** — strategy, personas, roadmap, and product requirements (v0.3)
 - **[`docs/design-pass-brief.md`](./docs/design-pass-brief.md)** — design-pass kickoff brief for surface exploration
 - **[`skills/openbook/`](./skills/openbook/)** — `/openbook` skill for end-of-run handoffs (Brief default; Standard/Essay by arg or inference)
+- **[`evals/`](./evals/)** — Layer 1 CI harness, seeded-flaw faithfulness fixture, Layer 2–4 protocols
 
 ### Changed
 
 - **[`VISION.md`](./VISION.md)** — rewritten as a one-page manifesto; detail moved to requirements
 - **[`USE.md`](./USE.md)** — retired to a skill pointer plus one-paragraph paste fallback
 - **README / integrations / AGENTS** — install path points at the skill first
+- **[`scripts/check_report.py`](./scripts/check_report.py)** — fails on librarian violations (em dashes, exclamation points)
 
 ## 0.1.0 — 2026-07-11
 

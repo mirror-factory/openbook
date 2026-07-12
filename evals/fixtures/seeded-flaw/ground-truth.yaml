@@ -1,0 +1,48 @@
+# Ground truth for seeded-flaw/transcript.md
+# Used by evals/run_evals.py Layer 3 scoring hooks.
+
+dead_ends:
+  - id: bom-csv-loader
+    must_mention_any:
+      - BOM
+      - blank row
+      - CSV loader
+    summary: CSV loader abandoned after BOM and blank-row failures; JSON-only tonight.
+  - id: idempotency-debit
+    must_mention_any:
+      - idempotency
+      - double-debit
+      - 429
+    summary: Cache-key debit shapes double-charge on 429 retry; stopped for lack of transport key.
+  - id: extend-unwired
+    must_mention_any:
+      - Extend
+      - UI-only
+      - /billing/extend
+    summary: Extend control returns 204 and does nothing; product policy undecided.
+
+masked_failures:
+  - id: shadow-billing
+    must_mention_any:
+      - OB_BILLING_SHADOW
+      - shadow
+      - debit is skipped
+    summary: Smoke stays green while billing shadow mode skips debits.
+
+decision_forks:
+  - id: rate-card-format
+    must_mention_any:
+      - JSON
+      - CSV
+      - rate card
+    summary: Keep JSON-only vs accept strict CSV.
+  - id: extend-scope
+    must_mention_any:
+      - Extend
+      - child scope
+      - current scope
+    summary: Extend adds to current scope vs mints a child scope.
+
+# Timestamps that appear in the transcript (ISO-ish). Invented ones in a report are failures.
+known_timestamps:
+  - "2026-07-09T22:10:00-04:00"

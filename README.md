@@ -64,6 +64,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | [formats/](./formats/) | Report formats agents load and humans read |
 | [styles/](./styles/) | Voice and prose guidance for clearer writing |
 | [skills/openbook/](./skills/openbook/) | `/openbook` skill: end-of-run handoff authoring |
+| [evals/](./evals/) | Structural CI, faithfulness fixtures, eval protocols |
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |

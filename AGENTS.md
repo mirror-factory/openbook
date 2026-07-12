@@ -23,6 +23,7 @@ Prefer [`skills/openbook/SKILL.md`](./skills/openbook/SKILL.md) (`/openbook`). A
 python scripts/check_report.py <report.md>    structural checker, the seatbelt
 python scripts/render_report.py <report.md>   HTML and PDF, never browser print
 python scripts/build_demo.py                  regenerates docs/ demo panes from examples
+python evals/run_evals.py                     Layer 1 structural evals (CI)
 ```
 
 Run the checker on every example and fixture you touch. If check_report.py and formats/report.md disagree, the format doc wins and the checker gets fixed.

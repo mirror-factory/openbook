@@ -267,6 +267,20 @@ def check(md: str) -> tuple[list[str], list[str]]:
             "index plus any cross-cutting asks"
         )
 
+    # Librarian voice (requirements §10.1): structural, fails the build
+    em_dashes = md.count("\u2014")
+    if em_dashes:
+        errors.append(
+            f"librarian: {em_dashes} em dash(es) (U+2014); "
+            "use commas, periods, or parentheses"
+        )
+    bangs = md.count("!")
+    if bangs:
+        errors.append(
+            f"librarian: {bangs} exclamation point(s); "
+            "name facts plainly without urgency theater"
+        )
+
     return errors, warnings
 
 
