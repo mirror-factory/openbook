@@ -209,14 +209,14 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
       <iframe class="pane pane-before" id="pane-before" title="Status dump before" srcdoc="{before_srcdoc}"></iframe>
       <iframe class="pane pane-after" id="pane-after" title="OpenBook Brief after" srcdoc="{after_srcdoc}"></iframe>
       <div class="handle" id="handle" role="slider" tabindex="0"
-           aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="30"
            aria-label="Reveal OpenBook Brief over the status dump">
         <span class="grip" aria-hidden="true">◂ Drag ▸</span>
       </div>
     </div>
     <label class="range-wrap visually-hidden">
       <span>Comparison slider</span>
-      <input type="range" id="slider" min="0" max="100" value="50" aria-hidden="true" tabindex="-1">
+      <input type="range" id="slider" min="0" max="100" value="30" aria-hidden="true" tabindex="-1">
     </label>
   </section>
 

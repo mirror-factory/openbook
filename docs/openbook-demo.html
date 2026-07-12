@@ -299,14 +299,14 @@ html[data-theme="night"] .pane-before {
 
 .pane-after {
   z-index: 2;
-  clip-path: inset(0 0 0 var(--pos, 50%));
+  clip-path: inset(0 0 0 var(--pos, 30%));
 }
 
 .handle {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--pos, 50%);
+  left: var(--pos, 30%);
   width: 48px;
   margin-left: -24px;
   z-index: 4;
@@ -429,15 +429,15 @@ html[data-theme="night"] .foot a {
   text-transform: uppercase;
 }
 
-/* Reading pages (Vision, About): one shared column for chrome, copy, footer */
+/* Reading pages (Vision, About, Start): same column width as the demo */
 body.reading .top,
 body.reading .page,
 body.reading .foot {
-  max-width: 38rem;
+  max-width: var(--max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 body.reading .top {
@@ -1397,14 +1397,14 @@ blockquote {
 &lt;/html&gt;
 "></iframe>
       <div class="handle" id="handle" role="slider" tabindex="0"
-           aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="30"
            aria-label="Reveal OpenBook Brief over the status dump">
         <span class="grip" aria-hidden="true">◂ Drag ▸</span>
       </div>
     </div>
     <label class="range-wrap visually-hidden">
       <span>Comparison slider</span>
-      <input type="range" id="slider" min="0" max="100" value="50" aria-hidden="true" tabindex="-1">
+      <input type="range" id="slider" min="0" max="100" value="30" aria-hidden="true" tabindex="-1">
     </label>
   </section>
 
@@ -1581,7 +1581,7 @@ blockquote {
   handle.addEventListener("lostpointercapture", endDrag);
 
   handle.addEventListener("keydown", (e) => {
-    const cur = Number(handle.getAttribute("aria-valuenow") || 50);
+    const cur = Number(handle.getAttribute("aria-valuenow") || 30);
     if (e.key === "ArrowLeft") setPos(cur - 3);
     if (e.key === "ArrowRight") setPos(cur + 3);
     if (e.key === "Home") setPos(0);
@@ -1592,7 +1592,7 @@ blockquote {
   paneAfter.addEventListener("load", syncScroll);
   // srcdoc iframes may already be complete
   syncScroll();
-  setPos(Number(slider.value) || 50);
+  setPos(Number(slider.value) || 30);
 })();
 
   </script>

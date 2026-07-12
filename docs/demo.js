@@ -158,7 +158,7 @@
   handle.addEventListener("lostpointercapture", endDrag);
 
   handle.addEventListener("keydown", (e) => {
-    const cur = Number(handle.getAttribute("aria-valuenow") || 50);
+    const cur = Number(handle.getAttribute("aria-valuenow") || 30);
     if (e.key === "ArrowLeft") setPos(cur - 3);
     if (e.key === "ArrowRight") setPos(cur + 3);
     if (e.key === "Home") setPos(0);
@@ -169,5 +169,5 @@
   paneAfter.addEventListener("load", syncScroll);
   // srcdoc iframes may already be complete
   syncScroll();
-  setPos(Number(slider.value) || 50);
+  setPos(Number(slider.value) || 30);
 })();

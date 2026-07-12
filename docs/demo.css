@@ -288,14 +288,14 @@ html[data-theme="night"] .pane-before {
 
 .pane-after {
   z-index: 2;
-  clip-path: inset(0 0 0 var(--pos, 50%));
+  clip-path: inset(0 0 0 var(--pos, 30%));
 }
 
 .handle {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--pos, 50%);
+  left: var(--pos, 30%);
   width: 48px;
   margin-left: -24px;
   z-index: 4;
@@ -418,15 +418,15 @@ html[data-theme="night"] .foot a {
   text-transform: uppercase;
 }
 
-/* Reading pages (Vision, About): one shared column for chrome, copy, footer */
+/* Reading pages (Vision, About, Start): same column width as the demo */
 body.reading .top,
 body.reading .page,
 body.reading .foot {
-  max-width: 38rem;
+  max-width: var(--max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 body.reading .top {
