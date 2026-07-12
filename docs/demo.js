@@ -4,10 +4,46 @@
   const handle = document.getElementById("handle");
   const paneBefore = document.getElementById("pane-before");
   const paneAfter = document.getElementById("pane-after");
+  const themeToggle = document.getElementById("theme-toggle");
+  const logoDay = document.querySelector(".logo-day");
+  const logoNight = document.querySelector(".logo-night");
 
   let dragging = false;
   let activePointerId = null;
   let scrollBound = false;
+
+  function setTheme(theme) {
+    const next = theme === "night" ? "night" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("openbook-demo-theme", next);
+    } catch (_) {
+      /* private mode */
+    }
+    if (themeToggle) {
+      const night = next === "night";
+      themeToggle.setAttribute("aria-pressed", night ? "true" : "false");
+      themeToggle.textContent = night ? "Day" : "Night";
+    }
+    if (logoDay && logoNight) {
+      logoDay.hidden = next === "night";
+      logoNight.hidden = next !== "night";
+    }
+  }
+
+  if (themeToggle) {
+    let stored = "light";
+    try {
+      stored = localStorage.getItem("openbook-demo-theme") || "light";
+    } catch (_) {
+      stored = "light";
+    }
+    setTheme(stored);
+    themeToggle.addEventListener("click", () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      setTheme(cur === "night" ? "light" : "night");
+    });
+  }
 
   function setPos(pct) {
     const v = Math.max(0, Math.min(100, pct));

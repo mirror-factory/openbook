@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OpenBook — before / after</title>
+  <title>OpenBook · before / after</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
   <style>
+/* OpenBook demo chrome. Tokens extracted from OpenBook Surfaces 2G / Shift. */
+
 :root {
-  --ink: #1c1917;
-  --paper: #f5f2ec;
-  --rule: #d6d3d1;
-  --accent: #57534e;
-  --dump-edge: #2a2a2a;
+  --paper: #F2EEE5;
+  --dune: #E7E4D8;
+  --ink: #1A1915;
+  --muted: #6B675C;
+  --body-muted: #3E3B33;
+  --soft: #A9A493;
+  --night: #0A0A09;
+  --night-ink: #E7E4D8;
+  --night-muted: #7D7A6E;
+  --night-soft: #A9A493;
+  --night-dim: #55534A;
+  --signal: #F54C26;
+  --pulse: #CEF25A;
+  --field: #818C64;
+  --dump: #050505;
   --max: 1200px;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+  --font-serif: "Source Serif 4", Georgia, serif;
 }
 
 * { box-sizing: border-box; }
@@ -22,49 +41,243 @@ html, body {
 }
 
 body {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-display);
   color: var(--ink);
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, #fffdf8 0%, transparent 55%),
-    linear-gradient(180deg, #faf7f2 0%, var(--paper) 40%, #efebe3 100%);
+  background: var(--paper);
   min-height: 100vh;
+  position: relative;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(206, 242, 90, 0.28) 0%,
+    rgba(206, 242, 90, 0) 65%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="night"] body {
+  color: var(--night-ink);
+  background: var(--night);
+}
+
+html[data-theme="night"] body::before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(129, 140, 100, 0.25) 0%,
+    rgba(129, 140, 100, 0) 65%
+  );
 }
 
 .top {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 1rem;
+  padding: 1.75rem 1.5rem 0.5rem;
+}
+
+.chrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-row img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.brand-mark {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--soft);
+  text-transform: uppercase;
+}
+
+html[data-theme="night"] .brand-mark {
+  color: var(--night-soft);
+}
+
+.chrome-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+html[data-theme="night"] .chrome-actions {
+  color: var(--night-soft);
+}
+
+.chrome-actions a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chrome-actions a:hover,
+.chrome-actions a[aria-current="page"] {
+  color: var(--ink);
+}
+
+html[data-theme="night"] .chrome-actions a:hover,
+html[data-theme="night"] .chrome-actions a[aria-current="page"] {
+  color: var(--night-ink);
+}
+
+.theme-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(26, 25, 21, 0.35);
+  border-radius: 3px;
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: var(--dune);
+}
+
+html[data-theme="night"] .theme-toggle {
+  color: var(--night-ink);
+  border-color: rgba(231, 228, 216, 0.4);
+}
+
+html[data-theme="night"] .theme-toggle:hover {
+  background: rgba(231, 228, 216, 0.08);
+}
+
+.hero {
+  text-align: center;
+  padding: 3rem 0 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
   font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.05;
   color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
+  margin: 0;
 }
 
-.logo:hover { border-bottom-color: var(--ink); }
+html[data-theme="night"] .logo {
+  color: #F2EEE5;
+}
 
 .tag {
-  margin: 0.35rem 0 0;
-  font-size: 0.95rem;
-  color: var(--accent);
+  margin: 0;
+  max-width: 42rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--soft);
+}
+
+html[data-theme="night"] .tag {
+  color: var(--night-soft);
 }
 
 .lede {
-  margin: 1.25rem 0 0;
+  margin: 0;
   max-width: 36rem;
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
   line-height: 1.5;
-  color: #44403c;
+  color: var(--body-muted);
+}
+
+html[data-theme="night"] .lede {
+  color: var(--night-soft);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.85rem 1.4rem;
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.cta-ghost {
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(26, 25, 21, 0.35);
+}
+
+html[data-theme="night"] .cta {
+  color: var(--night);
+  background: var(--dune);
+}
+
+html[data-theme="night"] .cta-ghost {
+  color: var(--night-ink);
+  border-color: rgba(231, 228, 216, 0.4);
+  background: transparent;
 }
 
 .stage {
   max-width: var(--max);
-  margin: 0.75rem auto 2rem;
-  padding: 0 1.25rem;
+  margin: 0.25rem auto 2rem;
+  padding: 0 1.5rem;
 }
 
 .labels {
@@ -72,22 +285,33 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
   margin-bottom: 0.75rem;
+}
+
+html[data-theme="night"] .labels {
+  color: var(--night-dim);
 }
 
 .compare {
   position: relative;
   height: min(76vh, 860px);
-  border: 1px solid var(--rule);
+  border: 1px solid rgba(26, 25, 21, 0.2);
   border-radius: 6px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 18px 40px rgba(28, 25, 23, 0.08);
+  background: var(--paper);
+  box-shadow: 0 18px 48px rgba(26, 25, 21, 0.08);
+}
+
+html[data-theme="night"] .compare {
+  border-color: rgba(231, 228, 216, 0.2);
+  background: var(--dump);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
 }
 
 .pane {
@@ -96,7 +320,11 @@ body {
   width: 100%;
   height: 100%;
   border: 0;
-  background: #fff;
+  background: var(--paper);
+}
+
+html[data-theme="night"] .pane-before {
+  background: var(--dump);
 }
 
 .pane-before { z-index: 1; }
@@ -126,25 +354,42 @@ body {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 2px;
-  margin-left: -1px;
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--dump-edge);
+  width: 12px;
+  margin-left: -6px;
+  background: var(--ink);
+  box-shadow: 0 0 40px rgba(26, 25, 21, 0.25);
   pointer-events: none;
+}
+
+html[data-theme="night"] .handle::before {
+  background: var(--dune);
+  box-shadow: 0 0 40px rgba(231, 228, 216, 0.3);
 }
 
 .grip {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
-  border-radius: 50%;
-  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+  min-width: 4.5rem;
+  height: auto;
+  padding: 0.45rem 0.55rem;
+  border-radius: 3px;
+  border: 0;
   background: var(--ink);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: none;
   pointer-events: none;
+}
+
+html[data-theme="night"] .grip {
+  background: var(--dune);
+  color: var(--night);
 }
 
 .compare.is-dragging {
@@ -158,25 +403,7 @@ body {
 
 .grip::before,
 .grip::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  transform: translateY(-50%);
-}
-
-.grip::before {
-  left: 8px;
-  border-width: 5px 6px 5px 0;
-  border-color: transparent #fff transparent transparent;
-}
-
-.grip::after {
-  right: 8px;
-  border-width: 5px 0 5px 6px;
-  border-color: transparent transparent transparent #fff;
+  content: none;
 }
 
 .range-wrap {
@@ -191,40 +418,75 @@ body {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
 
 .foot {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 1.25rem 3rem;
-  font-size: 0.88rem;
-  color: var(--accent);
+  padding: 0 1.5rem 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
 }
 
-.foot a { color: var(--ink); }
+html[data-theme="night"] .foot {
+  color: var(--night-muted);
+}
+
+.foot a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+html[data-theme="night"] .foot a {
+  color: var(--night-ink);
+}
+
+.foot a:hover {
+  color: var(--signal);
+}
 
 @media (max-width: 640px) {
   .compare { height: 70vh; }
-  .top { padding-top: 1.5rem; }
+  .top { padding-top: 1.25rem; }
+  .hero { padding-top: 2rem; }
+  .chrome-actions .nav-link { display: none; }
 }
 
   </style>
 </head>
 <body>
   <header class="top">
-    <div class="brand">
-      <a class="logo" href="https://github.com/mirror-factory/openbook">OpenBook</a>
-      <p class="tag">Agent work, written for humans.</p>
+    <div class="chrome">
+      <a class="brand-row" href="https://github.com/mirror-factory/openbook">
+        <img class="logo-day" src="data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%221000%22%20height%3D%22583%22%20viewBox%3D%220%200%201000%20583%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M500%20424.068C504.824%20424.068%20509.782%20425.789%20515.127%20429.472L539.833%20446.502C548.179%20452.254%20553.169%20461.77%20553.169%20471.941V552.15C553.169%20569.185%20539.427%20582.996%20522.477%20582.996H477.523C460.573%20582.995%20446.835%20569.185%20446.835%20552.15V471.941C446.835%20461.77%20451.821%20452.254%20460.167%20446.502L484.877%20429.472C490.221%20425.79%20495.177%20424.069%20500%20424.068Z%22%20fill%3D%22black%22%3E%3C/path%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M256.777%200L259.37%200.0238408C286.134%200.534278%20312.181%208.9375%20334.261%2024.2143L473.419%20120.495C489.426%20131.57%20510.574%20131.57%20526.581%20120.495L665.739%2024.2143C688.531%208.44459%20715.552%200.000149754%20743.223%200H957.589C981.012%200%201000%2019.0834%201000%2042.6234V85.66C1000%2099.158%20993.638%20111.86%20982.849%20119.899L924.326%20163.508L924.283%20163.544L831.264%20236.477C826.511%20240.204%20824.111%20246.418%20823.697%20252.558L823.689%20252.709L823.697%20252.86C824.111%20258.999%20826.511%20265.212%20831.264%20268.94L924.283%20341.873L924.326%20341.909L982.849%20385.518C993.637%20393.557%201000%20406.256%201000%20419.753V462.794C1000%20486.334%20981.012%20505.417%20957.589%20505.417H743.223C715.552%20505.417%20688.531%20496.973%20665.739%20481.203L526.581%20384.922C510.573%20373.846%20489.427%20373.846%20473.419%20384.922L334.261%20481.203C312.181%20496.48%20286.134%20504.883%20259.37%20505.393L256.777%20505.417H42.4113C18.9884%20505.417%200%20486.334%200%20462.794V419.753C0.000195788%20406.255%206.36291%20393.557%2017.1511%20385.518L75.6737%20341.909L75.7172%20341.873L168.736%20268.94C173.489%20265.212%20175.885%20258.998%20176.299%20252.86L176.311%20252.709L176.299%20252.558C175.885%20246.419%20173.489%20240.205%20168.736%20236.477L75.7172%20163.544L75.6737%20163.508L17.1511%20119.899C6.36264%20111.86%200%2099.158%200%2085.66V42.6234C0%2019.0834%2018.9884%200%2042.4113%200H256.777ZM283.923%20300.887C274.219%20300.887%20264.751%20303.914%20256.832%20309.549L171.484%20370.283L171.46%20370.299L171.44%20370.315C164.444%20375.551%20162.535%20385.34%20163.96%20393.441C165.364%20401.422%20170.399%20409.414%20178.94%20409.414H296.187C305.471%20409.414%20314.547%20406.645%20322.262%20401.455L413.157%20340.312L413.181%20340.292C420.431%20335.263%20422.492%20325.372%20421.144%20317.166C420.458%20312.999%20418.865%20309.003%20416.379%20305.997C413.865%20302.956%20410.383%20300.887%20406.108%20300.887H283.923ZM593.892%20300.887C589.617%20300.887%20586.135%20302.956%20583.621%20305.997C581.135%20309.003%20579.542%20312.999%20578.856%20317.166C577.508%20325.372%20579.569%20335.263%20586.819%20340.292L586.843%20340.312L677.738%20401.455C685.453%20406.645%20694.529%20409.414%20703.813%20409.414H821.06C829.601%20409.414%20834.636%20401.422%20836.04%20393.441C837.465%20385.34%20835.556%20375.551%20828.56%20370.315L828.54%20370.299L828.516%20370.283L743.168%20309.549C735.249%20303.914%20725.784%20300.887%20716.081%20300.887H593.892ZM178.94%2096.0029C170.399%2096.0034%20165.364%20103.995%20163.96%20111.976C162.535%20120.077%20164.444%20129.866%20171.44%20135.102L171.46%20135.118L171.484%20135.134L256.832%20195.868C264.751%20201.503%20274.219%20204.53%20283.923%20204.53H406.108C410.383%20204.53%20413.865%20202.461%20416.379%20199.42C418.865%20196.414%20420.458%20192.418%20421.144%20188.251C422.492%20180.045%20420.431%20170.154%20413.181%20165.125L413.157%20165.106L322.262%20103.962C314.547%2098.7723%20305.471%2096.003%20296.187%2096.0029H178.94ZM703.813%2096.0029C694.529%2096.003%20685.453%2098.7723%20677.738%20103.962L586.843%20165.106L586.819%20165.125C579.569%20170.154%20577.508%20180.045%20578.856%20188.251C579.542%20192.418%20581.135%20196.414%20583.621%20199.42C586.135%20202.461%20589.617%20204.53%20593.892%20204.53H716.081C725.784%20204.53%20735.249%20201.503%20743.168%20195.868L828.516%20135.134L828.54%20135.118L828.56%20135.102C835.556%20129.866%20837.465%20120.077%20836.04%20111.976C834.636%20103.995%20829.601%2096.0034%20821.06%2096.0029H703.813Z%22%20fill%3D%22black%22%3E%3C/path%3E%0A%3C/svg%3E" alt="">
+        <img class="logo-night" src="data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%221000%22%20height%3D%22583%22%20viewBox%3D%220%200%201000%20583%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M500%20424.068C504.824%20424.068%20509.782%20425.789%20515.127%20429.472L539.833%20446.502C548.179%20452.254%20553.169%20461.77%20553.169%20471.941V552.15C553.169%20569.185%20539.427%20582.996%20522.477%20582.996H477.523C460.573%20582.995%20446.835%20569.185%20446.835%20552.15V471.941C446.835%20461.77%20451.821%20452.254%20460.167%20446.502L484.877%20429.472C490.221%20425.79%20495.177%20424.069%20500%20424.068Z%22%20fill%3D%22white%22%3E%3C/path%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M256.777%200L259.37%200.0238408C286.134%200.534278%20312.181%208.9375%20334.261%2024.2143L473.419%20120.495C489.426%20131.57%20510.574%20131.57%20526.581%20120.495L665.739%2024.2143C688.531%208.44459%20715.552%200.000149754%20743.223%200H957.589C981.012%200%201000%2019.0834%201000%2042.6234V85.66C1000%2099.158%20993.638%20111.86%20982.849%20119.899L924.326%20163.508L924.283%20163.544L831.264%20236.477C826.511%20240.204%20824.111%20246.418%20823.697%20252.558L823.689%20252.709L823.697%20252.86C824.111%20258.999%20826.511%20265.212%20831.264%20268.94L924.283%20341.873L924.326%20341.909L982.849%20385.518C993.637%20393.557%201000%20406.256%201000%20419.753V462.794C1000%20486.334%20981.012%20505.417%20957.589%20505.417H743.223C715.552%20505.417%20688.531%20496.973%20665.739%20481.203L526.581%20384.922C510.573%20373.846%20489.427%20373.846%20473.419%20384.922L334.261%20481.203C312.181%20496.48%20286.134%20504.883%20259.37%20505.393L256.777%20505.417H42.4113C18.9884%20505.417%200%20486.334%200%20462.794V419.753C0.000195788%20406.255%206.36291%20393.557%2017.1511%20385.518L75.6737%20341.909L75.7172%20341.873L168.736%20268.94C173.489%20265.212%20175.885%20258.998%20176.299%20252.86L176.311%20252.709L176.299%20252.558C175.885%20246.419%20173.489%20240.205%20168.736%20236.477L75.7172%20163.544L75.6737%20163.508L17.1511%20119.899C6.36264%20111.86%200%2099.158%200%2085.66V42.6234C0%2019.0834%2018.9884%200%2042.4113%200H256.777ZM283.923%20300.887C274.219%20300.887%20264.751%20303.914%20256.832%20309.549L171.484%20370.283L171.46%20370.299L171.44%20370.315C164.444%20375.551%20162.535%20385.34%20163.96%20393.441C165.364%20401.422%20170.399%20409.414%20178.94%20409.414H296.187C305.471%20409.414%20314.547%20406.645%20322.262%20401.455L413.157%20340.312L413.181%20340.292C420.431%20335.263%20422.492%20325.372%20421.144%20317.166C420.458%20312.999%20418.865%20309.003%20416.379%20305.997C413.865%20302.956%20410.383%20300.887%20406.108%20300.887H283.923ZM593.892%20300.887C589.617%20300.887%20586.135%20302.956%20583.621%20305.997C581.135%20309.003%20579.542%20312.999%20578.856%20317.166C577.508%20325.372%20579.569%20335.263%20586.819%20340.292L586.843%20340.312L677.738%20401.455C685.453%20406.645%20694.529%20409.414%20703.813%20409.414H821.06C829.601%20409.414%20834.636%20401.422%20836.04%20393.441C837.465%20385.34%20835.556%20375.551%20828.56%20370.315L828.54%20370.299L828.516%20370.283L743.168%20309.549C735.249%20303.914%20725.784%20300.887%20716.081%20300.887H593.892ZM178.94%2096.0029C170.399%2096.0034%20165.364%20103.995%20163.96%20111.976C162.535%20120.077%20164.444%20129.866%20171.44%20135.102L171.46%20135.118L171.484%20135.134L256.832%20195.868C264.751%20201.503%20274.219%20204.53%20283.923%20204.53H406.108C410.383%20204.53%20413.865%20202.461%20416.379%20199.42C418.865%20196.414%20420.458%20192.418%20421.144%20188.251C422.492%20180.045%20420.431%20170.154%20413.181%20165.125L413.157%20165.106L322.262%20103.962C314.547%2098.7723%20305.471%2096.003%20296.187%2096.0029H178.94ZM703.813%2096.0029C694.529%2096.003%20685.453%2098.7723%20677.738%20103.962L586.843%20165.106L586.819%20165.125C579.569%20170.154%20577.508%20180.045%20578.856%20188.251C579.542%20192.418%20581.135%20196.414%20583.621%20199.42C586.135%20202.461%20589.617%20204.53%20593.892%20204.53H716.081C725.784%20204.53%20735.249%20201.503%20743.168%20195.868L828.516%20135.134L828.54%20135.118L828.56%20135.102C835.556%20129.866%20837.465%20120.077%20836.04%20111.976C834.636%20103.995%20829.601%2096.0034%20821.06%2096.0029H703.813Z%22%20fill%3D%22white%22%3E%3C/path%3E%0A%3C/svg%3E" alt="" hidden>
+        <span class="brand-mark">Mirror Factory / OpenBook</span>
+      </a>
+      <div class="chrome-actions">
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook#readme">Formats</a>
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook" aria-current="page">GitHub ↗</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
+      </div>
     </div>
-    <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+    <div class="hero">
+      <h1 class="logo">Agent work,<br>written for humans.</h1>
+      <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
+      <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+      <div class="ctas">
+        <a class="cta" href="#compare">Read a sample run</a>
+        <a class="cta cta-ghost" href="https://github.com/mirror-factory/openbook">Star on GitHub</a>
+      </div>
+    </div>
   </header>
 
   <section class="stage" aria-label="Before and after comparison">
     <div class="labels">
-      <span>Before</span>
-      <span>After</span>
+      <span>Before · the wall of terminals</span>
+      <span>After · the book</span>
     </div>
     <div class="compare" id="compare">
       <iframe class="pane pane-before" id="pane-before" title="Status dump before" srcdoc="&lt;!DOCTYPE html&gt;
@@ -237,19 +499,19 @@ body {
 body {
   margin: 0;
   padding: 14px 16px 40px;
-  font-family: ui-monospace, &quot;Cascadia Mono&quot;, Consolas, &quot;Courier New&quot;, monospace;
+  font-family: &quot;DM Mono&quot;, ui-monospace, &quot;Cascadia Mono&quot;, Consolas, &quot;Courier New&quot;, monospace;
   font-size: 11px;
   line-height: 1.38;
-  color: #c4c4c4;
-  background: #111;
+  color: #55534A;
+  background: #050505;
 }
 .badge {
   display: inline-block;
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #111;
-  background: #888;
+  color: #050505;
+  background: #55534A;
   padding: 2px 7px;
   margin-bottom: 10px;
 }
@@ -259,8 +521,8 @@ body {
   word-break: break-word;
 }
 .cli .ln { display: block; }
-.cli .fail { color: #e07070; }
-.cli .ok { color: #6aab6a; }
+.cli .fail { color: #F54C26; }
+.cli .ok { color: #CEF25A; }
 
 &lt;/style&gt;
 &lt;/head&gt;
@@ -441,7 +703,7 @@ body {
 &lt;title&gt;After — Brief&lt;/title&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap&quot;&gt;
 &lt;style&gt;
 /* OpenBook Report
    Layer 1: tokens
@@ -449,19 +711,19 @@ body {
    Layer 3: @media print (pt) — must stay last
 */
 
-/* ——— 1. Tokens ——— */
+/* ——— 1. Tokens (Shift / Surfaces 2F paper) ——— */
 :root {
-  --ink: #1c1917;
-  --muted: #57534e;
-  --rule: #d6d3d1;
-  --paper: #faf7f2;
-  --accent: #292524;
+  --ink: #1A1915;
+  --muted: #6B675C;
+  --rule: #E7E4D8;
+  --paper: #F2EEE5;
+  --accent: #1A1915;
   --space: 0.5rem;
   --measure: 65ch;
   --leading: 1.65;
   --font-body: &quot;Source Serif 4&quot;, Charter, &quot;Iowan Old Style&quot;, Georgia, &quot;Times New Roman&quot;, serif;
-  --font-ui: Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, &quot;Cascadia Mono&quot;, Consolas, &quot;Courier New&quot;, monospace;
+  --font-ui: &quot;Manrope&quot;, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono: &quot;DM Mono&quot;, ui-monospace, &quot;Cascadia Mono&quot;, Consolas, &quot;Courier New&quot;, monospace;
 }
 
 /* ——— 2. Screen base (rem only) ——— */
@@ -690,8 +952,8 @@ pre, code {
 }
 
 pre {
-  background: #f5f5f4;
-  border: 1px solid var(--rule);
+  background: #E7E4D8;
+  border: 1px solid rgba(26, 25, 21, 0.2);
   padding: 0.75rem;
   overflow: hidden;
   white-space: pre-wrap;
@@ -853,7 +1115,7 @@ blockquote {
   body {
     margin: 0;
     min-height: 100%;
-    background: #faf7f2;
+    background: #F2EEE5;
   }
   .demo-shell {
     max-width: 65ch;
@@ -861,13 +1123,13 @@ blockquote {
     padding: 2.75rem 1.5rem 3.5rem;
   }
   .demo-shell &gt; .kicker {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+    font-family: &quot;DM Mono&quot;, ui-monospace, monospace;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     font-size: 0.7rem;
-    color: #57534e;
+    color: #6B675C;
     margin: 0 0 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
   }
   .demo-shell .report {
     padding: 0 0 1rem;
@@ -934,7 +1196,7 @@ blockquote {
       <div class="handle" id="handle" role="slider" tabindex="0"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
            aria-label="Reveal OpenBook Brief over the status dump">
-        <span class="grip" aria-hidden="true"></span>
+        <span class="grip" aria-hidden="true">◂ Drag ▸</span>
       </div>
     </div>
     <label class="range-wrap visually-hidden">
@@ -944,7 +1206,7 @@ blockquote {
   </section>
 
   <footer class="foot">
-    <p>Self-contained preview — also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
+    <p>Self-contained preview · also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
     <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
   </footer>
 
@@ -955,10 +1217,46 @@ blockquote {
   const handle = document.getElementById("handle");
   const paneBefore = document.getElementById("pane-before");
   const paneAfter = document.getElementById("pane-after");
+  const themeToggle = document.getElementById("theme-toggle");
+  const logoDay = document.querySelector(".logo-day");
+  const logoNight = document.querySelector(".logo-night");
 
   let dragging = false;
   let activePointerId = null;
   let scrollBound = false;
+
+  function setTheme(theme) {
+    const next = theme === "night" ? "night" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("openbook-demo-theme", next);
+    } catch (_) {
+      /* private mode */
+    }
+    if (themeToggle) {
+      const night = next === "night";
+      themeToggle.setAttribute("aria-pressed", night ? "true" : "false");
+      themeToggle.textContent = night ? "Day" : "Night";
+    }
+    if (logoDay && logoNight) {
+      logoDay.hidden = next === "night";
+      logoNight.hidden = next !== "night";
+    }
+  }
+
+  if (themeToggle) {
+    let stored = "light";
+    try {
+      stored = localStorage.getItem("openbook-demo-theme") || "light";
+    } catch (_) {
+      stored = "light";
+    }
+    setTheme(stored);
+    themeToggle.addEventListener("click", () => {
+      const cur = document.documentElement.getAttribute("data-theme");
+      setTheme(cur === "night" ? "light" : "night");
+    });
+  }
 
   function setPos(pct) {
     const v = Math.max(0, Math.min(100, pct));

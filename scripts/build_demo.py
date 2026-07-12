@@ -11,6 +11,7 @@ import html
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -29,7 +30,7 @@ DEMO_CSS = REPORT_CSS + """
   body {
     margin: 0;
     min-height: 100%;
-    background: #faf7f2;
+    background: #F2EEE5;
   }
   .demo-shell {
     max-width: 65ch;
@@ -37,13 +38,13 @@ DEMO_CSS = REPORT_CSS + """
     padding: 2.75rem 1.5rem 3.5rem;
   }
   .demo-shell > .kicker {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "DM Mono", ui-monospace, monospace;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     font-size: 0.7rem;
-    color: #57534e;
+    color: #6B675C;
     margin: 0 0 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
   }
   .demo-shell .report {
     padding: 0 0 1rem;
@@ -54,24 +55,24 @@ DEMO_CSS = REPORT_CSS + """
 }
 """
 
-# Generic terminal: mostly mono; sparse accent (~5–10% of lines)
+# Terminal dump pane: Surfaces 2G before panel (#050505 / DM Mono / Shift accents)
 DUMP_CSS = """
 body {
   margin: 0;
   padding: 14px 16px 40px;
-  font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-family: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
   font-size: 11px;
   line-height: 1.38;
-  color: #c4c4c4;
-  background: #111;
+  color: #55534A;
+  background: #050505;
 }
 .badge {
   display: inline-block;
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #111;
-  background: #888;
+  color: #050505;
+  background: #55534A;
   padding: 2px 7px;
   margin-bottom: 10px;
 }
@@ -81,8 +82,8 @@ body {
   word-break: break-word;
 }
 .cli .ln { display: block; }
-.cli .fail { color: #e07070; }
-.cli .ok { color: #6aab6a; }
+.cli .fail { color: #F54C26; }
+.cli .ok { color: #CEF25A; }
 """
 
 
@@ -140,7 +141,7 @@ DOCS = ROOT / "docs"
 STANDALONE = DOCS / "openbook-demo.html"
 SOURCE_SERIF_HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 """
 
 
@@ -150,30 +151,55 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
     demo_js = (DOCS / "demo.js").read_text(encoding="utf-8")
     before_srcdoc = html.escape(before_doc, quote=True)
     after_srcdoc = html.escape(after_doc, quote=True)
+    black_logo = (DOCS / "assets" / "logo" / "mf-icon-true_black.svg").read_text(
+        encoding="utf-8"
+    )
+    white_logo = (DOCS / "assets" / "logo" / "mf-icon-true_white.svg").read_text(
+        encoding="utf-8"
+    )
+    black_data = "data:image/svg+xml;charset=utf-8," + quote(black_logo)
+    white_data = "data:image/svg+xml;charset=utf-8," + quote(white_logo)
 
     page = f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OpenBook — before / after</title>
+  <title>OpenBook · before / after</title>
+  {SOURCE_SERIF_HEAD}
   <style>
 {demo_css}
   </style>
 </head>
 <body>
   <header class="top">
-    <div class="brand">
-      <a class="logo" href="https://github.com/mirror-factory/openbook">OpenBook</a>
-      <p class="tag">Agent work, written for humans.</p>
+    <div class="chrome">
+      <a class="brand-row" href="https://github.com/mirror-factory/openbook">
+        <img class="logo-day" src="{black_data}" alt="">
+        <img class="logo-night" src="{white_data}" alt="" hidden>
+        <span class="brand-mark">Mirror Factory / OpenBook</span>
+      </a>
+      <div class="chrome-actions">
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook#readme">Formats</a>
+        <a class="nav-link" href="https://github.com/mirror-factory/openbook" aria-current="page">GitHub ↗</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
+      </div>
     </div>
-    <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+    <div class="hero">
+      <h1 class="logo">Agent work,<br>written for humans.</h1>
+      <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
+      <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+      <div class="ctas">
+        <a class="cta" href="#compare">Read a sample run</a>
+        <a class="cta cta-ghost" href="https://github.com/mirror-factory/openbook">Star on GitHub</a>
+      </div>
+    </div>
   </header>
 
   <section class="stage" aria-label="Before and after comparison">
     <div class="labels">
-      <span>Before</span>
-      <span>After</span>
+      <span>Before · the wall of terminals</span>
+      <span>After · the book</span>
     </div>
     <div class="compare" id="compare">
       <iframe class="pane pane-before" id="pane-before" title="Status dump before" srcdoc="{before_srcdoc}"></iframe>
@@ -181,7 +207,7 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
       <div class="handle" id="handle" role="slider" tabindex="0"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
            aria-label="Reveal OpenBook Brief over the status dump">
-        <span class="grip" aria-hidden="true"></span>
+        <span class="grip" aria-hidden="true">◂ Drag ▸</span>
       </div>
     </div>
     <label class="range-wrap visually-hidden">
@@ -191,7 +217,7 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
   </section>
 
   <footer class="foot">
-    <p>Self-contained preview — also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
+    <p>Self-contained preview · also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
     <p><a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a></p>
   </footer>
 
