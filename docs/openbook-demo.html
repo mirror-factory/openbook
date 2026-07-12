@@ -525,6 +525,11 @@ html[data-theme="night"] .prose .tagline {
   margin: 0 0 0.4rem;
 }
 
+.prose .indent-ital {
+  padding-left: 1.5rem;
+  font-style: italic;
+}
+
 .prose .stanza p:last-child {
   margin-bottom: 0;
 }
@@ -603,6 +608,86 @@ html[data-theme="night"] .prose .cta-row a {
   border-bottom-color: var(--signal);
 }
 
+.prose .start-code {
+  margin: 0.75rem 0 1.5rem;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: rgba(26, 25, 21, 0.04);
+  border: 1px solid rgba(26, 25, 21, 0.12);
+  border-radius: 3px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+html[data-theme="night"] .prose .start-code {
+  color: var(--night-ink);
+  background: rgba(231, 228, 216, 0.06);
+  border-color: rgba(231, 228, 216, 0.18);
+}
+
+.prose .start-code code {
+  font-size: inherit;
+  color: inherit;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem 1.25rem;
+  margin: 0.35rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-links a {
+  color: var(--soft);
+  text-decoration: none;
+}
+
+.hero-links a:hover {
+  color: var(--ink);
+}
+
+html[data-theme="night"] .hero-links a {
+  color: var(--night-soft);
+}
+
+html[data-theme="night"] .hero-links a:hover {
+  color: var(--night-ink);
+}
+
+.prose .share-note {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(26, 25, 21, 0.15);
+}
+
+html[data-theme="night"] .prose .share-note {
+  color: var(--night-muted);
+  border-top-color: rgba(231, 228, 216, 0.2);
+}
+
+.prose .share-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(26, 25, 21, 0.35);
+  text-underline-offset: 0.14em;
+}
+
 @media (max-width: 640px) {
   .compare { height: 70vh; }
   .top { padding-top: 1.25rem; }
@@ -652,6 +737,7 @@ html[data-theme="night"] .prose .cta-row a {
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/about.html">About</a>
+        <a class="nav-link" href="https://mirror-factory.github.io/openbook/start.html">Start</a>
         <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
       </div>
@@ -660,6 +746,11 @@ html[data-theme="night"] .prose .cta-row a {
       <h1 class="logo">Agent work, written for humans.</h1>
       <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
       <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+      <nav class="hero-links" aria-label="More on this site">
+        <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
+        <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
+        <a href="https://mirror-factory.github.io/openbook/start.html">Start</a>
+      </nav>
     </div>
   </header>
 
@@ -1322,6 +1413,7 @@ blockquote {
       <a href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
       <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
       <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
+      <a href="https://mirror-factory.github.io/openbook/start.html">Start</a>
       <a href="https://github.com/mirror-factory/openbook">GitHub</a>
     </nav>
     <p>Self-contained preview · also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>

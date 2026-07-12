@@ -12,9 +12,9 @@ It owes you a story, not a log.
 
 Trust is not a vibe. Trust is a document shape:
 
-a story you can skim,
-decisions you can answer,
-receipts you can check.
+*a story you can skim,*
+*decisions you can answer,*
+*receipts you can check.*
 
 &nbsp;
 

@@ -18,7 +18,9 @@ It is not an agent framework. It's a simple handoff layer between the run and th
 | Decide | Re-enter the terminal | Plain asks with room for a pen |
 | Follow-up | Asserted | Receipts in the appendix |
 
-[Interactive demo](https://mirror-factory.github.io/openbook/)
+[Interactive demo](https://mirror-factory.github.io/openbook/) · [Vision](https://mirror-factory.github.io/openbook/vision.html) · [Start](https://mirror-factory.github.io/openbook/start.html)
+
+Builders: share the demo. The point: Vision. Install: Start.
 
 ---
 

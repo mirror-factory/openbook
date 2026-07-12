@@ -10,6 +10,7 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 
 - **[`AGENTS.md`](./AGENTS.md)** — Cursor and coding-agent invariants for this repo
 - **Pages Vision + About** — [`docs/vision.html`](./docs/vision.html) (manifesto) and [`docs/about.html`](./docs/about.html) beside the wipe demo, with shared chrome nav
+- **Pages Start** — [`docs/start.html`](./docs/start.html) three-step getting started; demo hero links Vision · About · Start. Kyle: upload [`docs/assets/og-card.png`](./docs/assets/og-card.png) as the GitHub repo Social preview if not set yet.
 - **[`docs/requirements.md`](./docs/requirements.md)** — strategy, personas, roadmap, and product requirements (v0.3)
 - **[`docs/design-pass-brief.md`](./docs/design-pass-brief.md)** — design-pass kickoff brief for surface exploration
 - **[`skills/openbook/`](./skills/openbook/)** — `/openbook` skill for end-of-run handoffs (Brief default; Standard/Essay by arg or inference)

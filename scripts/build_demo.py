@@ -183,6 +183,7 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
         <a class="nav-link" href="https://mirror-factory.github.io/openbook/about.html">About</a>
+        <a class="nav-link" href="https://mirror-factory.github.io/openbook/start.html">Start</a>
         <a class="nav-link" href="https://github.com/mirror-factory/openbook">GitHub ↗</a>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Night</button>
       </div>
@@ -191,6 +192,11 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
       <h1 class="logo">Agent work, written for humans.</h1>
       <p class="tag">Open report formats that make long-horizon agent runs readable.</p>
       <p class="lede">Same night. An agent session transcript versus an OpenBook Brief.</p>
+      <nav class="hero-links" aria-label="More on this site">
+        <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
+        <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
+        <a href="https://mirror-factory.github.io/openbook/start.html">Start</a>
+      </nav>
     </div>
   </header>
 
@@ -219,6 +225,7 @@ def write_standalone(before_doc: str, after_doc: str) -> None:
       <a href="https://mirror-factory.github.io/openbook/" aria-current="page">Demo</a>
       <a href="https://mirror-factory.github.io/openbook/vision.html">Vision</a>
       <a href="https://mirror-factory.github.io/openbook/about.html">About</a>
+      <a href="https://mirror-factory.github.io/openbook/start.html">Start</a>
       <a href="https://github.com/mirror-factory/openbook">GitHub</a>
     </nav>
     <p>Self-contained preview · also live at <a href="https://mirror-factory.github.io/openbook/">mirror-factory.github.io/openbook</a>.</p>
