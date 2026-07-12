@@ -105,14 +105,43 @@ li {
   margin-bottom: 0.45rem;
 }
 
-em, i { font-style: italic; }
-strong, b { font-weight: 600; }
+em, i {
+  font-style: italic;
+  color: var(--body-muted, #3E3B33);
+  font-weight: inherit;
+}
+
+strong, b {
+  font-weight: 550;
+  color: inherit;
+}
+
+/* Source Serif often lacks 550; fall back without jumping to heavy 700 */
+@supports not (font-weight: 550) {
+  strong, b { font-weight: 500; }
+}
 
 a {
   color: var(--ink);
   text-decoration: underline;
-  text-decoration-thickness: from-font;
-  text-underline-offset: 0.12em;
+  text-decoration-color: rgba(26, 25, 21, 0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+a:hover {
+  text-decoration-color: var(--ink);
+}
+
+pre, code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+code {
+  font-weight: 400;
+  color: #3E3B33;
+  background: transparent;
 }
 
 hr {
@@ -174,10 +203,16 @@ hr {
 }
 
 .standfirst {
-  font-size: 1.35rem;
-  line-height: 1.5;
+  font-size: 1.28rem;
+  line-height: 1.55;
   color: var(--ink);
   margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+.standfirst strong,
+.sixty strong {
+  font-weight: 500;
 }
 
 /* Decisions */
@@ -189,7 +224,7 @@ hr {
 .decision-kicker {
   font-family: var(--font-ui);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -198,12 +233,21 @@ hr {
 
 .qblock .q {
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.15em;
-  line-height: 1.4;
+  font-weight: 500;
+  font-size: 1.08em;
+  line-height: 1.45;
   text-align: left;
   margin: 0 0 0.45rem;
+  color: var(--ink);
+}
+
+.qblock .q strong {
+  font-weight: 550;
   color: var(--accent);
+}
+
+@supports not (font-weight: 550) {
+  .qblock .q strong { font-weight: 600; }
 }
 
 .qblock .ctx {
@@ -248,11 +292,6 @@ figcaption {
   color: var(--muted);
   margin-top: 0.4rem;
   text-align: center;
-}
-
-pre, code {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
 }
 
 pre {

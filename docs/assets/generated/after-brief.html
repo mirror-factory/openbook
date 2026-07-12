@@ -105,14 +105,43 @@ li {
   margin-bottom: 0.45rem;
 }
 
-em, i { font-style: italic; }
-strong, b { font-weight: 600; }
+em, i {
+  font-style: italic;
+  color: var(--body-muted, #3E3B33);
+  font-weight: inherit;
+}
+
+strong, b {
+  font-weight: 550;
+  color: inherit;
+}
+
+/* Source Serif often lacks 550; fall back without jumping to heavy 700 */
+@supports not (font-weight: 550) {
+  strong, b { font-weight: 500; }
+}
 
 a {
   color: var(--ink);
   text-decoration: underline;
-  text-decoration-thickness: from-font;
-  text-underline-offset: 0.12em;
+  text-decoration-color: rgba(26, 25, 21, 0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+a:hover {
+  text-decoration-color: var(--ink);
+}
+
+pre, code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+code {
+  font-weight: 400;
+  color: #3E3B33;
+  background: transparent;
 }
 
 hr {
@@ -174,10 +203,16 @@ hr {
 }
 
 .standfirst {
-  font-size: 1.35rem;
-  line-height: 1.5;
+  font-size: 1.28rem;
+  line-height: 1.55;
   color: var(--ink);
   margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+.standfirst strong,
+.sixty strong {
+  font-weight: 500;
 }
 
 /* Decisions */
@@ -189,7 +224,7 @@ hr {
 .decision-kicker {
   font-family: var(--font-ui);
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -198,12 +233,21 @@ hr {
 
 .qblock .q {
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.15em;
-  line-height: 1.4;
+  font-weight: 500;
+  font-size: 1.08em;
+  line-height: 1.45;
   text-align: left;
   margin: 0 0 0.45rem;
+  color: var(--ink);
+}
+
+.qblock .q strong {
+  font-weight: 550;
   color: var(--accent);
+}
+
+@supports not (font-weight: 550) {
+  .qblock .q strong { font-weight: 600; }
 }
 
 .qblock .ctx {
@@ -248,11 +292,6 @@ figcaption {
   color: var(--muted);
   margin-top: 0.4rem;
   text-align: center;
-}
-
-pre, code {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
 }
 
 pre {
@@ -458,7 +497,7 @@ blockquote {
 <section class="sixty brief-lede">
 <h2>Sixty Seconds</h2>
 <p class="standfirst">While you were away I built <strong>OpenBook</strong>, and the fastest way to explain it is that you are holding it. You have agents that work for hours and hand you their homework as a wall of terminal output. Last night’s wall is still there, <strong>one drag of the handle to your left</strong>. This page is the other option: every long run ends in a report shaped like this one. <strong>A story you can skim</strong> in sixty seconds. <strong>Decisions you can answer</strong> with a pen. <strong>Receipts underneath</strong>, for whenever you doubt me.</p>
-<p>The build went well, with one confession. I wrote the <strong>format contract</strong>, a <strong>checker</strong> that fails any report that cheats the shape, and a <strong>renderer</strong> that prints to warm paper. <em>My first draft of this page opened with a grid of nine statistics. It looked impressive and said nothing.</em> The numbers now live in the appendix, where they belong. I also lost an hour to the demo’s wipe handle, which kept surrendering the drag to the page underneath it. That hour is in the transcript, because the rule here is simple: <strong>I may cut, but I may never invent.</strong></p>
+<p>The build went well, with one confession. I wrote the format contract, a checker that fails any report that cheats the shape, and a renderer that prints to warm paper. <em>My first draft of this page opened with a grid of nine statistics. It looked impressive and said nothing.</em> The numbers now live in the appendix, where they belong. I also lost an hour to the demo’s wipe handle, which kept surrendering the drag to the page underneath it. That hour is in the transcript, because the rule here is simple: <strong>I may cut, but I may never invent.</strong></p>
 <p>Three decisions below are yours. The first is the real one: whether your own agents should report to you this way. Saying yes costs <strong>one paste</strong>.</p>
 </section>
 <h2>What’s next</h2>
@@ -469,12 +508,12 @@ blockquote {
 </div>
 <div class="qblock">
 <p class="decision-kicker">Decision 2 · how much greets you by default</p>
-<p class="q">This page is a <strong>Brief</strong>. <em>Standard</em> adds chapters; <em>Essay</em> is for nights that earn one. Brief is the default because mornings are short. <strong>Bless it, or name your profile.</strong></p>
+<p class="q">This page is a Brief. <em>Standard</em> adds chapters; <em>Essay</em> is for nights that earn one. Brief is the default because mornings are short. <strong>Bless it, or name your profile.</strong></p>
 <div class="penroom"></div>
 </div>
 <div class="qblock">
 <p class="decision-kicker">Decision 3 · what counts as a receipt</p>
-<p class="q">Strict rule proposed: every claim in the story traces to a receipt I <strong>extracted mechanically</strong>, never one I paraphrased. <em>Slower to write, easier to check.</em> <strong>Confirm or relax.</strong></p>
+<p class="q">Strict rule proposed: every claim in the story traces to a receipt I extracted mechanically, never one I paraphrased. <em>Slower to write, easier to check.</em> <strong>Confirm or relax.</strong></p>
 <div class="penroom"></div>
 </div>
 <h2>What we learned</h2>
@@ -486,10 +525,10 @@ blockquote {
 <h2>Appendix</h2>
 <p><strong>By the numbers:</strong> 1 format contract · 1 checker · 1 renderer · 3 length profiles · 1 hour lost to a drag handle</p>
 <ul>
-<li><strong>The contract this page obeys:</strong> <code>formats/report.md</code> · this file passes <code>check_report.py</code> clean</li>
-<li><strong>The wipe bug, found and fixed:</strong> the handle now keeps the drag from iframes</li>
-<li><strong>The demoted statistics grid:</strong> first draft, in the transcript at <em>00:41</em></li>
-<li><strong>Everything here:</strong> <a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a> · <em>steal it tonight</em></li>
+<li>The contract this page obeys: <code>formats/report.md</code> · this file passes <code>check_report.py</code> clean</li>
+<li>The wipe bug, found and fixed: the handle now keeps the drag from iframes</li>
+<li>The demoted statistics grid: first draft, in the transcript at <em>00:41</em></li>
+<li>Everything here: <a href="https://github.com/mirror-factory/openbook">github.com/mirror-factory/openbook</a> · <em>steal it tonight</em></li>
 <li><em>This report describes its own construction. The recursion bottoms out here.</em></li>
 </ul>
 </article>
