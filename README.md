@@ -62,7 +62,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | Piece | Job |
 |-------|-----|
 | [formats/](./formats/) | Report formats agents load and humans read |
-| [styles/](./styles/) | Voice and prose guidance for clearer writing |
+| [styles/](./styles/) | Voice cards: [librarian](./styles/librarian.md) (default), [senior engineer](./styles/senior-engineer.md), [coach](./styles/coach.md) |
 | [skills/openbook/](./skills/openbook/) | `/openbook` skill: end-of-run handoff authoring |
 | [evals/](./evals/) | Structural CI, faithfulness fixtures, eval protocols |
 | [scripts/](./scripts/) | Structural checks, PDF render, demo build |

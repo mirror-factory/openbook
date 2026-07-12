@@ -71,6 +71,7 @@ What v0.1.0 contains (receipts: [repo](https://github.com/mirror-factory/openboo
 
 - **formats/report.md** — the Report contract. Three length profiles: Brief (~1 page, default; prose lede carries the story, Narrative forbidden), Standard (~2–4 pages, abstract + short Narrative), Essay (long, earned; Hybrid chapter-owned decisions with pen rooms). Required exact H2 headings per profile. Decision blocks as `### Decision N · short handle`, self-contained, plain-reference rule (never a bare internal ID). Truthfulness rules: dead ends are content, no invented timestamps, loud delivery failures, audit before handoff.
 - **styles/librarian.md** — voice card: economical, warm through specificity, no exclamation points, no em dashes, failures named plainly.
+- **styles/senior-engineer.md** / **styles/coach.md** — alternate voice cards (pager-owner precision; teach-the-next-run).
 - **scripts/** — `check_report.py` (length-conditional structural checker: the seatbelt), `render_report.py` (HTML→PDF, never browser-print), `build_demo.py`.
 - **render/report.css** — warm paper, Source Serif 4 with Georgia fallbacks, masthead byline with read time, standfirst lede, print-only pen rooms, US Letter, grayscale-safe.
 - **examples/before-after/** — one real July 8 night as transcript + Brief + Standard + Essay.

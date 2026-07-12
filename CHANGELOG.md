@@ -14,6 +14,7 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 - **[`skills/openbook/`](./skills/openbook/)** — `/openbook` skill for end-of-run handoffs (Brief default; Standard/Essay by arg or inference)
 - **[`evals/`](./evals/)** — Layer 1 CI harness, seeded-flaw faithfulness fixture, Layer 2–4 protocols
 - **[`docs/receipts.md`](./docs/receipts.md)** — `receipts.jsonl` shape; appendix lines extracted never paraphrased
+- **[`styles/senior-engineer.md`](./styles/senior-engineer.md)** / **[`styles/coach.md`](./styles/coach.md)** — alternate voice cards (pager-owner precision; teach-the-next-run)
 
 ### Changed
 
