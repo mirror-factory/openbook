@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBook OG card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0A0A09; }
+    .card {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      overflow: hidden;
+      background: #0A0A09;
+      color: #E7E4D8;
+      box-sizing: border-box;
+      padding: 64px 72px;
+      display: flex;
+      flex-direction: column;
+    }
+    .glow {
+      position: absolute;
+      top: -260px;
+      right: -140px;
+      width: 800px;
+      height: 560px;
+      background: radial-gradient(ellipse at center, rgba(129,140,100,0.3) 0%, rgba(129,140,100,0) 65%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+    .brand {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .brand img { height: 30px; width: auto; display: block; }
+    .brand span {
+      font-family: "DM Mono", monospace;
+      font-size: 16px;
+      letter-spacing: 0.24em;
+      color: #7D7A6E;
+      text-transform: uppercase;
+    }
+    .body {
+      position: relative;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .title {
+      font-family: "Manrope", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 92px;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: #F2EEE5;
+    }
+    .tag {
+      font-family: "Manrope", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 30px;
+      color: #A9A493;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(231,228,216,0.18);
+      padding-top: 22px;
+      font-family: "DM Mono", monospace;
+      font-size: 16px;
+      letter-spacing: 0.16em;
+    }
+    .foot .url { color: #7D7A6E; }
+    .foot .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #CEF25A;
+      text-shadow: 0 0 14px rgba(206,242,90,0.45);
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="brand">
+      <img src="logo/mf-icon-true_white.svg" alt="">
+      <span>Mirror Factory</span>
+    </div>
+    <div class="body">
+      <div class="title">OpenBook</div>
+      <div class="tag">Agent work, written for humans.</div>
+      <div class="foot">
+        <span class="url">github.com/mirror-factory/openbook</span>
+        <span class="status">■ 4 runs steady</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

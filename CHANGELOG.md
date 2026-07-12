@@ -12,13 +12,19 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 - **[`docs/requirements.md`](./docs/requirements.md)** — strategy, personas, roadmap, and product requirements (v0.3)
 - **[`docs/design-pass-brief.md`](./docs/design-pass-brief.md)** — design-pass kickoff brief for surface exploration
 - **[`skills/openbook/`](./skills/openbook/)** — `/openbook` skill for end-of-run handoffs (Brief default; Standard/Essay by arg or inference)
+- **[`evals/`](./evals/)** — Layer 1 CI harness, seeded-flaw faithfulness fixture, Layer 2–4 protocols
+- **[`docs/receipts.md`](./docs/receipts.md)** — `receipts.jsonl` shape; appendix lines extracted never paraphrased
 
 ### Changed
 
 - **[`VISION.md`](./VISION.md)** — rewritten as a one-page manifesto; detail moved to requirements
 - **[`USE.md`](./USE.md)** — retired to a skill pointer plus one-paragraph paste fallback
 - **README / integrations / AGENTS** — install path points at the skill first
+- **[`scripts/check_report.py`](./scripts/check_report.py)** — fails on librarian violations (em dashes, exclamation points); warns when lede numeric claims lack Appendix refs
+- **[`formats/report.md`](./formats/report.md)** — Appendix contract: extracted receipts; optional jsonl
+- **[`scripts/render_report.py`](./scripts/render_report.py)** — folds sibling `receipts.jsonl` into Appendix on render
 - **Demo restyle (Shift)** — [`docs/`](./docs/) before/after page uses Surfaces 2G tokens (paper `#F2EEE5`, ink `#1A1915`, night `#0A0A09`, Signal Red / Green Pulse), Manrope + DM Mono via Google Fonts, light default with a night toggle; wipe interaction unchanged. [`render/report.css`](./render/report.css) paper stack harmonized to the same tokens.
+- **OG card** — [`docs/assets/og-card.png`](./docs/assets/og-card.png) (1200×630 from Surfaces 2H / OG Card Spotlight) plus `og:*` / `twitter:*` meta on the demo page. GitHub repo Settings → Social preview still needs a manual upload by Kyle.
 
 ## 0.1.0 — 2026-07-11
 
