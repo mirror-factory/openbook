@@ -9,11 +9,11 @@
 
 ---
 
-## The sixty-second version
+## Two Minutes
 
 Agents got long horizons. Humans still have the same morning. Every response the industry has found to the flood of agent output throttles volume: PR size caps, kill switches, fewer parallel agents. Almost nobody is working on the legibility of what agents hand back. OpenBook is the only bet in that lane: raise the quality of the handoff artifact itself, so a human who was not in the loop can finish coffee with a clear picture and answer what needs answering with a pen.
 
-The product is three surfaces sharing one contract. The **Format Kit** (shipped, v0.1.0) is Markdown contracts agents load and humans read: Brief/Standard/Essay reports with a sixty-second lead, self-contained decision blocks, and receipts in an appendix, enforced by a structural checker and rendered to warm-paper PDF. The **Reader** packages rendering so a report is one link or one command away from readable, never a scavenger hunt through a Discord attachment. The **Local Monitor**, the featured new component, is an ambient display for watching runs in progress: calm instead of chaotic, one glanceable surface replacing a wall of terminals, designed so a bystander can tell how the night is going from across the room.
+The product is three surfaces sharing one contract. The **Format Kit** (shipped, v0.1.0) is Markdown contracts agents load and humans read: Brief/Standard/Essay reports with a two-minute lead, self-contained decision blocks, and receipts in an appendix, enforced by a structural checker and rendered to warm-paper PDF. The **Reader** packages rendering so a report is one link or one command away from readable, never a scavenger hunt through a Discord attachment. The **Local Monitor**, the featured new component, is an ambient display for watching runs in progress: calm instead of chaotic, one glanceable surface replacing a wall of terminals, designed so a bystander can tell how the night is going from across the room.
 
 The monitor is also the format's first software consumer. Standards die when nothing reads them (llms.txt); they stick when downstream tooling makes the structure pay (Conventional Commits). The monitor reads the same decision blocks and run narrative the reports use, which closes that loop.
 
@@ -218,7 +218,7 @@ Cross-cutting R&D notes: (a) the write-back format is just the Report contract's
 | Orchestration UIs | Vibe Kanban, Conductor, Crystal, Gas Town, Cursor 2.0, Codex app | Interactive operator consoles, code-centric, mostly vendor-shaped. Monitor is spectator-grade, ambient, vendor-neutral. |
 | Hobbyist monitors | ccusage, Claude Code Agent Monitor | Proof of demand; metric-dense web-dashboard aesthetic. Nothing calm or non-technical. |
 | HITL plumbing | HumanLayer, Agent Inbox | Closest kin to decision blocks, but transactional approve/deny modals. OpenBook decisions are memo-grade: context, options, pen room. |
-| Writing culture | ADRs, Amazon six-pager | Ancestors, not competitors. OpenBook is ADR/six-pager culture where the author is an agent and the reader has sixty seconds. |
+| Writing culture | ADRs, Amazon six-pager | Ancestors, not competitors. OpenBook is ADR/six-pager culture where the author is an agent and the reader has two minutes. |
 | Format standards | Keep a Changelog, Conventional Commits, llms.txt, AGENTS.md | Adoption lessons in §8. No agent-report standard exists; the lane is open. |
 
 ---
@@ -261,7 +261,7 @@ Four layers, cheapest first. The standing rule they all enforce: **a report may 
 
 3. **Faithfulness fixtures (the anti-slop layer).** Seeded-flaw transcripts with known ground truth: three dead ends, one quietly masked failure, two decision-worthy forks. Score the generated report like a classifier — failure recall (all three dead ends named), claim precision (a judge model traces every lede claim to a transcript span; untraceable claims count as hallucinations), decision recall (both forks surfaced), invented-timestamp count (regex). Track per skill revision so prompt changes have a scoreboard.
 
-4. **Human comprehension (the product truth).** The sixty-second test: a reader gets the report for sixty seconds, then answers five questions — what happened, what failed, what needs deciding, would you ship, what happens next — scored against a control reading the raw transcript for ten minutes. Decision self-containment: a non-builder answers each decision block without opening anything else. Dogfood field metrics: escape-hatch rate (times the raw transcript gets opened after reading the report), share of decisions answered within 24 hours, minutes of morning review per run.
+4. **Human comprehension (the product truth).** The two-minute test: a reader gets the report for two minutes, then answers five questions — what happened, what failed, what needs deciding, would you ship, what happens next — scored against a control reading the raw transcript for ten minutes. Decision self-containment: a non-builder answers each decision block without opening anything else. Dogfood field metrics: escape-hatch rate (times the raw transcript gets opened after reading the report), share of decisions answered within 24 hours, minutes of morning review per run.
 
 ---
 

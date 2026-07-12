@@ -332,7 +332,11 @@ def md_to_html(md: str) -> tuple[str, str]:
             close_sixty()
             if out and length != "Brief":
                 emit_pagebreak()
-            if h.lower() in ("sixty seconds", "the sixty-second version"):
+            if h.lower() in (
+                "two minutes",
+                "sixty seconds",
+                "the sixty-second version",
+            ):
                 cls = "sixty brief-lede" if length == "Brief" else "sixty"
                 out.append(f'<section class="{cls}">')
                 out.append(f"<h2>{inline(h)}</h2>")

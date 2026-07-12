@@ -15,12 +15,15 @@ import re
 import sys
 from pathlib import Path
 
-SIXTY_SECONDS = "Sixty Seconds"
-SIXTY_LEGACY = "The sixty-second version"
+TWO_MINUTES = "Two Minutes"
+LEDE_LEGACY = (
+    "Sixty Seconds",
+    "The sixty-second version",
+)
 
 REQUIRED_H2_BRIEF = [
     "Cover",
-    SIXTY_SECONDS,
+    TWO_MINUTES,
     "What's next",
     "What we learned",
     "Appendix",
@@ -28,7 +31,7 @@ REQUIRED_H2_BRIEF = [
 
 REQUIRED_H2_LONG = [
     "Cover",
-    SIXTY_SECONDS,
+    TWO_MINUTES,
     "Narrative",
     "What's next",
     "What we learned",
@@ -117,15 +120,16 @@ def required_h2_for(length: str | None) -> list[str]:
 
 
 def normalize_h2(h2: list[str]) -> list[str]:
-    """Map legacy sixty-second heading onto the canonical name for checks."""
-    return [SIXTY_SECONDS if h == SIXTY_LEGACY else h for h in h2]
+    """Map legacy lede headings onto the canonical name for checks."""
+    return [TWO_MINUTES if h in LEDE_LEGACY else h for h in h2]
 
 
-def sixty_heading(h2: list[str]) -> str | None:
-    if SIXTY_SECONDS in h2:
-        return SIXTY_SECONDS
-    if SIXTY_LEGACY in h2:
-        return SIXTY_LEGACY
+def lede_heading(h2: list[str]) -> str | None:
+    if TWO_MINUTES in h2:
+        return TWO_MINUTES
+    for legacy in LEDE_LEGACY:
+        if legacy in h2:
+            return legacy
     return None
 
 
@@ -140,13 +144,14 @@ def check(md: str) -> tuple[list[str], list[str]]:
     if length == "Brief" and "Narrative" in h2:
         errors.append(
             "Brief has a Narrative section: either fold it into "
-            f"## {SIXTY_SECONDS} or declare Standard"
+            f"## {TWO_MINUTES} or declare Standard"
         )
 
-    if SIXTY_LEGACY in h2:
-        warnings.append(
-            f"legacy H2 ## {SIXTY_LEGACY}: prefer ## {SIXTY_SECONDS}"
-        )
+    for legacy in LEDE_LEGACY:
+        if legacy in h2:
+            warnings.append(
+                f"legacy H2 ## {legacy}: prefer ## {TWO_MINUTES}"
+            )
 
     for req in required:
         if req not in h2_norm:
@@ -162,10 +167,10 @@ def check(md: str) -> tuple[list[str], list[str]]:
             + " -> ".join(required)
         )
 
-    sixty_h = sixty_heading(h2)
-    sixty = section_body(md, sixty_h) if sixty_h else ""
-    if sixty_h and len(sixty) < 40:
-        errors.append(f"## {sixty_h} is empty or too thin")
+    lede_h = lede_heading(h2)
+    sixty = section_body(md, lede_h) if lede_h else ""
+    if lede_h and len(sixty) < 40:
+        errors.append(f"## {lede_h} is empty or too thin")
 
     nxt = section_body(md, "What's next")
     narrative = section_body(md, "Narrative")
@@ -233,7 +238,7 @@ def check(md: str) -> tuple[list[str], list[str]]:
             )
         elif claim_nums and len(appendix) < 1:
             warnings.append(
-                "sixty-second has numeric claims but Appendix is empty: "
+                "two-minute lede has numeric claims but Appendix is empty: "
                 "add extracted receipts (see docs/receipts.md)"
             )
 
@@ -250,17 +255,17 @@ def check(md: str) -> tuple[list[str], list[str]]:
     if length == "Brief" and sixty:
         if re.search(r"^[-*]\s+", sixty, re.MULTILINE):
             warnings.append(
-                "Brief sixty-second contains bullet lines: use continuous prose"
+                "Brief two-minute lede contains bullet lines: use continuous prose"
             )
         bold_leads = BOLD_LEAD_RE.findall(sixty)
         if len(bold_leads) > 1:
             warnings.append(
-                f"{len(bold_leads)} bold-lead openers in Brief sixty-second: "
+                f"{len(bold_leads)} bold-lead openers in Brief two-minute lede: "
                 "prefer zero (writing carries emphasis)"
             )
         elif len(bold_leads) == 1:
             warnings.append(
-                "bold lead in Brief sixty-second: prefer continuous prose "
+                "bold lead in Brief two-minute lede: prefer continuous prose "
                 "without bold leads"
             )
 

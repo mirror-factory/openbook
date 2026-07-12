@@ -6,9 +6,9 @@
 **Author:** Your coding agent
 **When:** 2026-07-12 · overnight shift
 
-## Sixty Seconds
+## Two Minutes
 
-**You are holding the product.** OpenBook is a Markdown report kit for long agent runs: a sixty-second lead, decisions a pen can answer, receipts underneath. The wall of terminals from this same night is still one drag to your left.
+**You are holding the product.** OpenBook is a Markdown report kit for long agent runs: a two-minute lead, decisions a pen can answer, receipts underneath. The wall of terminals from this same night is still one drag to your left.
 
 **The build is real, with one confession.** Format contract, structural checker, warm-paper renderer. *Draft one opened with nine statistics early and said nothing.* The wipe handle stole an hour mid-shift. Dead ends stay visible. **I may cut, but I may never invent.**
 
@@ -50,13 +50,13 @@ Strict rule proposed: every claim in the story traces to a receipt I **extracted
 
 ## What's next
 
-1. **Decision 1 · whether this becomes normal** â€” adopt costs **one paste**; stand down if the wall is enough
-2. **Decision 2 · how much greets you by default** â€” **Bless Brief**, or name Standard / Essay
-3. **Decision 3 · what counts as a receipt** â€” mechanical extraction **Confirm or relax**
+1. **Decision 1 · whether this becomes normal** - adopt costs **one paste**; stand down if the wall is enough
+2. **Decision 2 · how much greets you by default** - **Bless Brief**, or name Standard / Essay
+3. **Decision 3 · what counts as a receipt** - mechanical extraction **Confirm or relax**
 
 ## What we learned
 
-- **Sixty seconds is a budget**, not a summary. Whatever does not fit was not the point.
+- **Two minutes is a budget**, not a summary. Whatever does not fit was not the point.
 - **A green checkmark is a hypothesis.** The receipt is the evidence.
 - **The wall of terminals was never the work.** It was the work's exhaust.
 - **Print styles belong last**, or the paper lies.
@@ -67,7 +67,7 @@ Strict rule proposed: every claim in the story traces to a receipt I **extracted
 **By the numbers:** 1 format contract · 1 checker · 1 renderer · 3 length profiles · 1 hour lost to a drag handle · 41 tests green · final check 06:12
 
 - **The contract this page obeys:** `formats/report.md` · this file passes `check_report.py` clean
-- **The wipe bug, found and fixed:** handle keeps drag from iframes (02:14â€“03:19)
+- **The wipe bug, found and fixed:** handle keeps drag from iframes (02:14-03:19)
 - **The demoted statistics grid:** first draft, in the transcript at *00:41*
 - **Cascade fix:** print styles last so screen cannot break PDF
 - **Everything here:** [github.com/mirror-factory/openbook](https://github.com/mirror-factory/openbook) · *steal it tonight*

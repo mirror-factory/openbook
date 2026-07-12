@@ -7,7 +7,7 @@
 **For:** A human reading on paper, with a pen
 **When:** The morning after a long run
 
-## Sixty Seconds
+## Two Minutes
 
 **This example shows the Hybrid long-report pattern.** Chapter-owned decisions sit at the end of the chapter that explains them, with pen room there. What's next indexes those asks and holds only cross-cutting questions that span the whole night. Every block is self-contained: no internal IDs, no "see chapter two."
 

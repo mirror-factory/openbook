@@ -20,7 +20,7 @@ Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io
 
 ### Changed
 
-- **Required H2** — `## Sixty Seconds` replaces `## The sixty-second version` (legacy heading still accepted with a deprecation warning)
+- **Required H2** — `## Two Minutes` replaces `## Sixty Seconds` (legacy `## Sixty Seconds` / `## The sixty-second version` still warn)
 - **Before/after demo pair** — meta night where the Brief is the product pitch ([`examples/before-after/`](./examples/before-after/)); Standard and Essay expand the same facts; Pages demo regenerated
 - **[`VISION.md`](./VISION.md)** — rewritten as a one-page manifesto; detail moved to requirements
 - **[`USE.md`](./USE.md)** — retired to a skill pointer plus one-paragraph paste fallback
@@ -44,7 +44,7 @@ Public default is **Brief**: a one-page prose handoff, not a short essay wearing
 
 ### Changed
 
-- **Brief shape** — continuous sixty-second prose carries the story; `## Narrative` is forbidden on Brief (promote to Standard if you need chapters)
+- **Brief shape** — continuous two-minute prose carries the story; `## Narrative` is forbidden on Brief (promote to Standard if you need chapters)
 - **Cover / Appendix** — drop Cover stats; optional `**By the numbers:**` lives in the Appendix
 - **Decisions** — prefer `### Decision N · short handle` (legacy `### N. [?]` still parses with a warning)
 - **Rendering** — warm paper, Source Serif 4 stack with Georgia fallbacks, masthead byline + read time, standfirst lede, print-only pen rooms ([`render/report.css`](./render/report.css))

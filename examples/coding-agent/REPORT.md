@@ -7,7 +7,7 @@
 **For:** A tech lead who asked for a long-horizon fix and went to sleep
 **When:** 2026-07-11 · ~3 hours
 
-## Sixty Seconds
+## Two Minutes
 
 Budgets could not stop anything. The middleware, tables, and admin panel were real and merged, but nothing wrote spend events, so burn stayed zero and the hard stop was decorative. This run closes the loop: every model call debits cents against the scope from a verified rate card; the stop notice carries an Extend control that resumes the paused run.
 

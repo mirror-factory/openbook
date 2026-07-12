@@ -46,13 +46,13 @@ Set `**Length:** Brief` (or Standard / Essay) in Cover.
 
 ## Brief shape (public default)
 
-- Continuous prose in `## Sixty Seconds` (3–6 paragraphs). First sentence is the bottom line. No bold leads, no bullets, no `## Narrative`.
+- Continuous prose in `## Two Minutes` (3–6 paragraphs). First sentence is the bottom line. No bold leads, no bullets, no `## Narrative`.
 - Decisions as `### Decision N · short handle`, then the question as the first paragraph. Prefer ≤3 asks.
 - Put numbers in Appendix as `**By the numbers:** …`, not on Cover.
 
 ## Standard / Essay
 
-- Sixty-second is an abstract (≤3 paragraphs; bold leads OK).
+- Two-minute is an abstract (≤3 paragraphs; bold leads OK).
 - `## Narrative` is required and prose-first.
 - On Essay: chapter-owned asks at chapter end; `What's next` is an index plus any cross-cutting asks.
 

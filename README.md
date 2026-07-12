@@ -14,7 +14,7 @@ It is not an agent framework. It's a simple handoff layer between the run and th
 
 | | Status dump | OpenBook |
 |---|-------------|---------|
-| Read | Lists and greens | Sixty-second story at the right depth |
+| Read | Lists and greens | Two-minute story at the right depth |
 | Decide | Re-enter the terminal | Plain asks with room for a pen |
 | Follow-up | Asserted | Receipts in the appendix |
 
@@ -50,7 +50,7 @@ Never browser-print a `file://` tab. Chrome injects date and URL footers. Use `r
 | Profile | Target | Role |
 |---------|--------|------|
 | **Brief** (default) | ~1 page | Prose lede carries the story; no Narrative section |
-| **Standard** | ~2–4 pages | Sixty-second abstract + short prose Narrative |
+| **Standard** | ~2–4 pages | Two-minute abstract + short prose Narrative |
 | **Essay** | long, when earned | Chaptered Hybrid (pens where context lives) |
 
 See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings often prefer Essay; most public handoffs should start at Brief.

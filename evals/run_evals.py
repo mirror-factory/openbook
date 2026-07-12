@@ -139,7 +139,7 @@ def score_layer3(report_md: str, truth: dict) -> Layer3Result:
         missed_dead_ends=miss_f,
         missed_forks=miss_d,
         claim_precision=(
-            "stub: wire a judge model that traces each sixty-second claim "
+            "stub: wire a judge model that traces each two-minute claim "
             "to a transcript span; untraceable claims are hallucinations"
         ),
     )

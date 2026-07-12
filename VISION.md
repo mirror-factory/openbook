@@ -20,7 +20,7 @@ receipts you can check.
 
 So the contract is small.
 
-**Sixty seconds** tells you what happened.
+**Two minutes** tells you what happened.
 **Decisions** ask plainly, one at a time, with room for a pen.
 **Receipts** wait underneath, for whenever you doubt.
 

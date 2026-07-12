@@ -6,9 +6,9 @@
 **Author:** Your coding agent
 **When:** 2026-07-12 · overnight shift
 
-## Sixty Seconds
+## Two Minutes
 
-While you were away I built **OpenBook**, and the fastest way to explain it is that you are holding it. You have agents that work for hours and hand you their homework as a wall of terminal output. Last night's wall is still there, **one drag of the handle to your left**. This page is the other option: every long run ends in a report shaped like this one. **A story you can skim** in sixty seconds. **Decisions you can answer** with a pen. **Receipts underneath**, for whenever you doubt me.
+While you were away I built **OpenBook**, and the fastest way to explain it is that you are holding it. You have agents that work for hours and hand you their homework as a wall of terminal output. Last night's wall is still there, **one drag of the handle to your left**. This page is the other option: every long run ends in a report shaped like this one. **A story you can skim** in two minutes. **Decisions you can answer** with a pen. **Receipts underneath**, for whenever you doubt me.
 
 The build went well, with one confession. I wrote the format contract, a checker that fails any report that cheats the shape, and a renderer that prints to warm paper. *My first draft of this page opened with a grid of nine statistics. It looked impressive and said nothing.* The numbers now live in the appendix, where they belong. I also lost an hour to the demo's wipe handle, which kept surrendering the drag to the page underneath it. That hour is in the transcript, because the rule here is simple: **I may cut, but I may never invent.**
 
@@ -30,7 +30,7 @@ Strict rule proposed: every claim in the story traces to a receipt I extracted m
 
 ## What we learned
 
-- **Sixty seconds is a budget**, not a summary. Whatever does not fit was not the point.
+- **Two minutes is a budget**, not a summary. Whatever does not fit was not the point.
 - **A green checkmark is a hypothesis.** The receipt is the evidence.
 - **The wall of terminals was never the work.** It was the work's exhaust.
 

@@ -10,7 +10,7 @@ How N run reports become one morning report. Load with [report.md](./report.md).
 | **Editor** | Assembles the morning report. Cuts for length and flow. Never invents. Never softens failures. |
 | **Checker owner** | Runs `scripts/check_report.py` on the assembled `REPORT.md` before handoff. Usually the editor. |
 
-Contributors do not merge each other's prose. The editor is the single writer of the final Cover, sixty-second version, and ranked What's next.
+Contributors do not merge each other's prose. The editor is the single writer of the final Cover, two-minute version, and ranked What's next.
 
 ## Inputs
 
@@ -25,7 +25,7 @@ Optional: `receipts.jsonl` beside a lane report for the renderer to fold later.
 
 ## Lede writer
 
-The editor writes **one** sixty-second version for the whole night.
+The editor writes **one** two-minute version for the whole night.
 
 - First sentence is the bottom line across all lanes.
 - Include every failure that would change a human's morning, even if it lived in only one lane.

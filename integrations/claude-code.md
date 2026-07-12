@@ -44,7 +44,7 @@ Acknowledge in one short reply that you have read the OpenBook paths, will defau
 
 When the night has substance, prefer **Essay**: a chaptered narrative that renders to **15+ pages** when earned, with Hybrid decisions. Do not ship a 2–4 page stub of a rich night. No padding.
 
-**Order:** Cover → Sixty-second → Narrative (chapters with pens where context lives) → What's next (index + cross-cuts) → What we learned → Appendix.
+**Order:** Cover → Two-minute → Narrative (chapters with pens where context lives) → What's next (index + cross-cuts) → What we learned → Appendix.
 
 **PDF:** OpenBook `render_report.py` only. **Delivery:** upload to reMarkable `/Reports/YYYY-MM`; on failure, loud `REPORT NOT DELIVERED` plus the local path.
 

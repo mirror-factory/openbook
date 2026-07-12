@@ -16,7 +16,7 @@ Load with the Report format when the handoff should teach the next run, not only
 - Put the portable rule in one short sentence, then the night's evidence.
 - Plain names first; IDs in parentheses at most.
 - Decision blocks ask for a choice, not a pep talk.
-- At Brief length, continuous prose in the sixty-second version. Save bold leads for Standard/Essay.
+- At Brief length, continuous prose in the two-minute version. Save bold leads for Standard/Essay.
 - When the run taught nothing new, say so. Empty lessons are honest.
 
 ## Forbidden moves
@@ -29,7 +29,7 @@ Load with the Report format when the handoff should teach the next run, not only
 
 ## Three specimens
 
-**Sixty-second opener:** The contract held under a hostile review, and the design direction is ready for a pen. The portable rule from the night is simple: green is a hypothesis until someone tries to break it. Three decisions below need you before the shell re-spec moves.
+**Two-minute opener:** The contract held under a hostile review, and the design direction is ready for a pen. The portable rule from the night is simple: green is a hypothesis until someone tries to break it. Three decisions below need you before the shell re-spec moves.
 
 **Lesson line:** Review-after-green caught seven data-integrity bugs behind a checkmark. Keep that step even when the suite is loud and green.
 

@@ -2,7 +2,7 @@
 
 **Load this file** when writing an end-of-run handoff for a human who was not in the loop.
 
-**One line:** A readable report with a sixty-second lead, the right amount of story for the length you chose, decisions a human can answer, and receipts underneath.
+**One line:** A readable report with a two-minute lead, the right amount of story for the length you chose, decisions a human can answer, and receipts underneath.
 
 **Public default length: Brief** (~one page). Use Standard or Essay when the work earns more depth.
 
@@ -21,17 +21,17 @@ Allowed values: `Brief` | `Standard` | `Essay`.
 ### Brief (default)
 
 1. `## Cover`
-2. `## Sixty Seconds`
+2. `## Two Minutes`
 3. `## What's next`
 4. `## What we learned`
 5. `## Appendix`
 
-**Do not include `## Narrative` on Brief.** If the sixty-second version cannot hold the story, promote to Standard.
+**Do not include `## Narrative` on Brief.** If the two-minute version cannot hold the story, promote to Standard.
 
 ### Standard / Essay
 
 1. `## Cover`
-2. `## Sixty Seconds`
+2. `## Two Minutes`
 3. `## Narrative`
 4. `## What's next`
 5. `## What we learned`
@@ -46,10 +46,10 @@ Optional H3 chapters under Narrative (e.g. `### Chapter 1 · …`).
 | Profile | Target (letter PDF) | Story | Decisions | When to use |
 |---------|---------------------|-------|-----------|-------------|
 | **Brief** (default) | ~1 page | Prose lede carries the story; **no Narrative section** | Trailing only; prefer ≤3 asks | Most coding-agent handoffs; small or medium runs |
-| **Standard** | ~2–4 pages | Sixty-second as abstract; Narrative is short chapters or continuous prose | Trailing, or light Hybrid if two+ chapter-owned asks | Multi-hour runs with a real story but not an overnight essay |
-| **Essay** | 10–15+ pages when earned | Sixty-second as abstract; full chaptered Narrative | **Hybrid:** chapter pens + closing index + optional cross-cuts | High-substance nights; Mirror Factory morning preference |
+| **Standard** | ~2–4 pages | Two-minute as abstract; Narrative is short chapters or continuous prose | Trailing, or light Hybrid if two+ chapter-owned asks | Multi-hour runs with a real story but not an overnight essay |
+| **Essay** | 10–15+ pages when earned | Two-minute as abstract; full chaptered Narrative | **Hybrid:** chapter pens + closing index + optional cross-cuts | High-substance nights; Mirror Factory morning preference |
 
-Shared at every length: Cover, sixty-second, What's next, What we learned, Appendix. Plain-reference and self-contained asks. Length is **earned**, never padded.
+Shared at every length: Cover, two-minute, What's next, What we learned, Appendix. Plain-reference and self-contained asks. Length is **earned**, never padded.
 
 There is **no maximum** page count. Padding a Brief into an essay, or shipping a status dump as any length, are both anti-patterns.
 
@@ -77,7 +77,7 @@ Optional machine-readable `**For:**` is ignored in the rendered byline (a docume
 
 The renderer builds a masthead: title, dek, byline (`Author · When · N-min read`), then a short rule into the body.
 
-### Sixty Seconds
+### Two Minutes
 
 A reader who stops here should still know what happened and what needs them.
 
@@ -87,7 +87,7 @@ A reader who stops here should still know what happened and what needs them.
 
 ### Narrative
 
-**Brief:** forbidden. Fold into the sixty-second version or declare Standard.
+**Brief:** forbidden. Fold into the two-minute version or declare Standard.
 
 **Standard:** 2–5 short chapters or one continuous narrative, *prose-first*. Bullets only for genuinely parallel facts. A Narrative that is only bullets fails review. Include failures and dead ends that matter.
 
@@ -149,7 +149,7 @@ Optional leading line:
 **By the numbers:** 6 research notes · 2 pull requests · 68 tests green
 ```
 
-Brief: a few receipt lines is enough. Every numeric claim in the sixty-second version should be findable here.
+Brief: a few receipt lines is enough. Every numeric claim in the two-minute version should be findable here.
 
 ---
 
@@ -190,7 +190,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - Status dump / PR laundry list with no story
 - Confident summary with no appendix receipts
 - Declaring **Brief** while shipping chaptered essay length (or the reverse without cause)
-- **A Brief with a Narrative section** (fold into sixty-second or promote to Standard)
+- **A Brief with a Narrative section** (fold into two-minute lede or promote to Standard)
 - **Stats strip thinking:** leading with numbers instead of the story
 - Shrinking a rich Essay night into a stub to look efficient
 - **Trailing-only decisions on an Essay** (forgot-by-the-end)
@@ -214,7 +214,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 **Author:** …
 **When:** …
 
-## Sixty Seconds
+## Two Minutes
 
 (3–6 paragraphs of continuous prose. First sentence is the bottom line.
 No box, no bold leads, no bullets. This IS the narrative at Brief length.)
@@ -243,7 +243,7 @@ Plain-language question. One context line. Self-contained.
 **Length:** Standard
 …
 
-## Sixty Seconds
+## Two Minutes
 
 …
 
@@ -277,7 +277,7 @@ Plain-language question. One context line. Self-contained.
 **Length:** Essay
 …
 
-## Sixty Seconds
+## Two Minutes
 
 …
 

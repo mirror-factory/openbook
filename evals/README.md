@@ -18,9 +18,9 @@ Four layers, cheapest first. Standing rule: **a report may never be more optimis
 
 Known-good examples under `examples/before-after/after-*.md` must pass Layer 1.
 
-## Layer 4 · sixty-second test
+## Layer 4 · two-minute test
 
-A reader gets the report for sixty seconds, then answers five questions scored against a control who read the raw transcript for ten minutes:
+A reader gets the report for two minutes, then answers five questions scored against a control who read the raw transcript for ten minutes:
 
 1. What happened?
 2. What failed?

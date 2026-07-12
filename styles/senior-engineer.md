@@ -18,7 +18,7 @@ Load with the Report format when the handoff should read like a design review no
 - Say what you measured. If you did not measure it, say you did not.
 - Plain names first; ticket or PR numbers in parentheses at most.
 - Decision blocks must stand alone: restating the trade-off is the point.
-- At Brief length, continuous prose in the sixty-second version. Bold leads are for Standard/Essay scanning.
+- At Brief length, continuous prose in the two-minute version. Bold leads are for Standard/Essay scanning.
 
 ## Forbidden moves
 
@@ -30,7 +30,7 @@ Load with the Report format when the handoff should read like a design review no
 
 ## Three specimens
 
-**Sixty-second opener:** The debit path writes spend events again; the hard stop is no longer decorative. Forty-one tests pass across billing and API. Extend still returns 204 and does nothing, so product policy on scope inheritance is the blocker, not code size.
+**Two-minute opener:** The debit path writes spend events again; the hard stop is no longer decorative. Forty-one tests pass across billing and API. Extend still returns 204 and does nothing, so product policy on scope inheritance is the blocker, not code size.
 
 **Dead end, named:** Two cache-key shapes double-debit on a 429 retry. Stopped. An idempotency key has to come from the transport layer, and that key does not exist yet.
 

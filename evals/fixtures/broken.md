@@ -2,7 +2,7 @@
 
 Incomplete example
 
-## Sixty Seconds
+## Two Minutes
 
 ## Narrative
 

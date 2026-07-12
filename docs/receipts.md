@@ -6,7 +6,7 @@ Machine-extracted evidence for the Appendix. OpenBook is a legibility layer, not
 
 Appendix receipt lines are **extracted, never paraphrased**. Copy the command, the test tally, the PR title, the path. Softening "2 failed" into "a couple of issues" is a truthfulness failure.
 
-Human prose stays in Cover, sixty-second, Narrative, What's next, and What we learned. Receipts live under Appendix (and optionally in `receipts.jsonl` beside the report).
+Human prose stays in Cover, two-minute, Narrative, What's next, and What we learned. Receipts live under Appendix (and optionally in `receipts.jsonl` beside the report).
 
 ## `receipts.jsonl`
 
@@ -44,7 +44,7 @@ If the report Appendix already contains a `**By the numbers:**` line and hand-wr
 
 ## Checker
 
-`scripts/check_report.py` warns when the sixty-second version makes numeric claims that do not appear anywhere in the Appendix. Fix by extracting a matching receipt, not by deleting the fact from the lede.
+`scripts/check_report.py` warns when the two-minute version makes numeric claims that do not appear anywhere in the Appendix. Fix by extracting a matching receipt, not by deleting the fact from the lede.
 
 ## Authoring habit
 
