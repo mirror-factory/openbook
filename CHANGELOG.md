@@ -2,6 +2,20 @@
 
 Notable changes to OpenBook. Format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 0.2.0-dev — 2026-07-12
+
+Docs foundation for the next cut. Live demo remains at [mirror-factory.github.io/openbook](https://mirror-factory.github.io/openbook/).
+
+### Added
+
+- **[`AGENTS.md`](./AGENTS.md)** — Cursor and coding-agent invariants for this repo
+- **[`docs/requirements.md`](./docs/requirements.md)** — strategy, personas, roadmap, and product requirements (v0.3)
+- **[`docs/design-pass-brief.md`](./docs/design-pass-brief.md)** — design-pass kickoff brief for surface exploration
+
+### Changed
+
+- **[`VISION.md`](./VISION.md)** — rewritten as a one-page manifesto; detail moved to requirements
+
 ## 0.1.0 — 2026-07-11
 
 Public default is **Brief**: a one-page prose handoff, not a short essay wearing long-report furniture. Includes an interactive before/after demo.

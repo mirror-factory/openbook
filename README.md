@@ -67,6 +67,7 @@ See [formats/report.md](./formats/report.md) for rules. Mirror Factory mornings 
 | [examples/](./examples/) | Same-night before / Brief / Standard / Essay |
 | [render/](./render/) | Report CSS (warm paper screen + Letter print) |
 | [docs/](./docs/) | Source for the [live demo](https://mirror-factory.github.io/openbook/) |
+| [docs/requirements.md](./docs/requirements.md) | Strategy, personas, roadmap, and product requirements |
 | [CHANGELOG.md](./CHANGELOG.md) | Release notes |
 
 ---
@@ -81,7 +82,9 @@ Longer Claude Code notes: [integrations/claude-code.md](./integrations/claude-co
 
 ## Vision
 
-Why this exists, who it is for, and where it goes: [VISION.md](./VISION.md)
+The point, in one page: [VISION.md](./VISION.md).
+
+Strategy, personas, roadmap, and the three surfaces: [docs/requirements.md](./docs/requirements.md).
 
 ---
 
