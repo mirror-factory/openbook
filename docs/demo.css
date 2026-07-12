@@ -288,14 +288,14 @@ html[data-theme="night"] .pane-before {
 
 .pane-after {
   z-index: 2;
-  clip-path: inset(0 0 0 var(--pos, 30%));
+  clip-path: inset(0 0 0 var(--pos, 70%));
 }
 
 .handle {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--pos, 30%);
+  left: var(--pos, 70%);
   width: 48px;
   margin-left: -24px;
   z-index: 4;
