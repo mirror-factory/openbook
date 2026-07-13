@@ -863,6 +863,7 @@ html[data-theme="night"] .prose .start-code {
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
 &lt;title&gt;Before — agent transcript&lt;/title&gt;
+&lt;base target=&quot;_blank&quot;&gt;
 &lt;style&gt;
 
 body {
@@ -976,6 +977,7 @@ body {
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
 &lt;title&gt;After — Brief&lt;/title&gt;
+&lt;base target=&quot;_blank&quot;&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
 &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap&quot;&gt;
@@ -1753,10 +1755,34 @@ blockquote {
     if (e.key === "End") setPos(100);
   });
 
-  paneBefore.addEventListener("load", syncScroll);
-  paneAfter.addEventListener("load", syncScroll);
-  // srcdoc iframes may already be complete
-  syncScroll();
+  function openIframeLinksOutside(iframe) {
+    try {
+      const doc = iframe.contentDocument;
+      if (!doc) return;
+      doc.querySelectorAll("a[href]").forEach((a) => {
+        a.setAttribute("target", "_blank");
+        a.setAttribute("rel", "noopener noreferrer");
+      });
+      if (doc.__openbookLinkGuard) return;
+      doc.__openbookLinkGuard = true;
+      doc.addEventListener(
+        "click",
+        (e) => {
+          const a = e.target && e.target.closest && e.target.closest("a[href]");
+          if (!a) return;
+          const href = a.getAttribute("href") || "";
+          if (!href || href.startsWith("#")) return;
+          // Keep navigation out of the pane even if markup lacked target.
+          a.setAttribute("target", "_blank");
+          a.setAttribute("rel", "noopener noreferrer");
+        },
+        true
+      );
+    } catch (_) {
+      /* cross-origin panes cannot be patched; src/srcdoc demos are same-origin */
+    }
+  }
+
   function applyLayout() {
     const stored = Number(slider.value);
     const fallback = defaultPos();
@@ -1767,6 +1793,16 @@ blockquote {
     }
   }
 
+  function onPaneLoad() {
+    openIframeLinksOutside(paneBefore);
+    openIframeLinksOutside(paneAfter);
+    syncScroll();
+  }
+
+  paneBefore.addEventListener("load", onPaneLoad);
+  paneAfter.addEventListener("load", onPaneLoad);
+  // srcdoc iframes may already be complete
+  onPaneLoad();
   narrowMq.addEventListener("change", applyLayout);
   applyLayout();
 })();
