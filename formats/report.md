@@ -188,6 +188,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - Grayscale-safe figures with captions
 - Numbered sequences present vertically as ordered lists (`1.` `2.` `3.`), never inline `(1) ... (2) ...` run-ons
 - Never reference an ID (task, PR, ticket) without explaining it on the same page; say what the thing IS in words, the ID in parentheses at most
+- Raw file paths do not belong in prose (Kyle's ink, the follow-up round: "Don't show raw file names, ensure legibility"). Name the thing in words; the path lives in the Appendix as a receipt, or in parentheses when the reader truly needs it
 - Two figures written back to back render as a side-by-side pair on one page; use this for before/after evidence
 - Pen room comes from decision blocks; never author blank space with `&nbsp;` entities
 - When numbers carry a claim, consider a chart; see [formats/dataviz.md](dataviz.md)
@@ -206,6 +207,7 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - **Trailing-only decisions on an Essay** (forgot-by-the-end)
 - Bare internal IDs as the only name for a thing (or an ID explained three pages away: same page or not at all)
 - Inline `(1) ... (2) ... (3)` enumeration packed into a paragraph
+- A raw file path standing in prose where a name in words belongs
 - An appendix bullet holding a dozen facts (one fact per line)
 - Before/after figures separated by a page break
 - Decision blocks that require flipping back to earlier chapters
