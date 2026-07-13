@@ -119,8 +119,11 @@ def read_minutes(md: str) -> int:
     return max(1, round(words / 220))
 
 
-def md_to_html(md: str) -> tuple[str, str]:
-    """Convert OpenBook markdown to HTML body + title. Stdlib only."""
+def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
+    """Convert OpenBook markdown to HTML body + title. Stdlib only.
+
+    base_dir resolves relative figure paths; the rendered HTML lives in a
+    temp dir, so figures become absolute file URIs at conversion time."""
     lines = md.replace("\r\n", "\n").split("\n")
     title = "OpenBook Report"
     length = detect_length(md)
@@ -363,6 +366,25 @@ def md_to_html(md: str) -> tuple[str, str]:
             i += 1
             continue
 
+        m_fig = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)\s*$", line)
+        if m_fig:
+            flush_para()
+            close_lists()
+            caption, src_path = m_fig.group(1), m_fig.group(2)
+            fig_path = Path(src_path)
+            if not fig_path.is_absolute() and base_dir is not None:
+                fig_path = (base_dir / fig_path).resolve()
+            if fig_path.is_file():
+                uri = fig_path.as_uri()
+                cap_html = f"<figcaption>{inline(caption)}</figcaption>" if caption else ""
+                out.append(
+                    f'<figure><img src="{html.escape(uri, quote=True)}" alt="{html.escape(caption, quote=True)}">{cap_html}</figure>'
+                )
+            else:
+                print(f"WARN: figure not found, skipped: {src_path}", file=sys.stderr)
+            i += 1
+            continue
+
         m_ul = re.match(r"^[-*]\s+(.*)$", line)
         if m_ul:
             flush_para()
@@ -415,7 +437,7 @@ def build_html(md_path: Path, receipts_path: Path | None = None) -> str:
     if receipts:
         md = fold_receipts_into_markdown(md, receipts)
         print(f"Receipts folded: {len(receipts)} from {jsonl.name}")
-    title, body = md_to_html(md)
+    title, body = md_to_html(md, base_dir=md_path.parent)
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     # Embed CSS so the HTML is self-contained for Playwright file:// load
     css = CSS_PATH.read_text(encoding="utf-8")
