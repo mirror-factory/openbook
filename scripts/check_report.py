@@ -56,7 +56,12 @@ BARE_ID_RE = re.compile(
     r"(?<![\w/])#\d{1,6}\b"
     r"|\bPR ?#?\d{1,6}\b"
     r"|\b[A-Z]{2,6}-\d{2,6}\b"
+    r"|(?<![\w/-])T\d{3}\b"  # task IDs (T023): explain on the same page
 )
+
+# Inline enumeration run-ons: "(1) ... (2) ..." packed into prose reads as a
+# wall; numbered sequences present vertically as ordered lists (Kyle's ink).
+INLINE_ENUM_RE = re.compile(r"\(\d{1,2}\)\s+\S+[^()]{0,400}?\(\d{1,2}\)\s+\S+")
 
 ID_ALLOWLIST_PREFIXES = ("UTF-", "ISO-", "SHA-", "MD-", "RFC-", "EC-", "AES-")
 
@@ -277,8 +282,24 @@ def check(md: str) -> tuple[list[str], list[str]]:
     if ids:
         shown = ", ".join(ids[:8]) + ("..." if len(ids) > 8 else "")
         warnings.append(
-            f"bare IDs found ({shown}): say what each thing IS in words; "
-            "IDs in parentheses at most"
+            f"bare IDs found ({shown}): never reference an ID without "
+            "explaining it on the same page; say what each thing IS in "
+            "words, IDs in parentheses at most"
+        )
+
+    enum_runs = INLINE_ENUM_RE.findall(md)
+    if enum_runs:
+        warnings.append(
+            f"{len(enum_runs)} inline enumeration run-on(s) like (1) ... (2) ...: "
+            "numbered sequences present vertically as ordered lists (1. 2. 3.)"
+        )
+
+    nbsp_count = md.count("&nbsp;") + md.count(" ")
+    if nbsp_count:
+        warnings.append(
+            f"{nbsp_count} non-breaking-space entities: pen room belongs to "
+            "decision blocks; the renderer folds entity-only paragraphs into "
+            "pen room, but prefer not to author them"
         )
 
     if narrative:

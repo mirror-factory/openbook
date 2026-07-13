@@ -64,6 +64,7 @@ Title + one subtitle. Who wrote it, when. Include `**Length:** …` when known. 
 Prefer labeled fields:
 
 ```markdown
+**Kicker:** …
 **Title:** …
 **Subtitle:** …
 **Length:** Brief
@@ -71,11 +72,13 @@ Prefer labeled fields:
 **When:** …
 ```
 
+`**Kicker:**` is optional: a short series line above the title in small caps (e.g. `Night shift · report 5`). It names what KIND of document this is so the title can spend its words on what happened.
+
 Optional machine-readable `**For:**` is ignored in the rendered byline (a document describing its audience to its audience is chrome).
 
 **Do not put `**Stats:**` on Cover.** Numbers belong in Appendix as `**By the numbers:** …`.
 
-The renderer builds a masthead: title, dek, byline (`Author · When · N-min read`), then a short rule into the body.
+The renderer builds a masthead: kicker (when given), title, dek, a full-measure rule, then the byline in caps under the rule.
 
 ### Two Minutes
 
@@ -139,6 +142,8 @@ Short. Portable to the next run. 1–3 lines on Brief. Bullets are fine. Not a p
 
 Receipts: pull requests, commits, tests, paths, sources, PENDING-HUMAN. Flat and honest.
 
+**One fact per line.** The appendix is scanned, not read. A commit list is many lines (or a table), never one paragraph-bullet; a bullet that runs eight printed lines has failed even if every word is true. The renderer dresses appendix lines as hanging-indent receipt rows; that dress assumes the writing law holds.
+
 **Extracted, never paraphrased.** Appendix lines are copied from the run (commands, tallies, titles, paths). Softening a failure count or inventing a cleaner summary is forbidden. See [docs/receipts.md](../docs/receipts.md).
 
 Optional machine file: `receipts.jsonl` beside the report. `scripts/render_report.py` folds those records into the Appendix on render. Prefer the jsonl (or identical Markdown bullets) over rewriting the same facts in warmer prose.
@@ -181,6 +186,12 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - Use OpenBook `render/` + `scripts/render_report.py`
 - US Letter; margins ≥2.4cm; page numbers; pen room under decisions (print only)
 - Grayscale-safe figures with captions
+- Numbered sequences present vertically as ordered lists (`1.` `2.` `3.`), never inline `(1) ... (2) ...` run-ons
+- Never reference an ID (task, PR, ticket) without explaining it on the same page; say what the thing IS in words, the ID in parentheses at most
+- Raw file paths do not belong in prose (Kyle's ink, the follow-up round: "Don't show raw file names, ensure legibility"). Name the thing in words; the path lives in the Appendix as a receipt, or in parentheses when the reader truly needs it
+- Two figures written back to back render as a side-by-side pair on one page; use this for before/after evidence
+- Pen room comes from decision blocks; never author blank space with `&nbsp;` entities
+- When numbers carry a claim, consider a chart; see [formats/dataviz.md](dataviz.md)
 - **Never** browser-print a `file://` tab
 
 ---
@@ -194,7 +205,11 @@ A multi-agent contributor may write a Narrative-shaped section in their own voic
 - **Stats strip thinking:** leading with numbers instead of the story
 - Shrinking a rich Essay night into a stub to look efficient
 - **Trailing-only decisions on an Essay** (forgot-by-the-end)
-- Bare internal IDs as the only name for a thing
+- Bare internal IDs as the only name for a thing (or an ID explained three pages away: same page or not at all)
+- Inline `(1) ... (2) ... (3)` enumeration packed into a paragraph
+- A raw file path standing in prose where a name in words belongs
+- An appendix bullet holding a dozen facts (one fact per line)
+- Before/after figures separated by a page break
 - Decision blocks that require flipping back to earlier chapters
 - More than five fuzzy decision questions
 - Jargon that earns a handwritten "What?"

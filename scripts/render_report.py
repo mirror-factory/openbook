@@ -139,6 +139,7 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
     in_ol = False
     in_pre = False
     in_sixty = False
+    in_appendix = False
     sixty_first = False
     pre_buf: list[str] = []
     para: list[str] = []
@@ -150,6 +151,14 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
         text = " ".join(para).strip()
         para = []
         if not text:
+            return
+        # A paragraph of nothing but non-breaking-space entities is authored
+        # pen room (seen in the wild; the escaped markup printed literally and
+        # earned a handwritten "What are these?"). Honor the intent: one quiet
+        # pen room per run of them, never visible markup.
+        if re.fullmatch(r"(?:&nbsp;|\s| )+", text):
+            if not (out and out[-1] == '<div class="penroom"></div>'):
+                out.append('<div class="penroom"></div>')
             return
         if in_sixty and sixty_first:
             out.append(f'<p class="standfirst">{inline(text)}</p>')
@@ -172,6 +181,12 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
             out.append("</section>")
             in_sixty = False
             sixty_first = False
+
+    def close_appendix() -> None:
+        nonlocal in_appendix
+        if in_appendix:
+            out.append("</section>")
+            in_appendix = False
 
     def smarten(s: str) -> str:
         """Light micro-typography before HTML escape (quotes, dashes, spaces)."""
@@ -243,6 +258,8 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
             i += 1
         if buf:
             chunks.append(" ".join(buf))
+        # entity-only spacer paragraphs are authored pen room, never context
+        chunks = [c for c in chunks if not re.fullmatch(r"(?:&nbsp;|\s| )+", c)]
         if chunks:
             out.append(f'<p class="q">{inline(chunks[0])}</p>')
             if len(chunks) > 1:
@@ -280,6 +297,7 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
             flush_para()
             close_lists()
             close_sixty()
+            close_appendix()
             title = line[2:].strip()
             if not has_cover_section:
                 out.append(f'<div class="cover"><h1>{inline(title)}</h1></div>')
@@ -313,9 +331,15 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
                                 fields[kl] = val
                     i += 1
                 out.append('<div class="cover">')
+                # Masthead order [Kyle's ink, morning after night 5]: kicker
+                # names the series, title carries the weight, dek explains,
+                # the rule closes the head, the byline sits under it in caps.
+                if fields.get("kicker"):
+                    out.append(f'<p class="kicker">{inline(fields["kicker"])}</p>')
                 out.append(f"<h1>{inline(cover_title)}</h1>")
                 if dek:
                     out.append(f'<p class="dek">{inline(dek)}</p>')
+                out.append('<div class="masthead-rule" aria-hidden="true"></div>')
                 # Byline: Author · When · N-min read (For/Length/Stats ignored here)
                 byline_bits: list[str] = []
                 if fields.get("author"):
@@ -326,13 +350,13 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
                 out.append(
                     '<p class="byline">' + " · ".join(byline_bits) + "</p>"
                 )
-                out.append('<div class="masthead-rule" aria-hidden="true"></div>')
                 out.append("</div>")
                 # Brief: no pagebreak after cover — lede opens the page
                 if length != "Brief":
                     emit_pagebreak()
                 continue
             close_sixty()
+            close_appendix()
             if out and length != "Brief":
                 emit_pagebreak()
             if h.lower() in (
@@ -345,6 +369,15 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
                 out.append(f"<h2>{inline(h)}</h2>")
                 in_sixty = True
                 sixty_first = True
+                i += 1
+                continue
+            if h.lower() == "appendix":
+                # Receipts wear their own dress [Kyle's ink: "figure out a
+                # much better formatting for the appendix"]: a section wrapper
+                # so CSS can set the scannable, hanging-indent receipt style.
+                out.append('<section class="appendix">')
+                out.append(f"<h2>{inline(h)}</h2>")
+                in_appendix = True
                 i += 1
                 continue
             out.append(f"<h2>{inline(h)}</h2>")
@@ -366,22 +399,45 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
             i += 1
             continue
 
-        m_fig = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)\s*$", line)
-        if m_fig:
-            flush_para()
-            close_lists()
-            caption, src_path = m_fig.group(1), m_fig.group(2)
+        FIG_RE = r"^!\[([^\]]*)\]\(([^)]+)\)\s*$"
+
+        def figure_html(caption: str, src_path: str) -> str | None:
             fig_path = Path(src_path)
             if not fig_path.is_absolute() and base_dir is not None:
                 fig_path = (base_dir / fig_path).resolve()
-            if fig_path.is_file():
-                uri = fig_path.as_uri()
-                cap_html = f"<figcaption>{inline(caption)}</figcaption>" if caption else ""
-                out.append(
-                    f'<figure><img src="{html.escape(uri, quote=True)}" alt="{html.escape(caption, quote=True)}">{cap_html}</figure>'
-                )
-            else:
+            if not fig_path.is_file():
                 print(f"WARN: figure not found, skipped: {src_path}", file=sys.stderr)
+                return None
+            uri = fig_path.as_uri()
+            cap_html = f"<figcaption>{inline(caption)}</figcaption>" if caption else ""
+            return (
+                f'<figure><img src="{html.escape(uri, quote=True)}" '
+                f'alt="{html.escape(caption, quote=True)}">{cap_html}</figure>'
+            )
+
+        m_fig = re.match(FIG_RE, line)
+        if m_fig:
+            flush_para()
+            close_lists()
+            # Two figures in a row are a pair (before/after is the common
+            # case) and stay side by side on one page [Kyle's ink]; a lone
+            # figure keeps the full measure.
+            j = i + 1
+            while j < len(lines) and not lines[j].strip():
+                j += 1
+            m_next = re.match(FIG_RE, lines[j]) if j < len(lines) else None
+            first = figure_html(m_fig.group(1), m_fig.group(2))
+            if m_next:
+                second = figure_html(m_next.group(1), m_next.group(2))
+                rendered = [f for f in (first, second) if f is not None]
+                if len(rendered) == 2:
+                    out.append('<div class="figpair">' + "".join(rendered) + "</div>")
+                else:
+                    out.extend(rendered)
+                i = j + 1
+                continue
+            if first is not None:
+                out.append(first)
             i += 1
             continue
 
@@ -424,6 +480,7 @@ def md_to_html(md: str, base_dir: Path | None = None) -> tuple[str, str]:
     flush_para()
     close_lists()
     close_sixty()
+    close_appendix()
     body = "\n".join(out)
     # Wrap so CSS can key off length (Brief suppresses sixty H2)
     body = f'<article class="report length-{length.lower()}">\n{body}\n</article>'
