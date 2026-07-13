@@ -325,7 +325,11 @@ def check(md: str) -> tuple[list[str], list[str]]:
             f"librarian: {em_dashes} em dash(es) (U+2014); "
             "use commas, periods, or parentheses"
         )
-    bangs = md.count("!")
+    # Figures (![caption](path)) and HTML comments are markup, not voice;
+    # only bangs that would be READ count against the register.
+    prose = re.sub(r"<!--.*?-->", "", md, flags=re.DOTALL)
+    prose = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", prose)
+    bangs = prose.count("!")
     if bangs:
         errors.append(
             f"librarian: {bangs} exclamation point(s); "

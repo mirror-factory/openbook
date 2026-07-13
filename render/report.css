@@ -444,3 +444,24 @@ blockquote {
     break-inside: avoid;
   }
 }
+
+/* Figures [dewey/figures]: screenshots as evidence, grayscale-safe, never
+   split across a page, captions in the receipt voice. */
+figure {
+  margin: 1.1em 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  max-height: 8.2in;
+  border: 1px solid #ccc;
+}
+figcaption {
+  font-family: var(--mono, monospace);
+  font-size: 8.5pt;
+  color: #555;
+  margin-top: 0.45em;
+  text-align: left;
+}
