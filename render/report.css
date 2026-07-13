@@ -143,37 +143,53 @@ hr {
   max-width: 4rem;
 }
 
-/* Masthead */
+/* Masthead [refined per Kyle's ink, morning after night 5]: kicker names
+   the series, the title carries the weight, the dek explains in one
+   breath, the rule closes the head, the byline sits under it in caps. */
 .cover {
   text-align: left;
   margin: 0 0 0.25rem;
 }
 
+.cover .kicker {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+
 .cover h1 {
-  margin-bottom: 0.75rem;
+  font-size: 2.8rem;
+  margin-bottom: 0.9rem;
 }
 
 .cover .dek {
-  font-size: 1.2rem;
-  line-height: 1.4;
+  font-size: 1.25rem;
+  line-height: 1.45;
   color: var(--muted);
-  margin: 0 0 1.15rem;
+  margin: 0 0 1.4rem;
   font-weight: 400;
+  max-width: 38ch;
 }
 
 .cover .byline {
   font-family: var(--font-ui);
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.6;
   color: var(--muted);
   margin: 0 0 1.35rem;
 }
 
 .masthead-rule {
-  width: 4rem;
+  width: 100%;
   height: 0;
-  border-top: 1px solid var(--rule);
-  margin: 0 0 1.75rem;
+  border-top: 1.5px solid var(--ink);
+  margin: 0 0 0.85rem;
 }
 
 /* Lede / two-minute */
@@ -286,6 +302,58 @@ figcaption {
   text-align: center;
 }
 
+/* A pair of figures (before/after) sits side by side on one page
+   [Kyle's ink]: the comparison is the content; splitting it across a
+   page break destroys it. */
+.figpair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  align-items: start;
+  margin: 1.1rem 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.figpair figure {
+  margin: 0;
+}
+
+/* The appendix is receipts, not prose [Kyle's ink: "much better
+   formatting... terrible to read"]: smaller quiet type, no bullet dots,
+   hanging indents so each fact scans as one line-block, a hairline
+   between facts, and refs in mono. One fact per line is the writing
+   law; this dress makes the law visible. */
+.appendix ul,
+.appendix ol {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.appendix li {
+  font-size: 0.82em;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0.42rem 0 0.42rem 1.1em;
+  text-indent: -1.1em;
+  border-bottom: 1px solid var(--rule);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.appendix li:first-child {
+  border-top: 1px solid var(--rule);
+}
+
+.appendix p {
+  font-size: 0.86em;
+}
+
+.appendix code {
+  font-size: 0.92em;
+}
+
 pre {
   background: #E7E4D8;
   border: 1px solid rgba(26, 25, 21, 0.2);
@@ -376,19 +444,41 @@ blockquote {
   }
 
   .cover {
-    padding-top: 36pt;
+    padding-top: 64pt;
+  }
+
+  .cover .kicker {
+    font-size: 8pt;
+    margin-bottom: 22pt;
+  }
+
+  .cover h1 {
+    font-size: 26pt;
   }
 
   .cover .dek {
-    font-size: 12pt;
+    font-size: 12.5pt;
   }
 
   .cover .byline {
-    font-size: 9pt;
+    font-size: 8pt;
   }
 
   .masthead-rule {
-    margin-bottom: 14pt;
+    margin-bottom: 8pt;
+  }
+
+  .figpair {
+    gap: 10pt;
+  }
+
+  .figpair figure img {
+    max-height: 4.6in;
+  }
+
+  .appendix li {
+    font-size: 9pt;
+    line-height: 1.45;
   }
 
   .length-brief .sixty.brief-lede > h2 {
