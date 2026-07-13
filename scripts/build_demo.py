@@ -53,6 +53,38 @@ DEMO_CSS = REPORT_CSS + """
     margin-top: 0.25rem;
   }
 }
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .demo-shell {
+    max-width: none;
+    padding: 1.35rem 1.1rem 2.25rem;
+  }
+  .demo-shell > .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+  .cover .dek {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  h2 {
+    font-size: 0.7rem;
+    margin-top: 1.75rem;
+  }
+  h3 {
+    font-size: 1rem;
+    margin-top: 1.25rem;
+  }
+}
 """
 
 # Terminal dump pane: Surfaces 2G before panel (#050505 / DM Mono / Shift accents)
@@ -84,6 +116,20 @@ body {
 .cli .ln { display: block; }
 .cli .fail { color: #F54C26; }
 .cli .ok { color: #CEF25A; }
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px 12px 28px;
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .badge {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    padding: 2px 5px;
+    margin-bottom: 8px;
+  }
+}
 """
 
 
@@ -99,6 +145,7 @@ def wrap_fragment(
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{html.escape(title)}</title>
 {head_extra}<style>
 {css}

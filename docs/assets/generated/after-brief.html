@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>After — Brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -480,6 +481,38 @@ blockquote {
   }
   .demo-shell .cover {
     margin-top: 0.25rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .demo-shell {
+    max-width: none;
+    padding: 1.35rem 1.1rem 2.25rem;
+  }
+  .demo-shell > .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+  .cover .dek {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  h2 {
+    font-size: 0.7rem;
+    margin-top: 1.75rem;
+  }
+  h3 {
+    font-size: 1rem;
+    margin-top: 1.25rem;
   }
 }
 
