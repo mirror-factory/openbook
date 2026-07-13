@@ -141,12 +141,15 @@ def wrap_fragment(
     head_extra: str = "",
 ) -> str:
     cls = f' class="{body_class}"' if body_class else ""
+    # Demo panes load inside iframes. External links must leave the frame —
+    # GitHub (and many sites) refuse to be framed, which shows as a blank/crash pane.
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{html.escape(title)}</title>
+<base target="_blank">
 {head_extra}<style>
 {css}
 </style>

@@ -184,10 +184,34 @@
     if (e.key === "End") setPos(100);
   });
 
-  paneBefore.addEventListener("load", syncScroll);
-  paneAfter.addEventListener("load", syncScroll);
-  // srcdoc iframes may already be complete
-  syncScroll();
+  function openIframeLinksOutside(iframe) {
+    try {
+      const doc = iframe.contentDocument;
+      if (!doc) return;
+      doc.querySelectorAll("a[href]").forEach((a) => {
+        a.setAttribute("target", "_blank");
+        a.setAttribute("rel", "noopener noreferrer");
+      });
+      if (doc.__openbookLinkGuard) return;
+      doc.__openbookLinkGuard = true;
+      doc.addEventListener(
+        "click",
+        (e) => {
+          const a = e.target && e.target.closest && e.target.closest("a[href]");
+          if (!a) return;
+          const href = a.getAttribute("href") || "";
+          if (!href || href.startsWith("#")) return;
+          // Keep navigation out of the pane even if markup lacked target.
+          a.setAttribute("target", "_blank");
+          a.setAttribute("rel", "noopener noreferrer");
+        },
+        true
+      );
+    } catch (_) {
+      /* cross-origin panes cannot be patched; src/srcdoc demos are same-origin */
+    }
+  }
+
   function applyLayout() {
     const stored = Number(slider.value);
     const fallback = defaultPos();
@@ -198,6 +222,16 @@
     }
   }
 
+  function onPaneLoad() {
+    openIframeLinksOutside(paneBefore);
+    openIframeLinksOutside(paneAfter);
+    syncScroll();
+  }
+
+  paneBefore.addEventListener("load", onPaneLoad);
+  paneAfter.addEventListener("load", onPaneLoad);
+  // srcdoc iframes may already be complete
+  onPaneLoad();
   narrowMq.addEventListener("change", applyLayout);
   applyLayout();
 })();
